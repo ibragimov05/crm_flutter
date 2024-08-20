@@ -1,4 +1,3 @@
-import 'package:crm_flutter/core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,27 +5,42 @@ import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-import '../../../../core/utils/app_assets.dart';
-import '../../../../core/utils/app_router.dart';
-import '../../../../core/utils/text_input_formatters.dart';
-import '../../../../logic/cubit/login_cubit/login_cubit.dart';
+import '../../../../app_config.dart';
 import '../../../widgets/widgets.dart';
+import '../../../../core/utils/utils.dart';
+import '../../../../logic/cubit/register_cubit/register_cubit.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _MainText(),
-            _SignInToMilliyma(),
-            SizedBox(),
-          ],
+    return BlocProvider.value(
+      value: getIt.get<RegisterCubit>(),
+      child: BlocListener<RegisterCubit, RegisterState>(
+        listener: (context, state) {
+          if(state.status.isSuccess){
+            Navigator.of(context).pop();
+          }
+          else if (state.status.isFailure) {
+            AppFunction.showToast(
+              message: state.errorMessage ?? 'Authentication failure',
+              isSuccess: false,
+              context: context,
+            );
+          }
+        },
+        child: Scaffold(
+          body: ListView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.only(right: 20, left: 20, top: 50),
+            children: [
+              const _MainText(),
+              40.sizedBoxH,
+              const _RegisterInToMilliyma(),
+              const SizedBox(),
+            ],
+          ),
         ),
       ),
     );
@@ -65,14 +79,14 @@ class _MainText extends StatelessWidget {
   }
 }
 
-class _SignInToMilliyma extends StatelessWidget {
-  const _SignInToMilliyma();
+class _RegisterInToMilliyma extends StatelessWidget {
+  const _RegisterInToMilliyma();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: DeviceScreen.h(context) / 1.8,
+      height: DeviceScreen.h(context) / 1.4,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
@@ -82,32 +96,20 @@ class _SignInToMilliyma extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Sign In to Milliyma',
+            'Register to Milliyma',
             style: AppTextStyles.nunitoSansW700.copyWith(
               fontSize: 18,
             ),
           ),
+          const _NameInput(),
           const _PhoneNumberInput(),
           const _PasswordInput(),
-          const _LoginButton(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ZoomTapAnimation(
-                onTap: () {},
-                child: Text(
-                  'Forgot Password?',
-                  style: AppTextStyles.nunitoSansW500.copyWith(
-                    color: AppColors.grayishBlue,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          const _PasswordConfirmationInput(),
+          const _RegisterButton(),
           ZoomTapAnimation(
-            onTap: () => context.push(AppRouter.registerScreen),
+            onTap: () => context.pop(),
             child: Text(
-              'Don’t have an account?',
+              'Already Registered?',
               style: AppTextStyles.nunitoSansW600.copyWith(
                 fontSize: 16,
                 color: AppColors.blue,
@@ -120,19 +122,41 @@ class _SignInToMilliyma extends StatelessWidget {
   }
 }
 
+class _NameInput extends StatelessWidget {
+  const _NameInput();
+
+  @override
+  Widget build(BuildContext context) {
+    final displayError = context.select(
+      (RegisterCubit cubit) => cubit.state.name.displayError,
+    );
+
+    return AppTextFormField(
+      textInputAction: TextInputAction.done,
+      onChanged: (name) => context.read<RegisterCubit>().nameChanged(name),
+      labelText: 'Your name',
+      hintText: 'Alex',
+      errorText: displayError != null ? 'Only letters are allowed' : null,
+    );
+  }
+}
+
 class _PhoneNumberInput extends StatelessWidget {
   const _PhoneNumberInput();
 
   @override
   Widget build(BuildContext context) {
-
+    final displayError = context.select(
+      (RegisterCubit cubit) => cubit.state.phoneNumber.displayError,
+    );
 
     return AppTextFormField(
-      onChanged: (phoneNumber){},
+      onChanged: (phoneNumber) =>
+          context.read<RegisterCubit>().phoneNumberChanged(phoneNumber),
       inputFormatters: [TextInputFormatters.phoneNumber],
       hintText: '+998 99 123 45 67',
       labelText: 'Phone number',
-      errorText: false != null ? 'Invalid phone number' : null,
+      errorText: displayError != null ? 'Invalid phone number' : null,
       textInputAction: TextInputAction.next,
       textInputType: TextInputType.phone,
     );
@@ -144,28 +168,57 @@ class _PasswordInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    final displayError = context.select(
+      (RegisterCubit cubit) => cubit.state.password.displayError,
+    );
     return AppTextFormField(
       textInputAction: TextInputAction.done,
-      onChanged: (password) {},
+      onChanged: (password) =>
+          context.read<RegisterCubit>().passwordChanged(password),
       labelText: 'Password',
       hintText: '********',
       isObscure: true,
-      errorText: false != null ? 'Enter valid password' : null,
+      errorText: displayError != null ? 'Enter valid password' : null,
     );
   }
 }
 
-class _LoginButton extends StatelessWidget {
-  const _LoginButton();
+class _PasswordConfirmationInput extends StatelessWidget {
+  const _PasswordConfirmationInput();
 
   @override
   Widget build(BuildContext context) {
+    final displayError = context.select(
+      (RegisterCubit cubit) => cubit.state.password.displayError,
+    );
+    return AppTextFormField(
+      textInputAction: TextInputAction.done,
+      onChanged: (passwordConfirmation) => context
+          .read<RegisterCubit>()
+          .confirmedPasswordChanged(passwordConfirmation),
+      labelText: 'Confirm Password',
+      hintText: '********',
+      isObscure: true,
+      errorText: displayError != null ? 'Password does not match' : null,
+    );
+  }
+}
+
+class _RegisterButton extends StatelessWidget {
+  const _RegisterButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final isInProgress = context.select(
+      (RegisterCubit cubit) => cubit.state.status.isInProgress,
+    );
+
+    final isValid = context.select((RegisterCubit cubit) => cubit.state.isValid);
 
     return AppRegularButton(
-      buttonLabel: 'Sign in',
-      onTap: false
-          ? () => context.read<LoginCubit>().loginWithCredentials()
+      buttonLabel: 'Register',
+      onTap: isValid && !isInProgress
+          ? () => context.read<RegisterCubit>().signUpFormSubmitted()
           : null,
       shouldAddIcon: true,
     );

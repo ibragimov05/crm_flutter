@@ -12,7 +12,7 @@ class Name extends FormzInput<String, NameValidationError> {
 
   const Name.dirty([super.value = '']) : super.dirty();
 
-  static final RegExp _nameRegExp = RegExp(r"^[A-Za-zÀ-ÿ' -]{2,50}$");
+  static final RegExp _nameRegExp = RegExp(r'^[a-zA-Z]+$');
 
   @override
   NameValidationError? validator(String? value) {

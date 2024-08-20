@@ -1,7 +1,5 @@
 import 'package:crm_flutter/core/utils/app_colors.dart';
 import 'package:crm_flutter/core/utils/app_router.dart';
-import 'package:crm_flutter/ui/screens/auth/login/login_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toastification/toastification.dart';

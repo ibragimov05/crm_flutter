@@ -1,8 +1,4 @@
 import 'package:crm_flutter/app_config.dart';
-import 'package:crm_flutter/core/utils/app_functions.dart';
-import 'package:crm_flutter/core/utils/app_router.dart';
-import 'package:crm_flutter/core/utils/text_input_formatters.dart';
-import 'package:crm_flutter/data/repositories/auth_repository.dart';
 import 'package:crm_flutter/logic/cubit/login_cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +34,7 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _MainText(),
-                _SignInToMilliyma(),
+                _LoginInToMilliyma(),
                 SizedBox(),
               ],
             ),
@@ -81,8 +77,8 @@ class _MainText extends StatelessWidget {
   }
 }
 
-class _SignInToMilliyma extends StatelessWidget {
-  const _SignInToMilliyma();
+class _LoginInToMilliyma extends StatelessWidget {
+  const _LoginInToMilliyma();
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +94,7 @@ class _SignInToMilliyma extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Sign In to Milliyma',
+            'Register to Milliyma',
             style: AppTextStyles.nunitoSansW700.copyWith(
               fontSize: 18,
             ),
