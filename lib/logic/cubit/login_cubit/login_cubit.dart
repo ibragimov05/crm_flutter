@@ -1,10 +1,11 @@
 import 'package:auth_form_inputs/auth_form_inputs.dart';
 import 'package:bloc/bloc.dart';
 import 'package:crm_flutter/data/repositories/auth_repository.dart';
-import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'login_state.dart';
+part 'login_cubit.freezed.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final AuthRepository _authRepository;

@@ -1,5 +1,6 @@
 import 'package:crm_flutter/app_config.dart';
 import 'package:crm_flutter/core/utils/app_functions.dart';
+import 'package:crm_flutter/core/utils/app_router.dart';
 import 'package:crm_flutter/core/utils/text_input_formatters.dart';
 import 'package:crm_flutter/data/repositories/auth_repository.dart';
 import 'package:crm_flutter/logic/cubit/login_cubit/login_cubit.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../../../../core/utils/utils.dart' hide AppConstants;
@@ -17,8 +19,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => LoginCubit(authRepository: getIt.get<AuthRepository>()),
+    return BlocProvider.value(
+      value: getIt.get<LoginCubit>(),
       child: BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state.status.isFailure) {
@@ -118,11 +120,14 @@ class _SignInToMilliyma extends StatelessWidget {
               ),
             ],
           ),
-          Text(
-            'Don’t have an account?',
-            style: AppTextStyles.nunitoSansW600.copyWith(
-              fontSize: 16,
-              color: AppColors.blue,
+          ZoomTapAnimation(
+            onTap: () => context.push(AppRouter.registerScreen),
+            child: Text(
+              'Don’t have an account?',
+              style: AppTextStyles.nunitoSansW600.copyWith(
+                fontSize: 16,
+                color: AppColors.blue,
+              ),
             ),
           ),
         ],

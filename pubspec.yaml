@@ -33,6 +33,7 @@ dependencies:
   equatable: ^2.0.5
   mask_text_input_formatter: ^2.9.0
   toastification: ^2.1.0
+  go_router: ^14.2.3
 
 dev_dependencies:
   flutter_test:
