@@ -23,14 +23,14 @@ class App extends StatelessWidget {
             },
           ),
           scaffoldBackgroundColor: AppColors.mainBackground,
-          textTheme: GoogleFonts.nunitoSansTextTheme(Theme.of(context).textTheme),
+          textTheme:
+              GoogleFonts.nunitoSansTextTheme(Theme.of(context).textTheme),
           textSelectionTheme: TextSelectionThemeData(
             selectionColor: const Color(0xFF3F8CFF).withOpacity(0.1),
             selectionHandleColor: const Color(0xFF3F8CFF),
             cursorColor: const Color(0xFF3F8CFF),
           ),
         ),
-        initialRoute: AppRouter.splashScreen,
         onGenerateRoute: AppRouter.onGenerateRoute,
       ),
     );

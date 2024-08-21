@@ -1,4 +1,3 @@
-
 import 'package:crm_flutter/data/services/shared_prefs/shared_prefs_service.dart';
 import 'package:dio/dio.dart';
 
@@ -16,14 +15,16 @@ class AuthDioService {
     final AppResponse appResponse = AppResponse();
 
     try {
-      appResponse.data = await _dioClient.post(url: '/login', data: {
+      final response = await _dioClient.post(url: '/login', data: {
         'phone': phone,
         'password': password,
       });
-      // await SharedPrefsService.saveAccessToken(
-      //   appResponse.data['data']['token'],
-      // );
 
+      appResponse.data = response.data;
+
+      await SharedPrefsService.saveAccessToken(
+        appResponse.data['data']['token'],
+      );
     } catch (e) {
       if (e is DioException) {
         appResponse.statusCode = e.response?.statusCode;
@@ -46,7 +47,7 @@ class AuthDioService {
     final AppResponse appResponse = AppResponse();
 
     try {
-      appResponse.data = await _dioClient.post(
+      final response = await _dioClient.post(
         url: '/register',
         data: {
           'name': name,
@@ -54,6 +55,12 @@ class AuthDioService {
           'password': password,
           'password_confirmation': passwordConfirmation,
         },
+      );
+
+      appResponse.data = response.data;
+
+      await SharedPrefsService.saveAccessToken(
+        appResponse.data['data']['token'],
       );
     } catch (e) {
       if (e is DioException) {

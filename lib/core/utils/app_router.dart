@@ -16,16 +16,14 @@ class AppRouter {
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case AppRouter.loginScreen:
-        return _buildPageRoute(const LoginScreen());
       case AppRouter.registerScreen:
         return _buildPageRoute(const RegisterScreen());
-      case AppRouter.splashScreen:
-        return _buildPageRoute(const SplashScreen());
+      case AppRouter.loginScreen:
+        return _buildPageRoute(const LoginScreen());
       case AppRouter.homeScreen:
         return _buildPageRoute(const HomeScreen());
       default:
-        return _buildPageRoute(const LoginScreen());
+        return _buildPageRoute(const SplashScreen());
     }
   }
 }

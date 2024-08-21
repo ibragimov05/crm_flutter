@@ -46,13 +46,19 @@ class _AppBar extends StatelessWidget {
                       title: const Text('you sure?'),
                       actions: [
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                           child: const Text('cancel'),
                         ),
                         TextButton(
-                          onPressed: () => context
+                          onPressed: () {
+                            context
                               .read<AuthBloc>()
-                              .add(const AuthEvent.logout()),
+                              .add(const AuthEvent.logout());
+                            Navigator.of(context).pop();
+
+                          },
                           child: const Text('yes'),
                         ),
                       ],

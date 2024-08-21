@@ -39,10 +39,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
         emit(state.copyWith(authStatus: AuthStatus.authenticated));
       } else {
-        emit(state.copyWith(
-          authStatus: AuthStatus.error,
-          error: appResponse.errorMessage,
-        ));
+        throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
       }
     } catch (e) {
       emit(state.copyWith(authStatus: AuthStatus.error, error: e.toString()));
@@ -66,10 +63,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
         emit(state.copyWith(authStatus: AuthStatus.authenticated));
       } else {
-        emit(state.copyWith(
-          authStatus: AuthStatus.error,
-          error: appResponse.errorMessage,
-        ));
+        throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
       }
     } catch (e) {
       emit(state.copyWith(authStatus: AuthStatus.error, error: e.toString()));
@@ -81,9 +75,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) {
     emit(state.copyWith(authStatus: AuthStatus.loading));
-    try {
-
-    } catch (e) {
+    try {} catch (e) {
       emit(state.copyWith(authStatus: AuthStatus.error, error: e.toString()));
     }
   }
