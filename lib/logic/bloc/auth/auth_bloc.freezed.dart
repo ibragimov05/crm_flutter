@@ -948,8 +948,6 @@ abstract class $AuthStateCopyWith<$Res> {
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
   $Res call({User? user, AuthStatus authStatus, String? error});
-
-  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -986,20 +984,6 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
               as String?,
     ) as $Val);
   }
-
-  /// Create a copy of AuthState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res>? get user {
-    if (_value.user == null) {
-      return null;
-    }
-
-    return $UserCopyWith<$Res>(_value.user!, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -1011,9 +995,6 @@ abstract class _$$AuthStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({User? user, AuthStatus authStatus, String? error});
-
-  @override
-  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc

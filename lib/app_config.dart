@@ -1,6 +1,9 @@
 import 'package:crm_flutter/data/repositories/auth_repository.dart';
+import 'package:crm_flutter/data/repositories/user_repository.dart';
 import 'package:crm_flutter/data/services/dio/auth_dio_service.dart';
+import 'package:crm_flutter/data/services/dio/user_dio_service.dart';
 import 'package:crm_flutter/logic/bloc/auth/auth_bloc.dart';
+import 'package:crm_flutter/logic/bloc/user/user_bloc.dart';
 import 'package:crm_flutter/logic/cubit/register_cubit/register_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -23,12 +26,18 @@ class AppConfig {
     getIt.registerLazySingleton(
       () => AuthRepository(authDioService: AuthDioService()),
     );
+    getIt.registerLazySingleton(
+      () => UserRepository(userDioService: UserDioService()),
+    );
 
     /// registering blocs && cubits
     /// [BLOCS]
     getIt.registerLazySingleton(
-      () => AuthBloc(authRepository: getIt.get<AuthRepository>()),
+      () => AuthBloc(
+          authRepository: getIt.get<AuthRepository>(),
+          userRepository: getIt.get<UserRepository>()),
     );
+    getIt.registerLazySingleton(() => UserBloc());
 
     /// [CUBITS]
     getIt.registerLazySingleton(() => LoginCubit());

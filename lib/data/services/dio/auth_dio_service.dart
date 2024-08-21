@@ -1,5 +1,6 @@
 import 'package:crm_flutter/data/services/shared_prefs/shared_prefs_service.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../models/app_response.dart';
 import '../../../core/network/dio_client.dart';
@@ -74,20 +75,12 @@ class AuthDioService {
   }
 
   /// logout user
-  Future<AppResponse> logOut() async {
-    final AppResponse appResponse = AppResponse();
-
+  Future<void> logOut() async {
     try {
       _dioClient.post(url: '/logout');
     } catch (e) {
-      appResponse.isSuccess = false;
-      if (e is DioException) {
-        appResponse.statusCode = e.response?.statusCode;
-      }
-      appResponse.errorMessage = e.toString();
+      debugPrint('error occurred in logout');
     }
-
-    return appResponse;
   }
 
   String? checkTokenExpiry() => SharedPrefsService.getAccessToken();

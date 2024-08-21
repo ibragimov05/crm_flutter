@@ -83,7 +83,7 @@ class _WelcomeBack extends StatelessWidget {
     return Row(
       children: [
         Text(
-          'Welcome back, Alex!',
+          'Welcome back, ${UserData.name}!',
           style: AppTextStyles.nunitoSansW600.copyWith(
             color: AppColors.grey,
             fontSize: 16,

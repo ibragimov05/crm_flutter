@@ -1,4 +1,7 @@
+import 'package:crm_flutter/core/utils/user_constants.dart';
 import 'package:crm_flutter/core/utils/utils.dart';
+import 'package:crm_flutter/data/models/user/user.dart';
+import 'package:crm_flutter/data/services/shared_prefs/user_shared_prefs_service.dart';
 import 'package:crm_flutter/ui/screens/auth/login/login_screen.dart';
 import 'package:crm_flutter/ui/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +27,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _collectUserData() async {
     await Future.delayed(const Duration(seconds: 2));
+    final User? user = UserSharedPrefsService.getUser();
+
+    if (user == null) return;
+
+    UserData.setUserData(user);
   }
 
   Future<void> _toTheNextScreen() async {
