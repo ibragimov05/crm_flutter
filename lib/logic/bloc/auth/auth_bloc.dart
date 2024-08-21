@@ -71,6 +71,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         phone: event.phoneNumber,
         password: event.password,
         passwordConfirmation: event.passwordConfirmation,
+        roleId: event.roleId + 1,
       );
 
       if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {

@@ -39,7 +39,7 @@ class _RegisterInToMilliyma extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: DeviceScreen.h(context) / 1.4,
+      height: DeviceScreen.h(context) / 1.35,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
@@ -50,14 +50,13 @@ class _RegisterInToMilliyma extends StatelessWidget {
         children: [
           Text(
             'Register to Milliyma',
-            style: AppTextStyles.nunitoSansW700.copyWith(
-              fontSize: 18,
-            ),
+            style: AppTextStyles.nunitoSansW700.copyWith(fontSize: 18),
           ),
           const _NameInput(),
           const _PhoneNumberInput(),
           const _PasswordInput(),
           const _PasswordConfirmationInput(),
+          const UserRoleCheckBox(),
           const _RegisterButton(),
           ZoomTapAnimation(
             onTap: () => Navigator.of(context).pop(),
@@ -180,11 +179,11 @@ class _RegisterButton extends StatelessWidget {
                     phoneNumber: state.phoneNumber.value,
                     password: state.password.value,
                     passwordConfirmation: state.confirmedPassword.value,
-                    role: '1',
+                    roleId: state.roleId,
                   ));
             }
           : null,
-      shouldAddIcon: true,
     );
   }
 }
+

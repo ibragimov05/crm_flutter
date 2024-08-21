@@ -18,12 +18,14 @@ class AuthRepository {
     required String phone,
     required String password,
     required String passwordConfirmation,
+    required int roleId
   }) async =>
       _authDioService.register(
         name: name,
         phone: phone,
         password: password,
         passwordConfirmation: passwordConfirmation,
+        roleId: roleId,
       );
 
   Future<void> logOut() async => _authDioService.logOut();

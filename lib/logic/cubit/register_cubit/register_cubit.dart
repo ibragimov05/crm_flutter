@@ -55,6 +55,20 @@ class RegisterCubit extends Cubit<RegisterState> {
     ));
   }
 
+  void roleIdChanged(int newRoleId) {
+
+    emit(state.copyWith(
+      roleId: newRoleId,
+      status: FormzSubmissionStatus.initial,
+      isValid: Formz.validate([
+        state.name,
+        state.phoneNumber,
+        state.password,
+        state.confirmedPassword,
+      ]),
+    ));
+  }
+
   void confirmedPasswordChanged(String value) {
     final confirmedPassword = ConfirmedPassword.dirty(
       password: state.password.value,

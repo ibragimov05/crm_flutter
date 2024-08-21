@@ -38,33 +38,9 @@ class _AppBar extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(Icons.notifications_none_rounded),
               ),
-              GestureDetector(
-                onLongPress: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text('you sure?'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            context
-                              .read<AuthBloc>()
-                              .add(const AuthEvent.logout());
-                            Navigator.of(context).pop();
-
-                          },
-                          child: const Text('yes'),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+              ZoomTapAnimation(
+                onTap: () =>
+                    Navigator.pushNamed(context, AppRouter.profileScreen),
                 child: const CircleAvatar(radius: 20),
               ),
             ],

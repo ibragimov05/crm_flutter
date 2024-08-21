@@ -44,6 +44,7 @@ class AuthDioService {
     required String phone,
     required String password,
     required String passwordConfirmation,
+    required int roleId,
   }) async {
     final AppResponse appResponse = AppResponse();
 
@@ -55,6 +56,7 @@ class AuthDioService {
           'phone': phone,
           'password': password,
           'password_confirmation': passwordConfirmation,
+          'role_id': roleId,
         },
       );
 

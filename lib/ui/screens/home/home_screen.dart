@@ -1,11 +1,9 @@
 import 'package:crm_flutter/core/utils/user_constants.dart';
 import 'package:crm_flutter/core/utils/utils.dart';
-import 'package:crm_flutter/data/services/dio/user_dio_service.dart';
-import 'package:crm_flutter/logic/bloc/auth/auth_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 part 'widgets/home_screen_private_widgets.dart';
 

@@ -21,6 +21,7 @@ mixin _$RegisterState {
   Password get password => throw _privateConstructorUsedError;
   ConfirmedPassword get confirmedPassword => throw _privateConstructorUsedError;
   FormzSubmissionStatus get status => throw _privateConstructorUsedError;
+  int get roleId => throw _privateConstructorUsedError;
   bool get isValid => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
@@ -43,6 +44,7 @@ abstract class $RegisterStateCopyWith<$Res> {
       Password password,
       ConfirmedPassword confirmedPassword,
       FormzSubmissionStatus status,
+      int roleId,
       bool isValid,
       String? errorMessage});
 }
@@ -67,6 +69,7 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
     Object? password = null,
     Object? confirmedPassword = null,
     Object? status = null,
+    Object? roleId = null,
     Object? isValid = null,
     Object? errorMessage = freezed,
   }) {
@@ -91,6 +94,10 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as FormzSubmissionStatus,
+      roleId: null == roleId
+          ? _value.roleId
+          : roleId // ignore: cast_nullable_to_non_nullable
+              as int,
       isValid: null == isValid
           ? _value.isValid
           : isValid // ignore: cast_nullable_to_non_nullable
@@ -117,6 +124,7 @@ abstract class _$$RegisterStateImplCopyWith<$Res>
       Password password,
       ConfirmedPassword confirmedPassword,
       FormzSubmissionStatus status,
+      int roleId,
       bool isValid,
       String? errorMessage});
 }
@@ -139,6 +147,7 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
     Object? password = null,
     Object? confirmedPassword = null,
     Object? status = null,
+    Object? roleId = null,
     Object? isValid = null,
     Object? errorMessage = freezed,
   }) {
@@ -163,6 +172,10 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as FormzSubmissionStatus,
+      roleId: null == roleId
+          ? _value.roleId
+          : roleId // ignore: cast_nullable_to_non_nullable
+              as int,
       isValid: null == isValid
           ? _value.isValid
           : isValid // ignore: cast_nullable_to_non_nullable
@@ -184,6 +197,7 @@ class _$RegisterStateImpl implements _RegisterState {
       this.password = const Password.pure(),
       this.confirmedPassword = const ConfirmedPassword.pure(),
       this.status = FormzSubmissionStatus.initial,
+      this.roleId = 0,
       this.isValid = false,
       this.errorMessage});
 
@@ -204,13 +218,16 @@ class _$RegisterStateImpl implements _RegisterState {
   final FormzSubmissionStatus status;
   @override
   @JsonKey()
+  final int roleId;
+  @override
+  @JsonKey()
   final bool isValid;
   @override
   final String? errorMessage;
 
   @override
   String toString() {
-    return 'RegisterState(phoneNumber: $phoneNumber, name: $name, password: $password, confirmedPassword: $confirmedPassword, status: $status, isValid: $isValid, errorMessage: $errorMessage)';
+    return 'RegisterState(phoneNumber: $phoneNumber, name: $name, password: $password, confirmedPassword: $confirmedPassword, status: $status, roleId: $roleId, isValid: $isValid, errorMessage: $errorMessage)';
   }
 
   @override
@@ -226,6 +243,7 @@ class _$RegisterStateImpl implements _RegisterState {
             (identical(other.confirmedPassword, confirmedPassword) ||
                 other.confirmedPassword == confirmedPassword) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.roleId, roleId) || other.roleId == roleId) &&
             (identical(other.isValid, isValid) || other.isValid == isValid) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
@@ -233,7 +251,7 @@ class _$RegisterStateImpl implements _RegisterState {
 
   @override
   int get hashCode => Object.hash(runtimeType, phoneNumber, name, password,
-      confirmedPassword, status, isValid, errorMessage);
+      confirmedPassword, status, roleId, isValid, errorMessage);
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
@@ -251,6 +269,7 @@ abstract class _RegisterState implements RegisterState {
       final Password password,
       final ConfirmedPassword confirmedPassword,
       final FormzSubmissionStatus status,
+      final int roleId,
       final bool isValid,
       final String? errorMessage}) = _$RegisterStateImpl;
 
@@ -264,6 +283,8 @@ abstract class _RegisterState implements RegisterState {
   ConfirmedPassword get confirmedPassword;
   @override
   FormzSubmissionStatus get status;
+  @override
+  int get roleId;
   @override
   bool get isValid;
   @override

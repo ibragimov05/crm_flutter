@@ -12,7 +12,7 @@ class AuthEvent with _$AuthEvent {
     required String phoneNumber,
     required String password,
     required String passwordConfirmation,
-    required String role,
+    required int roleId,
   }) = RegisterUserEvent;
 
   const factory AuthEvent.resetPassword({required String phoneNumber}) =

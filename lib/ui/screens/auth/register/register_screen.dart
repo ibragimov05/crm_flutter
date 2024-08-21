@@ -1,3 +1,4 @@
+import 'package:crm_flutter/ui/screens/auth/register/widgets/user_role_check_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
