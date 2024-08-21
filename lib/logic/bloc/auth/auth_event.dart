@@ -12,10 +12,13 @@ class AuthEvent with _$AuthEvent {
     required String phoneNumber,
     required String password,
     required String passwordConfirmation,
+    required String role,
   }) = RegisterUserEvent;
 
   const factory AuthEvent.resetPassword({required String phoneNumber}) =
       ResetPasswordEvent;
+
+  const factory AuthEvent.checkTokenExpiry() = CheckTokenExpiryEvent;
 
   const factory AuthEvent.logout() = LogoutEvent;
 }

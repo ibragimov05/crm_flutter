@@ -10,7 +10,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ToastificationWrapper(
-      child: MaterialApp.router(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           appBarTheme: const AppBarTheme(
@@ -30,7 +30,8 @@ class App extends StatelessWidget {
             cursorColor: const Color(0xFF3F8CFF),
           ),
         ),
-        routerConfig: AppRouter.config,
+        initialRoute: AppRouter.splashScreen,
+        onGenerateRoute: AppRouter.onGenerateRoute,
       ),
     );
   }

@@ -25,4 +25,6 @@ class AuthRepository {
         password: password,
         passwordConfirmation: passwordConfirmation,
       );
+
+  String? checkTokenExpiry() => _authDioService.checkTokenExpiry();
 }

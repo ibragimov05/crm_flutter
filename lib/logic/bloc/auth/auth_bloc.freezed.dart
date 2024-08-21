@@ -20,9 +20,10 @@ mixin _$AuthEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String phoneNumber, String password) loginUser,
     required TResult Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)
+            String passwordConfirmation, String role)
         registerUser,
     required TResult Function(String phoneNumber) resetPassword,
+    required TResult Function() checkTokenExpiry,
     required TResult Function() logout,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,9 +31,10 @@ mixin _$AuthEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String phoneNumber, String password)? loginUser,
     TResult? Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)?
+            String passwordConfirmation, String role)?
         registerUser,
     TResult? Function(String phoneNumber)? resetPassword,
+    TResult? Function()? checkTokenExpiry,
     TResult? Function()? logout,
   }) =>
       throw _privateConstructorUsedError;
@@ -40,9 +42,10 @@ mixin _$AuthEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String phoneNumber, String password)? loginUser,
     TResult Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)?
+            String passwordConfirmation, String role)?
         registerUser,
     TResult Function(String phoneNumber)? resetPassword,
+    TResult Function()? checkTokenExpiry,
     TResult Function()? logout,
     required TResult orElse(),
   }) =>
@@ -52,6 +55,7 @@ mixin _$AuthEvent {
     required TResult Function(LoginUserEvent value) loginUser,
     required TResult Function(RegisterUserEvent value) registerUser,
     required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(CheckTokenExpiryEvent value) checkTokenExpiry,
     required TResult Function(LogoutEvent value) logout,
   }) =>
       throw _privateConstructorUsedError;
@@ -60,6 +64,7 @@ mixin _$AuthEvent {
     TResult? Function(LoginUserEvent value)? loginUser,
     TResult? Function(RegisterUserEvent value)? registerUser,
     TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(CheckTokenExpiryEvent value)? checkTokenExpiry,
     TResult? Function(LogoutEvent value)? logout,
   }) =>
       throw _privateConstructorUsedError;
@@ -68,6 +73,7 @@ mixin _$AuthEvent {
     TResult Function(LoginUserEvent value)? loginUser,
     TResult Function(RegisterUserEvent value)? registerUser,
     TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(CheckTokenExpiryEvent value)? checkTokenExpiry,
     TResult Function(LogoutEvent value)? logout,
     required TResult orElse(),
   }) =>
@@ -176,9 +182,10 @@ class _$LoginUserEventImpl implements LoginUserEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String phoneNumber, String password) loginUser,
     required TResult Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)
+            String passwordConfirmation, String role)
         registerUser,
     required TResult Function(String phoneNumber) resetPassword,
+    required TResult Function() checkTokenExpiry,
     required TResult Function() logout,
   }) {
     return loginUser(phoneNumber, password);
@@ -189,9 +196,10 @@ class _$LoginUserEventImpl implements LoginUserEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String phoneNumber, String password)? loginUser,
     TResult? Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)?
+            String passwordConfirmation, String role)?
         registerUser,
     TResult? Function(String phoneNumber)? resetPassword,
+    TResult? Function()? checkTokenExpiry,
     TResult? Function()? logout,
   }) {
     return loginUser?.call(phoneNumber, password);
@@ -202,9 +210,10 @@ class _$LoginUserEventImpl implements LoginUserEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String phoneNumber, String password)? loginUser,
     TResult Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)?
+            String passwordConfirmation, String role)?
         registerUser,
     TResult Function(String phoneNumber)? resetPassword,
+    TResult Function()? checkTokenExpiry,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
@@ -220,6 +229,7 @@ class _$LoginUserEventImpl implements LoginUserEvent {
     required TResult Function(LoginUserEvent value) loginUser,
     required TResult Function(RegisterUserEvent value) registerUser,
     required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(CheckTokenExpiryEvent value) checkTokenExpiry,
     required TResult Function(LogoutEvent value) logout,
   }) {
     return loginUser(this);
@@ -231,6 +241,7 @@ class _$LoginUserEventImpl implements LoginUserEvent {
     TResult? Function(LoginUserEvent value)? loginUser,
     TResult? Function(RegisterUserEvent value)? registerUser,
     TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(CheckTokenExpiryEvent value)? checkTokenExpiry,
     TResult? Function(LogoutEvent value)? logout,
   }) {
     return loginUser?.call(this);
@@ -242,6 +253,7 @@ class _$LoginUserEventImpl implements LoginUserEvent {
     TResult Function(LoginUserEvent value)? loginUser,
     TResult Function(RegisterUserEvent value)? registerUser,
     TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(CheckTokenExpiryEvent value)? checkTokenExpiry,
     TResult Function(LogoutEvent value)? logout,
     required TResult orElse(),
   }) {
@@ -277,7 +289,8 @@ abstract class _$$RegisterUserEventImplCopyWith<$Res> {
       {String name,
       String phoneNumber,
       String password,
-      String passwordConfirmation});
+      String passwordConfirmation,
+      String role});
 }
 
 /// @nodoc
@@ -297,6 +310,7 @@ class __$$RegisterUserEventImplCopyWithImpl<$Res>
     Object? phoneNumber = null,
     Object? password = null,
     Object? passwordConfirmation = null,
+    Object? role = null,
   }) {
     return _then(_$RegisterUserEventImpl(
       name: null == name
@@ -315,6 +329,10 @@ class __$$RegisterUserEventImplCopyWithImpl<$Res>
           ? _value.passwordConfirmation
           : passwordConfirmation // ignore: cast_nullable_to_non_nullable
               as String,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -326,7 +344,8 @@ class _$RegisterUserEventImpl implements RegisterUserEvent {
       {required this.name,
       required this.phoneNumber,
       required this.password,
-      required this.passwordConfirmation});
+      required this.passwordConfirmation,
+      required this.role});
 
   @override
   final String name;
@@ -336,10 +355,12 @@ class _$RegisterUserEventImpl implements RegisterUserEvent {
   final String password;
   @override
   final String passwordConfirmation;
+  @override
+  final String role;
 
   @override
   String toString() {
-    return 'AuthEvent.registerUser(name: $name, phoneNumber: $phoneNumber, password: $password, passwordConfirmation: $passwordConfirmation)';
+    return 'AuthEvent.registerUser(name: $name, phoneNumber: $phoneNumber, password: $password, passwordConfirmation: $passwordConfirmation, role: $role)';
   }
 
   @override
@@ -353,12 +374,13 @@ class _$RegisterUserEventImpl implements RegisterUserEvent {
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.passwordConfirmation, passwordConfirmation) ||
-                other.passwordConfirmation == passwordConfirmation));
+                other.passwordConfirmation == passwordConfirmation) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, name, phoneNumber, password, passwordConfirmation);
+      runtimeType, name, phoneNumber, password, passwordConfirmation, role);
 
   /// Create a copy of AuthEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -374,12 +396,14 @@ class _$RegisterUserEventImpl implements RegisterUserEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String phoneNumber, String password) loginUser,
     required TResult Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)
+            String passwordConfirmation, String role)
         registerUser,
     required TResult Function(String phoneNumber) resetPassword,
+    required TResult Function() checkTokenExpiry,
     required TResult Function() logout,
   }) {
-    return registerUser(name, phoneNumber, password, passwordConfirmation);
+    return registerUser(
+        name, phoneNumber, password, passwordConfirmation, role);
   }
 
   @override
@@ -387,13 +411,14 @@ class _$RegisterUserEventImpl implements RegisterUserEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String phoneNumber, String password)? loginUser,
     TResult? Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)?
+            String passwordConfirmation, String role)?
         registerUser,
     TResult? Function(String phoneNumber)? resetPassword,
+    TResult? Function()? checkTokenExpiry,
     TResult? Function()? logout,
   }) {
     return registerUser?.call(
-        name, phoneNumber, password, passwordConfirmation);
+        name, phoneNumber, password, passwordConfirmation, role);
   }
 
   @override
@@ -401,14 +426,16 @@ class _$RegisterUserEventImpl implements RegisterUserEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String phoneNumber, String password)? loginUser,
     TResult Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)?
+            String passwordConfirmation, String role)?
         registerUser,
     TResult Function(String phoneNumber)? resetPassword,
+    TResult Function()? checkTokenExpiry,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (registerUser != null) {
-      return registerUser(name, phoneNumber, password, passwordConfirmation);
+      return registerUser(
+          name, phoneNumber, password, passwordConfirmation, role);
     }
     return orElse();
   }
@@ -419,6 +446,7 @@ class _$RegisterUserEventImpl implements RegisterUserEvent {
     required TResult Function(LoginUserEvent value) loginUser,
     required TResult Function(RegisterUserEvent value) registerUser,
     required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(CheckTokenExpiryEvent value) checkTokenExpiry,
     required TResult Function(LogoutEvent value) logout,
   }) {
     return registerUser(this);
@@ -430,6 +458,7 @@ class _$RegisterUserEventImpl implements RegisterUserEvent {
     TResult? Function(LoginUserEvent value)? loginUser,
     TResult? Function(RegisterUserEvent value)? registerUser,
     TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(CheckTokenExpiryEvent value)? checkTokenExpiry,
     TResult? Function(LogoutEvent value)? logout,
   }) {
     return registerUser?.call(this);
@@ -441,6 +470,7 @@ class _$RegisterUserEventImpl implements RegisterUserEvent {
     TResult Function(LoginUserEvent value)? loginUser,
     TResult Function(RegisterUserEvent value)? registerUser,
     TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(CheckTokenExpiryEvent value)? checkTokenExpiry,
     TResult Function(LogoutEvent value)? logout,
     required TResult orElse(),
   }) {
@@ -456,12 +486,14 @@ abstract class RegisterUserEvent implements AuthEvent {
       {required final String name,
       required final String phoneNumber,
       required final String password,
-      required final String passwordConfirmation}) = _$RegisterUserEventImpl;
+      required final String passwordConfirmation,
+      required final String role}) = _$RegisterUserEventImpl;
 
   String get name;
   String get phoneNumber;
   String get password;
   String get passwordConfirmation;
+  String get role;
 
   /// Create a copy of AuthEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -542,9 +574,10 @@ class _$ResetPasswordEventImpl implements ResetPasswordEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String phoneNumber, String password) loginUser,
     required TResult Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)
+            String passwordConfirmation, String role)
         registerUser,
     required TResult Function(String phoneNumber) resetPassword,
+    required TResult Function() checkTokenExpiry,
     required TResult Function() logout,
   }) {
     return resetPassword(phoneNumber);
@@ -555,9 +588,10 @@ class _$ResetPasswordEventImpl implements ResetPasswordEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String phoneNumber, String password)? loginUser,
     TResult? Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)?
+            String passwordConfirmation, String role)?
         registerUser,
     TResult? Function(String phoneNumber)? resetPassword,
+    TResult? Function()? checkTokenExpiry,
     TResult? Function()? logout,
   }) {
     return resetPassword?.call(phoneNumber);
@@ -568,9 +602,10 @@ class _$ResetPasswordEventImpl implements ResetPasswordEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String phoneNumber, String password)? loginUser,
     TResult Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)?
+            String passwordConfirmation, String role)?
         registerUser,
     TResult Function(String phoneNumber)? resetPassword,
+    TResult Function()? checkTokenExpiry,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
@@ -586,6 +621,7 @@ class _$ResetPasswordEventImpl implements ResetPasswordEvent {
     required TResult Function(LoginUserEvent value) loginUser,
     required TResult Function(RegisterUserEvent value) registerUser,
     required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(CheckTokenExpiryEvent value) checkTokenExpiry,
     required TResult Function(LogoutEvent value) logout,
   }) {
     return resetPassword(this);
@@ -597,6 +633,7 @@ class _$ResetPasswordEventImpl implements ResetPasswordEvent {
     TResult? Function(LoginUserEvent value)? loginUser,
     TResult? Function(RegisterUserEvent value)? registerUser,
     TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(CheckTokenExpiryEvent value)? checkTokenExpiry,
     TResult? Function(LogoutEvent value)? logout,
   }) {
     return resetPassword?.call(this);
@@ -608,6 +645,7 @@ class _$ResetPasswordEventImpl implements ResetPasswordEvent {
     TResult Function(LoginUserEvent value)? loginUser,
     TResult Function(RegisterUserEvent value)? registerUser,
     TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(CheckTokenExpiryEvent value)? checkTokenExpiry,
     TResult Function(LogoutEvent value)? logout,
     required TResult orElse(),
   }) {
@@ -629,6 +667,137 @@ abstract class ResetPasswordEvent implements AuthEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ResetPasswordEventImplCopyWith<_$ResetPasswordEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CheckTokenExpiryEventImplCopyWith<$Res> {
+  factory _$$CheckTokenExpiryEventImplCopyWith(
+          _$CheckTokenExpiryEventImpl value,
+          $Res Function(_$CheckTokenExpiryEventImpl) then) =
+      __$$CheckTokenExpiryEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CheckTokenExpiryEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$CheckTokenExpiryEventImpl>
+    implements _$$CheckTokenExpiryEventImplCopyWith<$Res> {
+  __$$CheckTokenExpiryEventImplCopyWithImpl(_$CheckTokenExpiryEventImpl _value,
+      $Res Function(_$CheckTokenExpiryEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CheckTokenExpiryEventImpl implements CheckTokenExpiryEvent {
+  const _$CheckTokenExpiryEventImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.checkTokenExpiry()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CheckTokenExpiryEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String phoneNumber, String password) loginUser,
+    required TResult Function(String name, String phoneNumber, String password,
+            String passwordConfirmation, String role)
+        registerUser,
+    required TResult Function(String phoneNumber) resetPassword,
+    required TResult Function() checkTokenExpiry,
+    required TResult Function() logout,
+  }) {
+    return checkTokenExpiry();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String phoneNumber, String password)? loginUser,
+    TResult? Function(String name, String phoneNumber, String password,
+            String passwordConfirmation, String role)?
+        registerUser,
+    TResult? Function(String phoneNumber)? resetPassword,
+    TResult? Function()? checkTokenExpiry,
+    TResult? Function()? logout,
+  }) {
+    return checkTokenExpiry?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String phoneNumber, String password)? loginUser,
+    TResult Function(String name, String phoneNumber, String password,
+            String passwordConfirmation, String role)?
+        registerUser,
+    TResult Function(String phoneNumber)? resetPassword,
+    TResult Function()? checkTokenExpiry,
+    TResult Function()? logout,
+    required TResult orElse(),
+  }) {
+    if (checkTokenExpiry != null) {
+      return checkTokenExpiry();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoginUserEvent value) loginUser,
+    required TResult Function(RegisterUserEvent value) registerUser,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(CheckTokenExpiryEvent value) checkTokenExpiry,
+    required TResult Function(LogoutEvent value) logout,
+  }) {
+    return checkTokenExpiry(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoginUserEvent value)? loginUser,
+    TResult? Function(RegisterUserEvent value)? registerUser,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(CheckTokenExpiryEvent value)? checkTokenExpiry,
+    TResult? Function(LogoutEvent value)? logout,
+  }) {
+    return checkTokenExpiry?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoginUserEvent value)? loginUser,
+    TResult Function(RegisterUserEvent value)? registerUser,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(CheckTokenExpiryEvent value)? checkTokenExpiry,
+    TResult Function(LogoutEvent value)? logout,
+    required TResult orElse(),
+  }) {
+    if (checkTokenExpiry != null) {
+      return checkTokenExpiry(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CheckTokenExpiryEvent implements AuthEvent {
+  const factory CheckTokenExpiryEvent() = _$CheckTokenExpiryEventImpl;
 }
 
 /// @nodoc
@@ -674,9 +843,10 @@ class _$LogoutEventImpl implements LogoutEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String phoneNumber, String password) loginUser,
     required TResult Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)
+            String passwordConfirmation, String role)
         registerUser,
     required TResult Function(String phoneNumber) resetPassword,
+    required TResult Function() checkTokenExpiry,
     required TResult Function() logout,
   }) {
     return logout();
@@ -687,9 +857,10 @@ class _$LogoutEventImpl implements LogoutEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String phoneNumber, String password)? loginUser,
     TResult? Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)?
+            String passwordConfirmation, String role)?
         registerUser,
     TResult? Function(String phoneNumber)? resetPassword,
+    TResult? Function()? checkTokenExpiry,
     TResult? Function()? logout,
   }) {
     return logout?.call();
@@ -700,9 +871,10 @@ class _$LogoutEventImpl implements LogoutEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String phoneNumber, String password)? loginUser,
     TResult Function(String name, String phoneNumber, String password,
-            String passwordConfirmation)?
+            String passwordConfirmation, String role)?
         registerUser,
     TResult Function(String phoneNumber)? resetPassword,
+    TResult Function()? checkTokenExpiry,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
@@ -718,6 +890,7 @@ class _$LogoutEventImpl implements LogoutEvent {
     required TResult Function(LoginUserEvent value) loginUser,
     required TResult Function(RegisterUserEvent value) registerUser,
     required TResult Function(ResetPasswordEvent value) resetPassword,
+    required TResult Function(CheckTokenExpiryEvent value) checkTokenExpiry,
     required TResult Function(LogoutEvent value) logout,
   }) {
     return logout(this);
@@ -729,6 +902,7 @@ class _$LogoutEventImpl implements LogoutEvent {
     TResult? Function(LoginUserEvent value)? loginUser,
     TResult? Function(RegisterUserEvent value)? registerUser,
     TResult? Function(ResetPasswordEvent value)? resetPassword,
+    TResult? Function(CheckTokenExpiryEvent value)? checkTokenExpiry,
     TResult? Function(LogoutEvent value)? logout,
   }) {
     return logout?.call(this);
@@ -740,6 +914,7 @@ class _$LogoutEventImpl implements LogoutEvent {
     TResult Function(LoginUserEvent value)? loginUser,
     TResult Function(RegisterUserEvent value)? registerUser,
     TResult Function(ResetPasswordEvent value)? resetPassword,
+    TResult Function(CheckTokenExpiryEvent value)? checkTokenExpiry,
     TResult Function(LogoutEvent value)? logout,
     required TResult orElse(),
   }) {

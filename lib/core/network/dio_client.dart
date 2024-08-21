@@ -1,14 +1,17 @@
+import 'package:crm_flutter/data/services/shared_prefs/shared_prefs_service.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class DioClient {
   final _dio = Dio();
 
   DioClient._private() {
-    _dio.options
-      ..baseUrl = 'http://millima.flutterwithakmaljon.uz/api'
-      ..connectTimeout = const Duration(seconds: 10)
-      ..receiveTimeout = const Duration(seconds: 10)
-      ..responseType = ResponseType.json;
+    _dio
+      ..options.baseUrl = 'http://millima.flutterwithakmaljon.uz/api'
+      ..options.connectTimeout = const Duration(seconds: 10)
+      ..options.receiveTimeout = const Duration(seconds: 10)
+      ..options.responseType = ResponseType.json
+      ..interceptors.add(DioInterceptor());
   }
 
   static final _singletonConstructor = DioClient._private();
@@ -38,7 +41,6 @@ class DioClient {
     Options? options,
   }) async {
     try {
-      /// /////////////////////////////////////////////////////////////
       final response = await _dio.post(
         url,
         data: data,
@@ -55,7 +57,10 @@ class DioClient {
     required Map<String, dynamic> data,
   }) async {
     try {
-      final response = await _dio.put(url, data: data);
+      final response = await _dio.put(
+        url,
+        data: data,
+      );
       return response;
     } catch (e) {
       rethrow;
@@ -70,5 +75,38 @@ class DioClient {
     } catch (e) {
       rethrow;
     }
+  }
+}
+
+/// [DioInterceptor] for [DioClient]
+class DioInterceptor extends Interceptor {
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    debugPrint("Request method: ${options.method}");
+
+    final accessToken = SharedPrefsService.getAccessToken();
+
+    if (accessToken != null) {
+      options.headers['Authorization'] = "Bearer $accessToken";
+    }
+
+    if (options.connectTimeout != null &&
+        options.connectTimeout! < const Duration(milliseconds: 300)) {
+      options.connectTimeout = const Duration(milliseconds: 300);
+    }
+
+    handler.next(options);
+  }
+
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    debugPrint("INTERCEPTOR: response.data: ${response.data}");
+    handler.next(response);
+  }
+
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    debugPrint("INTERCEPTOR: error: ${err.response?.data}");
+    handler.next(err);
   }
 }

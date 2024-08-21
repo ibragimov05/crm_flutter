@@ -1,6 +1,5 @@
 import 'package:auth_form_inputs/auth_form_inputs.dart';
 import 'package:bloc/bloc.dart';
-import 'package:crm_flutter/data/repositories/auth_repository.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,11 +8,7 @@ part 'register_state.dart';
 part 'register_cubit.freezed.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
-  final AuthRepository _authRepository;
-
-  RegisterCubit({required AuthRepository authRepository})
-      : _authRepository = authRepository,
-        super(const RegisterState());
+  RegisterCubit() : super(const RegisterState());
 
   void nameChanged(String value) {
     final name = Name.dirty(value);
@@ -75,28 +70,5 @@ class RegisterCubit extends Cubit<RegisterState> {
         confirmedPassword,
       ]),
     ));
-  }
-
-  void signUpFormSubmitted() async {
-    if (!state.isValid) return;
-
-    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-
-    try {
-      final appResponse = await _authRepository.register(
-        phone: state.phoneNumber.value,
-        name: state.name.value,
-        password: state.password.value,
-        passwordConfirmation: state.confirmedPassword.value,
-      );
-
-      if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
-        emit(state.copyWith(status: FormzSubmissionStatus.success));
-      } else {
-        throw 'error: {status_code: ${appResponse.statusCode}, error_message: ${appResponse.errorMessage}';
-      }
-    } catch (_) {
-      emit(state.copyWith(status: FormzSubmissionStatus.failure));
-    }
   }
 }

@@ -1,6 +1,9 @@
-import 'package:crm_flutter/core/network/dio_client.dart';
-import 'package:crm_flutter/data/models/app_response.dart';
+
+import 'package:crm_flutter/data/services/shared_prefs/shared_prefs_service.dart';
 import 'package:dio/dio.dart';
+
+import '../../models/app_response.dart';
+import '../../../core/network/dio_client.dart';
 
 class AuthDioService {
   final DioClient _dioClient = DioClient();
@@ -13,10 +16,14 @@ class AuthDioService {
     final AppResponse appResponse = AppResponse();
 
     try {
-      appResponse.data = await _dioClient.put(url: 'login', data: {
+      appResponse.data = await _dioClient.post(url: '/login', data: {
         'phone': phone,
         'password': password,
       });
+      // await SharedPrefsService.saveAccessToken(
+      //   appResponse.data['data']['token'],
+      // );
+
     } catch (e) {
       if (e is DioException) {
         appResponse.statusCode = e.response?.statusCode;
@@ -39,12 +46,15 @@ class AuthDioService {
     final AppResponse appResponse = AppResponse();
 
     try {
-      appResponse.data = await _dioClient.put(url: 'register', data: {
-        'name': name,
-        'phone': phone,
-        'password': password,
-        'password_confirmation': passwordConfirmation,
-      });
+      appResponse.data = await _dioClient.post(
+        url: '/register',
+        data: {
+          'name': name,
+          'phone': phone,
+          'password': password,
+          'password_confirmation': passwordConfirmation,
+        },
+      );
     } catch (e) {
       if (e is DioException) {
         appResponse.statusCode = e.response?.statusCode;
@@ -61,7 +71,7 @@ class AuthDioService {
     final AppResponse appResponse = AppResponse();
 
     try {
-      _dioClient.post(url: 'logout');
+      _dioClient.post(url: '/logout');
     } catch (e) {
       appResponse.isSuccess = false;
       if (e is DioException) {
@@ -72,4 +82,6 @@ class AuthDioService {
 
     return appResponse;
   }
+
+  String? checkTokenExpiry() => SharedPrefsService.getAccessToken();
 }
