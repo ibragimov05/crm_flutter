@@ -54,19 +54,17 @@ class HomeScreen extends StatelessWidget {
                       ZoomTapAnimation(
                         onTap: () => Navigator.pushNamed(
                             context, AppRouter.profileScreen),
-                        child: CircleAvatar(
-                          backgroundColor: AppColors.softPastelBlue,
-                          radius: 20,
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          clipBehavior: Clip.hardEdge,
+                          decoration:
+                              const BoxDecoration(shape: BoxShape.circle),
                           child: BlocBuilder<UserBloc, UserState>(
                             buildWhen: (previous, current) =>
                                 current.userStatus == UserStatus.loaded,
-                            builder: (context, state) {
-                              print('----------------------------------------');
-                              print(state.user?.photo);
-                              print('----------------------------------------');
-
-                              return const ShowUserPhotoItem();
-                            },
+                            builder: (context, state) =>
+                                const ShowUserPhotoItem(),
                           ),
                         ),
                       ),
@@ -85,15 +83,13 @@ class HomeScreen extends StatelessWidget {
                       BlocBuilder<UserBloc, UserState>(
                         buildWhen: (previous, current) =>
                             current.userStatus == UserStatus.loaded,
-                        builder: (context, state) {
-                          return Text(
-                            'Welcome back, ${UserData.name}!',
-                            style: AppTextStyles.nunitoSansW600.copyWith(
-                              color: AppColors.grey,
-                              fontSize: 16,
+                        builder: (context, state) => Text(
+                          'Welcome back, ${UserData.name}!',
+                          style: AppTextStyles.nunitoSansW600.copyWith(
+                            color: AppColors.grey,
+                            fontSize: 16,
                             ),
-                          );
-                        },
+                        ),
                       ),
                     ],
                   ),

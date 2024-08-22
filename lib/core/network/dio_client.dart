@@ -82,7 +82,6 @@ class DioClient {
 class DioInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    debugPrint("Request method: ${options.method}");
 
     final accessToken = TokenPrefsService.getAccessToken();
 

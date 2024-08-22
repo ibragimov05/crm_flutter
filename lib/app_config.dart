@@ -1,7 +1,10 @@
+import 'package:crm_flutter/data/repositories/admin_management_repository.dart';
 import 'package:crm_flutter/data/repositories/auth_repository.dart';
 import 'package:crm_flutter/data/repositories/user_repository.dart';
+import 'package:crm_flutter/data/services/dio/admin_management_dio_service.dart';
 import 'package:crm_flutter/data/services/dio/auth_dio_service.dart';
 import 'package:crm_flutter/data/services/dio/user_dio_service.dart';
+import 'package:crm_flutter/logic/bloc/admin_management/admin_management_bloc.dart';
 import 'package:crm_flutter/logic/bloc/auth/auth_bloc.dart';
 import 'package:crm_flutter/logic/bloc/user/user_bloc.dart';
 import 'package:crm_flutter/logic/cubit/edit_profile_form_cubit/edit_profile_form_cubit.dart';
@@ -29,6 +32,10 @@ class AppConfig {
     getIt.registerLazySingleton(
       () => UserRepository(userDioService: UserDioService()),
     );
+    getIt.registerLazySingleton(
+      () => AdminManagementRepository(
+          adminDioService: AdminManagementDioService()),
+    );
 
     /// registering blocs && cubits
     /// [BLOCS]
@@ -39,6 +46,11 @@ class AppConfig {
     );
     getIt.registerLazySingleton(
       () => UserBloc(userRepository: getIt.get<UserRepository>()),
+    );
+    getIt.registerLazySingleton(
+      () => AdminManagementBloc(
+        adminManagementRepository: getIt.get<AdminManagementRepository>(),
+      ),
     );
 
     /// [CUBITS]

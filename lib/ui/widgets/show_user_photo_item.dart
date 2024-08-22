@@ -19,7 +19,7 @@ class ShowUserPhotoItem extends StatelessWidget {
         'http://millima.flutterwithakmaljon.uz/storage/avatars/${UserData.photo}',
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) =>
-            Image.asset(AppConstants.userProfilePhoto, fit: BoxFit.cover),
+            Image.network(AppConstants.userProfilePhoto, fit: BoxFit.cover),
       );
     }
 

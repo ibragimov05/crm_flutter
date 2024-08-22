@@ -4,7 +4,6 @@ import 'package:crm_flutter/logic/cubit/edit_profile_form_cubit/edit_profile_for
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/utils/utils.dart';
 import '../../../../logic/bloc/user/user_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -42,9 +41,11 @@ class _UserImageWidgetState extends State<UserImageWidget> {
           child: BlocBuilder<EditProfileFormCubit, EditProfileFormState>(
             buildWhen: (previous, current) => current.photoPath.isNotEmpty,
             builder: (context, editProfileState) {
-              return CircleAvatar(
-                radius: 30,
-                backgroundColor: AppColors.softPastelBlue,
+              return Container(
+                height: 60,
+                width: 60,
+                clipBehavior: Clip.hardEdge,
+                decoration: const BoxDecoration(shape: BoxShape.circle),
                 child: ShowUserPhotoItem(
                   imageFileForEdit: _xFile != null ? File(_xFile!.path) : null,
                 ),
