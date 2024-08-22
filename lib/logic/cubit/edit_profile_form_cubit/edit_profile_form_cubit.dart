@@ -59,4 +59,12 @@ class EditProfileFormCubit extends Cubit<EditProfileFormState> {
 
     emit(state.copyWith(photoPath: value, isValid: isValid));
   }
+
+  void toInitial() => emit(state.copyWith(
+        isValid: false,
+        photoPath: '',
+        name: const Name.pure(),
+        email: const Email.pure(),
+        phoneNumber: const PhoneNumber.pure(),
+      ));
 }

@@ -30,11 +30,12 @@ class AdminPanelDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Settings'),
-            onTap: () {
-              Navigator.pop(context);
-            },
+            leading: const Icon(Icons.group),
+            title: const Text('Groups'),
+            onTap: () => Navigator.pushNamed(
+              context,
+              AppRouter.adminPanelGroupsScreen,
+            ),
           ),
         ],
       ),

@@ -55,10 +55,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(state.copyWith(userStatus: UserStatus.loading));
 
     await _userRepository.updateUser(
-      email: event.email.isEmpty ? UserData.email : event.email,
-      name: event.name.isEmpty ? UserData.name : event.name,
-      phone: event.phone.isEmpty ? UserData.phone : event.phone,
-      photoPath: event.photoPath.isEmpty ? UserData.photo : event.photoPath,
+      email: event.email == UserData.email ? '' : event.email,
+      name: event.name == UserData.name ? '' : event.name,
+      phone: event.phone == UserData.phone ? '' : event.phone,
+      photoPath: event.photoPath == UserData.photo ? '' : event.photoPath,
     );
 
     add(const UserEvent.getUserEvent());

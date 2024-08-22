@@ -110,6 +110,9 @@ class _SaveButton extends StatelessWidget {
       listener: (context, state) {
         if (state.userStatus == UserStatus.loaded) {
           Navigator.of(context).pop();
+
+          context.read<EditProfileFormCubit>().toInitial();
+
           AppFunction.showToast(
             message: 'Your data has been updated successfully',
             isSuccess: true,

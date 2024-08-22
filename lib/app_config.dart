@@ -1,9 +1,12 @@
+import 'package:crm_flutter/data/repositories/admin_group_management_repository.dart';
 import 'package:crm_flutter/data/repositories/admin_management_repository.dart';
 import 'package:crm_flutter/data/repositories/auth_repository.dart';
 import 'package:crm_flutter/data/repositories/user_repository.dart';
+import 'package:crm_flutter/data/services/dio/admin_group_management_dio_service.dart';
 import 'package:crm_flutter/data/services/dio/admin_management_dio_service.dart';
 import 'package:crm_flutter/data/services/dio/auth_dio_service.dart';
 import 'package:crm_flutter/data/services/dio/user_dio_service.dart';
+import 'package:crm_flutter/logic/bloc/admin_group_management/admin_group_management_bloc.dart';
 import 'package:crm_flutter/logic/bloc/admin_management/admin_management_bloc.dart';
 import 'package:crm_flutter/logic/bloc/auth/auth_bloc.dart';
 import 'package:crm_flutter/logic/bloc/user/user_bloc.dart';
@@ -36,6 +39,11 @@ class AppConfig {
       () => AdminManagementRepository(
           adminDioService: AdminManagementDioService()),
     );
+    getIt.registerLazySingleton(
+      () => AdminGroupManagementRepository(
+        adminGroupManagementDioService: AdminGroupManagementDioService(),
+      ),
+    );
 
     /// registering blocs && cubits
     /// [BLOCS]
@@ -50,6 +58,12 @@ class AppConfig {
     getIt.registerLazySingleton(
       () => AdminManagementBloc(
         adminManagementRepository: getIt.get<AdminManagementRepository>(),
+      ),
+    );
+    getIt.registerLazySingleton(
+      () => AdminGroupManagementBloc(
+        adminGroupManagementRepository:
+            getIt.get<AdminGroupManagementRepository>(),
       ),
     );
 

@@ -1,5 +1,4 @@
-import 'package:crm_flutter/core/utils/app_colors.dart';
-import 'package:crm_flutter/core/utils/app_router.dart';
+import 'package:crm_flutter/core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toastification/toastification.dart';
@@ -15,6 +14,16 @@ class App extends StatelessWidget {
         theme: ThemeData(
           appBarTheme: const AppBarTheme(
             backgroundColor: AppColors.mainBackground,
+            centerTitle: true,
+            surfaceTintColor: Colors.transparent,
+            shadowColor: AppColors.grey,
+          ),
+          textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+              overlayColor: WidgetStatePropertyAll(
+                AppColors.grayishBlue.withOpacity(0.1),
+              ),
+            ),
           ),
           scaffoldBackgroundColor: AppColors.mainBackground,
           textTheme:

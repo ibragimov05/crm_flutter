@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:crm_flutter/core/utils/app_colors.dart';
 import 'package:crm_flutter/logic/cubit/edit_profile_form_cubit/edit_profile_form_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +46,10 @@ class _UserImageWidgetState extends State<UserImageWidget> {
                 height: 60,
                 width: 60,
                 clipBehavior: Clip.hardEdge,
-                decoration: const BoxDecoration(shape: BoxShape.circle),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.grayishBlue.withOpacity(0.15),
+                ),
                 child: ShowUserPhotoItem(
                   imageFileForEdit: _xFile != null ? File(_xFile!.path) : null,
                 ),

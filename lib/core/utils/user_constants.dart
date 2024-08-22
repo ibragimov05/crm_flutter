@@ -21,8 +21,8 @@ class UserData {
     id = user.id;
     name = user.name;
     phone = user.phone;
-    email = user.email ?? 'null';
-    photo = user.photo ?? 'null';
+    email = user.email ?? '';
+    photo = user.photo ?? '';
     createdAt = user.createdAt ?? DateTime.now();
     emailVerifiedAt = user.emailVerifiedAt ?? DateTime.now();
     updatedAt = user.updatedAt ?? DateTime.now();

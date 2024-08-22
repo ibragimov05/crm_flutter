@@ -14,7 +14,7 @@ class ShowUserPhotoItem extends StatelessWidget {
       return Image.file(imageFileForEdit!, fit: BoxFit.cover);
     }
 
-    if (UserData.photo.isNotEmpty) {
+    if (UserData.photo.isNotEmpty && UserData.photo != 'null') {
       return Image.network(
         'http://millima.flutterwithakmaljon.uz/storage/avatars/${UserData.photo}',
         fit: BoxFit.cover,
@@ -23,9 +23,11 @@ class ShowUserPhotoItem extends StatelessWidget {
       );
     }
 
-    return Text(
-      AppFunction.getUserName(UserData.name),
-      style: AppTextStyles.nunitoSansW700,
+    return Center(
+      child: Text(
+        AppFunction.getUserName(UserData.name),
+        style: AppTextStyles.nunitoSansW700,
+      ),
     );
   }
 }

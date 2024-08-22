@@ -32,9 +32,9 @@ class UserDioService {
     final AppResponse appResponse = AppResponse();
     try {
       FormData formData = FormData.fromMap({
-        "name": name,
-        "phone": phone,
-        "email": email,
+        if (name.isNotEmpty) "name": name,
+        if (phone.isNotEmpty) "phone": phone,
+        if (email.isNotEmpty) "email": email,
         if (photoPath.isNotEmpty)
           "photo": await MultipartFile.fromFile(
             photoPath,

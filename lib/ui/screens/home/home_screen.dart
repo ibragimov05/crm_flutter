@@ -58,8 +58,10 @@ class HomeScreen extends StatelessWidget {
                           height: 40,
                           width: 40,
                           clipBehavior: Clip.hardEdge,
-                          decoration:
-                              const BoxDecoration(shape: BoxShape.circle),
+                          decoration: BoxDecoration(
+                            color: AppColors.grayishBlue.withOpacity(0.15),
+                            shape: BoxShape.circle,
+                          ),
                           child: BlocBuilder<UserBloc, UserState>(
                             buildWhen: (previous, current) =>
                                 current.userStatus == UserStatus.loaded,
