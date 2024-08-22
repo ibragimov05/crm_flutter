@@ -10,7 +10,7 @@ class AdminManagementDioService {
     final AppResponse appResponse = AppResponse();
 
     try {
-      final response = await _dioClient.get(url: '/users?id=&name&email&phone');
+      final response = await _dioClient.get(url: '/users');
 
       appResponse.data = response.data['data'];
     } catch (e) {

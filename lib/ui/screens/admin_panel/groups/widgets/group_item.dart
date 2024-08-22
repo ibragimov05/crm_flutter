@@ -1,5 +1,6 @@
 import 'package:crm_flutter/core/utils/app_text_styles.dart';
 import 'package:crm_flutter/data/models/groups/group.dart';
+import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/edit_group_students_dialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_colors.dart';
@@ -37,15 +38,20 @@ class GroupItem extends StatelessWidget {
                 child: Text(
                   "Students count: ${group.students.length}",
                   textAlign: TextAlign.end,
+                  overflow: TextOverflow.ellipsis,  // Ensure the text doesn't overflow
                 ),
               ),
             ],
           ),
+          const SizedBox(height: 8),  // Add some space between rows for better readability
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(
-                onPressed: () {},
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => EditGroupStudentsDialog(group: group),
+                ),
                 child: Text(
                   'Edit student',
                   style: AppTextStyles.nunitoSansW600.copyWith(
@@ -64,13 +70,14 @@ class GroupItem extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 8),  // Add some space between rows for better readability
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(
                 onPressed: () {},
                 child: Text(
-                  'Edit assistant techaer',
+                  'Edit assistant teacher',
                   style: AppTextStyles.nunitoSansW600.copyWith(
                     color: AppColors.darkShadeGreen,
                   ),

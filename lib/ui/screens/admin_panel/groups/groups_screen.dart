@@ -1,30 +1,18 @@
-import 'package:crm_flutter/app_config.dart';
 import 'package:crm_flutter/core/utils/app_colors.dart';
 import 'package:crm_flutter/logic/bloc/admin_group_management/admin_group_management_bloc.dart';
+import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/add_new_group_dialog.dart';
 import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/group_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GroupsScreen extends StatelessWidget {
+class GroupsScreen extends StatefulWidget {
   const GroupsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: getIt.get<AdminGroupManagementBloc>(),
-      child: const _GroupScreen(),
-    );
-  }
+  State<GroupsScreen> createState() => _GroupsScreenState();
 }
 
-class _GroupScreen extends StatefulWidget {
-  const _GroupScreen();
-
-  @override
-  State<_GroupScreen> createState() => _GroupScreenState();
-}
-
-class _GroupScreenState extends State<_GroupScreen> {
+class _GroupsScreenState extends State<GroupsScreen> {
   @override
   void initState() {
     super.initState();
@@ -56,7 +44,11 @@ class _GroupScreenState extends State<_GroupScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.grayishBlue,
-        onPressed: () {},
+        onPressed: () => showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => const AddNewGroupDialog(),
+        ),
         tooltip: 'Add new group',
         child: const Icon(Icons.add),
       ),

@@ -57,12 +57,6 @@ class AdminGroupManagementBloc
           await _adminGroupManagementRepository.addGroup(event.newGroup);
 
       if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
-        print('------------------------------------------------');
-        print('SUCCESS');
-        print('------------------------------------------------');
-        print('SUCCESS');
-        print('------------------------------------------------');
-
         add(const GetAllGroupsAdminManEvent());
       } else {
         throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';

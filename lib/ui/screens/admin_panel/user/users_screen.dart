@@ -1,4 +1,3 @@
-import 'package:crm_flutter/app_config.dart';
 import 'package:crm_flutter/core/utils/app_colors.dart';
 import 'package:crm_flutter/core/utils/app_functions.dart';
 import 'package:crm_flutter/ui/screens/admin_panel/user/widgets/display_users_widget.dart';
@@ -7,34 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../logic/bloc/admin_management/admin_management_bloc.dart';
 
-class UsersScreen extends StatelessWidget {
+class UsersScreen extends StatefulWidget {
   const UsersScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: getIt.get<AdminManagementBloc>(),
-      child: const _UsersScreen(),
-    );
-  }
+  State<UsersScreen> createState() => _UsersScreenState();
 }
 
-class _UsersScreen extends StatefulWidget {
-  const _UsersScreen();
-
-  @override
-  State<_UsersScreen> createState() => _UsersScreenState();
-}
-
-class _UsersScreenState extends State<_UsersScreen> {
-  @override
-  void initState() {
-    super.initState();
-    context
-        .read<AdminManagementBloc>()
-        .add(const AdminManagementEvent.getAllUsers());
-  }
-
+class _UsersScreenState extends State<UsersScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

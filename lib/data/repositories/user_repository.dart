@@ -9,6 +9,8 @@ class UserRepository {
 
   Future<AppResponse> getUser() async => await _userDioService.getUser();
 
+  Future<AppResponse> getUserGroups() async => await _userDioService.getUserGroups();
+
   Future<AppResponse> updateUser({
     required String email,
     required String name,

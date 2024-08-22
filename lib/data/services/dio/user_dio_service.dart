@@ -23,6 +23,23 @@ class UserDioService {
     return appResponse;
   }
 
+  Future<AppResponse> getUserGroups() async {
+    final AppResponse appResponse = AppResponse();
+
+    try {
+      final response = await _dioClient.get(url: '/student/groups');
+      appResponse.data = response.data['data'];
+    } catch (e) {
+      if (e is DioException) {
+        appResponse.statusCode = e.response?.statusCode;
+      }
+      appResponse.errorMessage = e.toString();
+      appResponse.isSuccess = false;
+    }
+
+    return appResponse;
+  }
+
   Future<AppResponse> updateUser({
     required String email,
     required String name,

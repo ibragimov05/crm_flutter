@@ -71,6 +71,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         obscureText: _isObscure,
         initialValue: widget.initialValue,
         onChanged: widget.onChanged,
+        validator: widget.validator,
         textInputAction: widget.textInputAction,
         keyboardType: widget.textInputType,
         inputFormatters: widget.inputFormatters,
