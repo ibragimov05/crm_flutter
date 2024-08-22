@@ -1,4 +1,4 @@
-import 'package:crm_flutter/logic/cubit/register_cubit/register_cubit.dart';
+import 'package:crm_flutter/logic/cubit/register_form_cubit/register_form_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +23,7 @@ class _UserRoleCheckBoxState extends State<UserRoleCheckBox> {
   @override
   Widget build(BuildContext context) {
     final checkBoxVal = context.select(
-      (RegisterCubit cubit) => cubit.state.roleId,
+      (RegisterFormCubit cubit) => cubit.state.roleId,
     );
 
     return Row(
@@ -37,7 +37,7 @@ class _UserRoleCheckBoxState extends State<UserRoleCheckBox> {
               value: checkBoxVal == index,
               activeColor: AppColors.blue,
               onChanged: (value) =>
-                  context.read<RegisterCubit>().roleIdChanged(index),
+                  context.read<RegisterFormCubit>().roleIdChanged(index),
             ),
             Text(
               _roles[index],

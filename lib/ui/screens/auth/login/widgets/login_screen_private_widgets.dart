@@ -93,12 +93,12 @@ class _PhoneNumberInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final displayError = context.select(
-      (LoginCubit cubit) => cubit.state.phoneNumber.displayError,
+      (LoginFormCubit cubit) => cubit.state.phoneNumber.displayError,
     );
 
     return AppTextFormField(
       onChanged: (phoneNumber) =>
-          context.read<LoginCubit>().phoneNumberChanged(phoneNumber),
+          context.read<LoginFormCubit>().phoneNumberChanged(phoneNumber),
       inputFormatters: [TextInputFormatters.phoneNumber],
       hintText: '+998 99 123 45 67',
       labelText: 'Phone number',
@@ -115,12 +115,12 @@ class _PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final displayError = context.select(
-      (LoginCubit cubit) => cubit.state.password.displayError,
+      (LoginFormCubit cubit) => cubit.state.password.displayError,
     );
     return AppTextFormField(
       textInputAction: TextInputAction.done,
       onChanged: (password) =>
-          context.read<LoginCubit>().passwordChanged(password),
+          context.read<LoginFormCubit>().passwordChanged(password),
       labelText: 'Password',
       hintText: '********',
       isObscure: true,
@@ -138,9 +138,9 @@ class _LoginButton extends StatelessWidget {
       (AuthBloc bloc) => bloc.state.authStatus,
     );
 
-    final state = context.select((LoginCubit cubit) => cubit.state);
+    final state = context.select((LoginFormCubit cubit) => cubit.state);
 
-    final isValid = context.select((LoginCubit cubit) => cubit.state.isValid);
+    final isValid = context.select((LoginFormCubit cubit) => cubit.state.isValid);
 
     return AppRegularButton(
       buttonLabel: 'Sign in',

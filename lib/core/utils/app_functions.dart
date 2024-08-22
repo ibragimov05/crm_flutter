@@ -16,4 +16,8 @@ class AppFunction {
       closeButtonShowType: CloseButtonShowType.onHover,
     );
   }
+
+  static String getUserName(String name) {
+    return (name[0] + name[1]).toUpperCase();
+  }
 }

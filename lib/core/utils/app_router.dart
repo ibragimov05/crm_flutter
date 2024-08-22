@@ -1,3 +1,4 @@
+import 'package:crm_flutter/ui/screens/admin_panel/user/users_screen.dart';
 import 'package:crm_flutter/ui/screens/auth/login/login_screen.dart';
 import 'package:crm_flutter/ui/screens/auth/register/register_screen.dart';
 import 'package:crm_flutter/ui/screens/home/home_screen.dart';
@@ -11,6 +12,7 @@ class AppRouter {
   static const String splashScreen = '/splashScreen';
   static const String homeScreen = '/homeScreen';
   static const String profileScreen = '/profileScreen';
+  static const String adminPanelUsersScreen = '/adminPanelUsersScreen';
 
   static PageRoute _buildPageRoute(Widget widget) {
     return CupertinoPageRoute(builder: (BuildContext context) => widget);
@@ -26,6 +28,8 @@ class AppRouter {
         return _buildPageRoute(const HomeScreen());
       case AppRouter.profileScreen:
         return _buildPageRoute(const ProfileScreen());
+      case AppRouter.adminPanelUsersScreen:
+        return _buildPageRoute(const UsersScreen());
       default:
         return _buildPageRoute(const SplashScreen());
     }

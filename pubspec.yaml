@@ -14,7 +14,8 @@ dependencies:
 
   auth_form_inputs:
     path: packages/auth_form_inputs
-
+  edit_profile_form_inputs:
+    path: packages/edit_profile_form_inputs
   cupertino_icons: ^1.0.8
 
   flutter_svg: ^2.0.10+1
@@ -34,7 +35,6 @@ dependencies:
   mask_text_input_formatter: ^2.9.0
   toastification: ^2.1.0
   shared_preferences: ^2.3.2
-  flow_builder: ^0.1.0
 
 dev_dependencies:
   flutter_test:

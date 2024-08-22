@@ -79,7 +79,7 @@ class AuthDioService {
   /// logout user
   Future<void> logOut() async {
     try {
-      _dioClient.post(url: '/logout');
+      await _dioClient.post(url: '/logout');
     } catch (e) {
       debugPrint('error occurred in logout');
     }

@@ -1,4 +1,5 @@
 import 'package:crm_flutter/logic/bloc/auth/auth_bloc.dart';
+import 'package:crm_flutter/logic/bloc/user/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +16,7 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider.value(value: getIt.get<AuthBloc>()),
+        BlocProvider.value(value: getIt.get<UserBloc>()),
       ],
       child: const App(),
     ),

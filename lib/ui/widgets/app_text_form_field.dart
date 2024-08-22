@@ -17,6 +17,7 @@ class AppTextFormField extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType textInputType;
   final TextInputAction textInputAction;
+  final String? initialValue;
 
   const AppTextFormField({
     super.key,
@@ -30,6 +31,7 @@ class AppTextFormField extends StatefulWidget {
     this.isObscure = false,
     this.textInputType = TextInputType.text,
     this.textInputAction = TextInputAction.done,
+    this.initialValue,
   });
 
   @override
@@ -67,6 +69,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
   Widget _textFormField() => TextFormField(
         controller: widget.controller,
         obscureText: _isObscure,
+        initialValue: widget.initialValue,
         onChanged: widget.onChanged,
         textInputAction: widget.textInputAction,
         keyboardType: widget.textInputType,

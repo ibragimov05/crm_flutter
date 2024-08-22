@@ -1,4 +1,3 @@
-import 'package:crm_flutter/core/utils/user_constants.dart';
 import 'package:crm_flutter/core/utils/utils.dart';
 import 'package:crm_flutter/data/models/user/user.dart';
 import 'package:crm_flutter/data/services/shared_prefs/user_shared_prefs_service.dart';

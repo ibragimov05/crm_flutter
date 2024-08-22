@@ -16,12 +16,6 @@ class App extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             backgroundColor: AppColors.mainBackground,
           ),
-          pageTransitionsTheme: const PageTransitionsTheme(
-            builders: {
-              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-            },
-          ),
           scaffoldBackgroundColor: AppColors.mainBackground,
           textTheme:
               GoogleFonts.nunitoSansTextTheme(Theme.of(context).textTheme),

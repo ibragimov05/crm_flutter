@@ -4,12 +4,12 @@ import 'package:crm_flutter/data/services/dio/auth_dio_service.dart';
 import 'package:crm_flutter/data/services/dio/user_dio_service.dart';
 import 'package:crm_flutter/logic/bloc/auth/auth_bloc.dart';
 import 'package:crm_flutter/logic/bloc/user/user_bloc.dart';
-import 'package:crm_flutter/logic/cubit/register_cubit/register_cubit.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:crm_flutter/logic/cubit/edit_profile_form_cubit/edit_profile_form_cubit.dart';
+import 'package:crm_flutter/logic/cubit/register_form_cubit/register_form_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'logic/cubit/login_cubit/login_cubit.dart';
+import 'logic/cubit/login_form_cubit/login_form_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
 late SharedPreferences sharedPrefs;
@@ -37,14 +37,13 @@ class AppConfig {
           authRepository: getIt.get<AuthRepository>(),
           userRepository: getIt.get<UserRepository>()),
     );
-    getIt.registerLazySingleton(() => UserBloc());
+    getIt.registerLazySingleton(
+      () => UserBloc(userRepository: getIt.get<UserRepository>()),
+    );
 
     /// [CUBITS]
-    getIt.registerLazySingleton(() => LoginCubit());
-    getIt.registerLazySingleton(() => RegisterCubit());
+    getIt.registerLazySingleton(() => LoginFormCubit());
+    getIt.registerLazySingleton(() => RegisterFormCubit());
+    getIt.registerLazySingleton(() => EditProfileFormCubit());
   }
 }
-
-List<BlocProvider> allBlocs = [
-  BlocProvider.value(value: getIt.get<AuthBloc>()),
-];

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'register_cubit.dart';
+part of 'register_form_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,51 +15,49 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$RegisterState {
+mixin _$RegisterFormState {
   PhoneNumber get phoneNumber => throw _privateConstructorUsedError;
   Name get name => throw _privateConstructorUsedError;
   Password get password => throw _privateConstructorUsedError;
   ConfirmedPassword get confirmedPassword => throw _privateConstructorUsedError;
-  FormzSubmissionStatus get status => throw _privateConstructorUsedError;
   int get roleId => throw _privateConstructorUsedError;
   bool get isValid => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
-  /// Create a copy of RegisterState
+  /// Create a copy of RegisterFormState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $RegisterStateCopyWith<RegisterState> get copyWith =>
+  $RegisterFormStateCopyWith<RegisterFormState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RegisterStateCopyWith<$Res> {
-  factory $RegisterStateCopyWith(
-          RegisterState value, $Res Function(RegisterState) then) =
-      _$RegisterStateCopyWithImpl<$Res, RegisterState>;
+abstract class $RegisterFormStateCopyWith<$Res> {
+  factory $RegisterFormStateCopyWith(
+          RegisterFormState value, $Res Function(RegisterFormState) then) =
+      _$RegisterFormStateCopyWithImpl<$Res, RegisterFormState>;
   @useResult
   $Res call(
       {PhoneNumber phoneNumber,
       Name name,
       Password password,
       ConfirmedPassword confirmedPassword,
-      FormzSubmissionStatus status,
       int roleId,
       bool isValid,
       String? errorMessage});
 }
 
 /// @nodoc
-class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
-    implements $RegisterStateCopyWith<$Res> {
-  _$RegisterStateCopyWithImpl(this._value, this._then);
+class _$RegisterFormStateCopyWithImpl<$Res, $Val extends RegisterFormState>
+    implements $RegisterFormStateCopyWith<$Res> {
+  _$RegisterFormStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of RegisterState
+  /// Create a copy of RegisterFormState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -68,7 +66,6 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
     Object? name = null,
     Object? password = null,
     Object? confirmedPassword = null,
-    Object? status = null,
     Object? roleId = null,
     Object? isValid = null,
     Object? errorMessage = freezed,
@@ -90,10 +87,6 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
           ? _value.confirmedPassword
           : confirmedPassword // ignore: cast_nullable_to_non_nullable
               as ConfirmedPassword,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as FormzSubmissionStatus,
       roleId: null == roleId
           ? _value.roleId
           : roleId // ignore: cast_nullable_to_non_nullable
@@ -111,11 +104,11 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
 }
 
 /// @nodoc
-abstract class _$$RegisterStateImplCopyWith<$Res>
-    implements $RegisterStateCopyWith<$Res> {
-  factory _$$RegisterStateImplCopyWith(
-          _$RegisterStateImpl value, $Res Function(_$RegisterStateImpl) then) =
-      __$$RegisterStateImplCopyWithImpl<$Res>;
+abstract class _$$RegisterFormStateImplCopyWith<$Res>
+    implements $RegisterFormStateCopyWith<$Res> {
+  factory _$$RegisterFormStateImplCopyWith(_$RegisterFormStateImpl value,
+          $Res Function(_$RegisterFormStateImpl) then) =
+      __$$RegisterFormStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -123,21 +116,20 @@ abstract class _$$RegisterStateImplCopyWith<$Res>
       Name name,
       Password password,
       ConfirmedPassword confirmedPassword,
-      FormzSubmissionStatus status,
       int roleId,
       bool isValid,
       String? errorMessage});
 }
 
 /// @nodoc
-class __$$RegisterStateImplCopyWithImpl<$Res>
-    extends _$RegisterStateCopyWithImpl<$Res, _$RegisterStateImpl>
-    implements _$$RegisterStateImplCopyWith<$Res> {
-  __$$RegisterStateImplCopyWithImpl(
-      _$RegisterStateImpl _value, $Res Function(_$RegisterStateImpl) _then)
+class __$$RegisterFormStateImplCopyWithImpl<$Res>
+    extends _$RegisterFormStateCopyWithImpl<$Res, _$RegisterFormStateImpl>
+    implements _$$RegisterFormStateImplCopyWith<$Res> {
+  __$$RegisterFormStateImplCopyWithImpl(_$RegisterFormStateImpl _value,
+      $Res Function(_$RegisterFormStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of RegisterState
+  /// Create a copy of RegisterFormState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -146,12 +138,11 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
     Object? name = null,
     Object? password = null,
     Object? confirmedPassword = null,
-    Object? status = null,
     Object? roleId = null,
     Object? isValid = null,
     Object? errorMessage = freezed,
   }) {
-    return _then(_$RegisterStateImpl(
+    return _then(_$RegisterFormStateImpl(
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
@@ -168,10 +159,6 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
           ? _value.confirmedPassword
           : confirmedPassword // ignore: cast_nullable_to_non_nullable
               as ConfirmedPassword,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as FormzSubmissionStatus,
       roleId: null == roleId
           ? _value.roleId
           : roleId // ignore: cast_nullable_to_non_nullable
@@ -190,13 +177,12 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RegisterStateImpl implements _RegisterState {
-  const _$RegisterStateImpl(
+class _$RegisterFormStateImpl implements _RegisterFormState {
+  const _$RegisterFormStateImpl(
       {this.phoneNumber = const PhoneNumber.pure(),
       this.name = const Name.pure(),
       this.password = const Password.pure(),
       this.confirmedPassword = const ConfirmedPassword.pure(),
-      this.status = FormzSubmissionStatus.initial,
       this.roleId = 0,
       this.isValid = false,
       this.errorMessage});
@@ -215,9 +201,6 @@ class _$RegisterStateImpl implements _RegisterState {
   final ConfirmedPassword confirmedPassword;
   @override
   @JsonKey()
-  final FormzSubmissionStatus status;
-  @override
-  @JsonKey()
   final int roleId;
   @override
   @JsonKey()
@@ -227,14 +210,14 @@ class _$RegisterStateImpl implements _RegisterState {
 
   @override
   String toString() {
-    return 'RegisterState(phoneNumber: $phoneNumber, name: $name, password: $password, confirmedPassword: $confirmedPassword, status: $status, roleId: $roleId, isValid: $isValid, errorMessage: $errorMessage)';
+    return 'RegisterFormState(phoneNumber: $phoneNumber, name: $name, password: $password, confirmedPassword: $confirmedPassword, roleId: $roleId, isValid: $isValid, errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RegisterStateImpl &&
+            other is _$RegisterFormStateImpl &&
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
             (identical(other.name, name) || other.name == name) &&
@@ -242,7 +225,6 @@ class _$RegisterStateImpl implements _RegisterState {
                 other.password == password) &&
             (identical(other.confirmedPassword, confirmedPassword) ||
                 other.confirmedPassword == confirmedPassword) &&
-            (identical(other.status, status) || other.status == status) &&
             (identical(other.roleId, roleId) || other.roleId == roleId) &&
             (identical(other.isValid, isValid) || other.isValid == isValid) &&
             (identical(other.errorMessage, errorMessage) ||
@@ -251,27 +233,27 @@ class _$RegisterStateImpl implements _RegisterState {
 
   @override
   int get hashCode => Object.hash(runtimeType, phoneNumber, name, password,
-      confirmedPassword, status, roleId, isValid, errorMessage);
+      confirmedPassword, roleId, isValid, errorMessage);
 
-  /// Create a copy of RegisterState
+  /// Create a copy of RegisterFormState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$RegisterStateImplCopyWith<_$RegisterStateImpl> get copyWith =>
-      __$$RegisterStateImplCopyWithImpl<_$RegisterStateImpl>(this, _$identity);
+  _$$RegisterFormStateImplCopyWith<_$RegisterFormStateImpl> get copyWith =>
+      __$$RegisterFormStateImplCopyWithImpl<_$RegisterFormStateImpl>(
+          this, _$identity);
 }
 
-abstract class _RegisterState implements RegisterState {
-  const factory _RegisterState(
+abstract class _RegisterFormState implements RegisterFormState {
+  const factory _RegisterFormState(
       {final PhoneNumber phoneNumber,
       final Name name,
       final Password password,
       final ConfirmedPassword confirmedPassword,
-      final FormzSubmissionStatus status,
       final int roleId,
       final bool isValid,
-      final String? errorMessage}) = _$RegisterStateImpl;
+      final String? errorMessage}) = _$RegisterFormStateImpl;
 
   @override
   PhoneNumber get phoneNumber;
@@ -282,18 +264,16 @@ abstract class _RegisterState implements RegisterState {
   @override
   ConfirmedPassword get confirmedPassword;
   @override
-  FormzSubmissionStatus get status;
-  @override
   int get roleId;
   @override
   bool get isValid;
   @override
   String? get errorMessage;
 
-  /// Create a copy of RegisterState
+  /// Create a copy of RegisterFormState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$RegisterStateImplCopyWith<_$RegisterStateImpl> get copyWith =>
+  _$$RegisterFormStateImplCopyWith<_$RegisterFormStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

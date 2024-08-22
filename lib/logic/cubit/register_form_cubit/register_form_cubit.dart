@@ -3,19 +3,18 @@ import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'register_state.dart';
+part 'register_form_state.dart';
 
-part 'register_cubit.freezed.dart';
+part 'register_form_cubit.freezed.dart';
 
-class RegisterCubit extends Cubit<RegisterState> {
-  RegisterCubit() : super(const RegisterState());
+class RegisterFormCubit extends Cubit<RegisterFormState> {
+  RegisterFormCubit() : super(const RegisterFormState());
 
   void nameChanged(String value) {
     final name = Name.dirty(value);
 
     emit(state.copyWith(
       name: name,
-      status: FormzSubmissionStatus.initial,
       isValid: Formz.validate([
         name,
         state.phoneNumber,
@@ -30,7 +29,6 @@ class RegisterCubit extends Cubit<RegisterState> {
 
     emit(state.copyWith(
       phoneNumber: phoneNumber,
-      status: FormzSubmissionStatus.initial,
       isValid: Formz.validate([
         state.name,
         phoneNumber,
@@ -45,7 +43,6 @@ class RegisterCubit extends Cubit<RegisterState> {
 
     emit(state.copyWith(
       password: password,
-      status: FormzSubmissionStatus.initial,
       isValid: Formz.validate([
         state.name,
         state.phoneNumber,
@@ -59,7 +56,6 @@ class RegisterCubit extends Cubit<RegisterState> {
 
     emit(state.copyWith(
       roleId: newRoleId,
-      status: FormzSubmissionStatus.initial,
       isValid: Formz.validate([
         state.name,
         state.phoneNumber,

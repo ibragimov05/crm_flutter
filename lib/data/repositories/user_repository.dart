@@ -8,4 +8,17 @@ class UserRepository {
       : _userDioService = userDioService;
 
   Future<AppResponse> getUser() async => await _userDioService.getUser();
+
+  Future<AppResponse> updateUser({
+    required String email,
+    required String name,
+    required String phone,
+    required String photoPath,
+  }) async =>
+      await _userDioService.updateUser(
+        email: email,
+        name: name,
+        phone: phone,
+        photoPath: photoPath,
+      );
 }

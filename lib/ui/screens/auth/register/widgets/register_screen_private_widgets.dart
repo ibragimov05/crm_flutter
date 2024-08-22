@@ -80,12 +80,12 @@ class _NameInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final displayError = context.select(
-      (RegisterCubit cubit) => cubit.state.name.displayError,
+      (RegisterFormCubit cubit) => cubit.state.name.displayError,
     );
 
     return AppTextFormField(
       textInputAction: TextInputAction.done,
-      onChanged: (name) => context.read<RegisterCubit>().nameChanged(name),
+      onChanged: (name) => context.read<RegisterFormCubit>().nameChanged(name),
       labelText: 'Your name',
       hintText: 'Alex',
       errorText: displayError != null ? 'Only letters are allowed' : null,
@@ -99,12 +99,12 @@ class _PhoneNumberInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final displayError = context.select(
-      (RegisterCubit cubit) => cubit.state.phoneNumber.displayError,
+      (RegisterFormCubit cubit) => cubit.state.phoneNumber.displayError,
     );
 
     return AppTextFormField(
       onChanged: (phoneNumber) =>
-          context.read<RegisterCubit>().phoneNumberChanged(phoneNumber),
+          context.read<RegisterFormCubit>().phoneNumberChanged(phoneNumber),
       inputFormatters: [TextInputFormatters.phoneNumber],
       hintText: '+998 99 123 45 67',
       labelText: 'Phone number',
@@ -121,12 +121,12 @@ class _PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final displayError = context.select(
-      (RegisterCubit cubit) => cubit.state.password.displayError,
+      (RegisterFormCubit cubit) => cubit.state.password.displayError,
     );
     return AppTextFormField(
       textInputAction: TextInputAction.done,
       onChanged: (password) =>
-          context.read<RegisterCubit>().passwordChanged(password),
+          context.read<RegisterFormCubit>().passwordChanged(password),
       labelText: 'Password',
       hintText: '********',
       isObscure: true,
@@ -141,12 +141,12 @@ class _PasswordConfirmationInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final displayError = context.select(
-      (RegisterCubit cubit) => cubit.state.confirmedPassword.displayError,
+      (RegisterFormCubit cubit) => cubit.state.confirmedPassword.displayError,
     );
     return AppTextFormField(
       textInputAction: TextInputAction.done,
       onChanged: (passwordConfirmation) => context
-          .read<RegisterCubit>()
+          .read<RegisterFormCubit>()
           .confirmedPasswordChanged(passwordConfirmation),
       labelText: 'Confirm Password',
       hintText: '********',
@@ -166,9 +166,9 @@ class _RegisterButton extends StatelessWidget {
     );
 
     final isValid =
-        context.select((RegisterCubit cubit) => cubit.state.isValid);
+        context.select((RegisterFormCubit cubit) => cubit.state.isValid);
 
-    final state = context.select((RegisterCubit cubit) => cubit.state);
+    final state = context.select((RegisterFormCubit cubit) => cubit.state);
 
     return AppRegularButton(
       buttonLabel: 'Register',

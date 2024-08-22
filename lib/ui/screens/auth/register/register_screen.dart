@@ -6,9 +6,9 @@ import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../../../../app_config.dart';
 import '../../../../logic/bloc/auth/auth_bloc.dart';
+import '../../../../logic/cubit/register_form_cubit/register_form_cubit.dart';
 import '../../../widgets/widgets.dart';
 import '../../../../core/utils/utils.dart';
-import '../../../../logic/cubit/register_cubit/register_cubit.dart';
 
 part 'widgets/register_screen_private_widgets.dart';
 
@@ -18,7 +18,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: getIt.get<RegisterCubit>(),
+      value: getIt.get<RegisterFormCubit>(),
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if(state.authStatus == AuthStatus.authenticated){

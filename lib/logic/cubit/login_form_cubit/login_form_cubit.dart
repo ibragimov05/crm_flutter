@@ -3,18 +3,17 @@ import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'login_state.dart';
-part 'login_cubit.freezed.dart';
+part 'login_form_state.dart';
+part 'login_form_cubit.freezed.dart';
 
-class LoginCubit extends Cubit<LoginState> {
-  LoginCubit() : super(const LoginState());
+class LoginFormCubit extends Cubit<LoginFormState> {
+  LoginFormCubit() : super(const LoginFormState());
 
   void phoneNumberChanged(String value) {
     final phoneNumber = PhoneNumber.dirty(value);
 
     emit(state.copyWith(
       phoneNumber: phoneNumber,
-      status: FormzSubmissionStatus.initial,
       isValid: Formz.validate([phoneNumber, state.password]),
     ));
   }
@@ -24,7 +23,6 @@ class LoginCubit extends Cubit<LoginState> {
 
     emit(state.copyWith(
       password: password,
-      status: FormzSubmissionStatus.initial,
       isValid: Formz.validate([state.phoneNumber, password]),
     ));
   }

@@ -38,13 +38,13 @@ class DioClient {
   Future<Response> post({
     required String url,
     Map<String, dynamic>? data,
+    FormData? formData,
     Options? options,
   }) async {
     try {
       final response = await _dio.post(
         url,
-        data: data,
-        options: Options(headers: {'authorization': 'Bearer \\'}),
+        data: data ?? formData,
       );
       return response;
     } catch (e) {

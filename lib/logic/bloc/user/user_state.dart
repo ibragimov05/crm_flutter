@@ -1,6 +1,12 @@
 part of 'user_bloc.dart';
 
-@immutable
-sealed class UserState {}
+enum UserStatus { initial, loading, loaded, error }
 
-final class UserInitial extends UserState {}
+@freezed
+class UserState with _$UserState {
+  const factory UserState({
+    User? user,
+    @Default(UserStatus.initial) UserStatus userStatus,
+    String? error,
+  }) = _UserState;
+}
