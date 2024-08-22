@@ -1,8 +1,11 @@
 import 'package:crm_flutter/core/utils/utils.dart';
+import 'package:crm_flutter/logic/bloc/user/user_bloc.dart';
 import 'package:crm_flutter/logic/cubit/edit_profile_form_cubit/edit_profile_form_cubit.dart';
 import 'package:crm_flutter/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../app_config.dart';
 
 class EditProfileWidget extends StatelessWidget {
   const EditProfileWidget({super.key});
@@ -95,9 +98,36 @@ class _SaveButton extends StatelessWidget {
       (EditProfileFormCubit cubit) => cubit.state.isValid,
     );
 
-    return AppRegularButton(
-      buttonLabel: 'Save',
-      onTap: isValid ? () {} : null,
+    final state = context.select(
+      (EditProfileFormCubit cubit) => cubit.state,
+    );
+
+    final userStatus =
+        context.select((UserBloc value) => value.state.userStatus);
+
+    return BlocListener<UserBloc, UserState>(
+      bloc: getIt.get<UserBloc>(),
+      listener: (context, state) {
+        if (state.userStatus == UserStatus.loaded) {
+          Navigator.of(context).pop();
+          AppFunction.showToast(
+            message: 'Your data has been updated successfully',
+            isSuccess: true,
+            context: context,
+          );
+        }
+      },
+      child: AppRegularButton(
+        buttonLabel: 'Save',
+        onTap: !(userStatus == UserStatus.loading) && isValid
+            ? () => context.read<UserBloc>().add(UserEvent.updateUserData(
+                  email: state.email.value,
+                  name: state.name.value,
+                  phone: state.phoneNumber.value,
+                  photoPath: state.photoPath,
+                ))
+            : null,
+      ),
     );
   }
 }

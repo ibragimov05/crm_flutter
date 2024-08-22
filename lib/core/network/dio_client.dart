@@ -1,4 +1,4 @@
-import 'package:crm_flutter/data/services/shared_prefs/shared_prefs_service.dart';
+import 'package:crm_flutter/data/services/shared_prefs/token_prefs_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -84,7 +84,7 @@ class DioInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     debugPrint("Request method: ${options.method}");
 
-    final accessToken = SharedPrefsService.getAccessToken();
+    final accessToken = TokenPrefsService.getAccessToken();
 
     if (accessToken != null) {
       options.headers['Authorization'] = "Bearer $accessToken";

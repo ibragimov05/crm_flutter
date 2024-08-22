@@ -3,7 +3,7 @@ import 'package:crm_flutter/core/utils/user_constants.dart';
 import 'package:crm_flutter/data/models/user/user.dart';
 import 'package:crm_flutter/data/repositories/auth_repository.dart';
 import 'package:crm_flutter/data/repositories/user_repository.dart';
-import 'package:crm_flutter/data/services/shared_prefs/shared_prefs_service.dart';
+import 'package:crm_flutter/data/services/shared_prefs/token_prefs_service.dart';
 import 'package:crm_flutter/data/services/shared_prefs/user_shared_prefs_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -118,7 +118,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       await Future.wait([
         _authRepository.logOut(),
-        SharedPrefsService.clearAccessToken(),
+        TokenPrefsService.clearAccessToken(),
+        UserSharedPrefsService.clearUser(),
       ]);
 
       emit(state.copyWith(authStatus: AuthStatus.unauthenticated));

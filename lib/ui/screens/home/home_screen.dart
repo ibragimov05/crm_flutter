@@ -1,9 +1,12 @@
 import 'package:crm_flutter/core/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
+import '../../../logic/bloc/user/user_bloc.dart';
+import '../../widgets/show_user_photo_item.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -51,7 +54,21 @@ class HomeScreen extends StatelessWidget {
                       ZoomTapAnimation(
                         onTap: () => Navigator.pushNamed(
                             context, AppRouter.profileScreen),
-                        child: const CircleAvatar(radius: 20),
+                        child: CircleAvatar(
+                          backgroundColor: AppColors.softPastelBlue,
+                          radius: 20,
+                          child: BlocBuilder<UserBloc, UserState>(
+                            buildWhen: (previous, current) =>
+                                current.userStatus == UserStatus.loaded,
+                            builder: (context, state) {
+                              print('----------------------------------------');
+                              print(state.user?.photo);
+                              print('----------------------------------------');
+
+                              return const ShowUserPhotoItem();
+                            },
+                          ),
+                        ),
                       ),
                     ],
                   )
@@ -65,12 +82,18 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        'Welcome back, ${UserData.name}!',
-                        style: AppTextStyles.nunitoSansW600.copyWith(
-                          color: AppColors.grey,
-                          fontSize: 16,
-                        ),
+                      BlocBuilder<UserBloc, UserState>(
+                        buildWhen: (previous, current) =>
+                            current.userStatus == UserStatus.loaded,
+                        builder: (context, state) {
+                          return Text(
+                            'Welcome back, ${UserData.name}!',
+                            style: AppTextStyles.nunitoSansW600.copyWith(
+                              color: AppColors.grey,
+                              fontSize: 16,
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

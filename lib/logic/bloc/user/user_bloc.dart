@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:crm_flutter/core/utils/user_constants.dart';
 import 'package:crm_flutter/data/models/user/user.dart';
 import 'package:crm_flutter/data/repositories/user_repository.dart';
+import 'package:crm_flutter/data/services/shared_prefs/user_shared_prefs_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_event.dart';
@@ -28,16 +30,20 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     try {
       if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
-        UserData.setUserData((appResponse.data as User));
+        final User user = (appResponse.data as User);
+
+        UserData.setUserData(user);
+        UserSharedPrefsService.updateUser(user);
 
         emit(state.copyWith(
           userStatus: UserStatus.loaded,
-          user: (appResponse.data as User),
+          user: user,
         ));
       } else {
         throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
       }
     } catch (e) {
+      debugPrint("error _onGetUser UserBloc: $e");
       emit(state.copyWith(error: e.toString(), userStatus: UserStatus.error));
     }
   }
@@ -49,10 +55,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(state.copyWith(userStatus: UserStatus.loading));
 
     await _userRepository.updateUser(
-      email: event.email,
-      name: event.name,
-      phone: event.phone,
-      photoPath: event.photoPath,
+      email: event.email.isEmpty ? UserData.email : event.email,
+      name: event.name.isEmpty ? UserData.name : event.name,
+      phone: event.phone.isEmpty ? UserData.phone : event.phone,
+      photoPath: event.photoPath.isEmpty ? UserData.photo : event.photoPath,
     );
+
+    add(const UserEvent.getUserEvent());
   }
 }

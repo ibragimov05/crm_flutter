@@ -75,6 +75,32 @@ class User {
     };
   }
 
+  User copyWith({
+    int? id,
+    String? name,
+    String? email,
+    String? phone,
+    String? photo,
+    DateTime? emailVerifiedAt,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? roleId,
+    Role? role,
+  }) {
+    return User(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      photo: photo ?? this.photo,
+      emailVerifiedAt: emailVerifiedAt ?? this.emailVerifiedAt,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      roleId: roleId ?? this.roleId,
+      role: role ?? this.role,
+    );
+  }
+
   @override
   String toString() {
     return 'User(id: $id, name: $name, email: $email, phone: $phone, roleId: $roleId, photo: $photo, role: ${role.toString()}, emailVerifiedAt: $emailVerifiedAt, createdAt: $createdAt, updatedAt: $updatedAt)';

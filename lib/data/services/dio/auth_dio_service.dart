@@ -1,4 +1,4 @@
-import 'package:crm_flutter/data/services/shared_prefs/shared_prefs_service.dart';
+import 'package:crm_flutter/data/services/shared_prefs/token_prefs_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -23,7 +23,7 @@ class AuthDioService {
 
       appResponse.data = response.data;
 
-      await SharedPrefsService.saveAccessToken(
+      await TokenPrefsService.saveAccessToken(
         appResponse.data['data']['token'],
       );
     } catch (e) {
@@ -62,7 +62,7 @@ class AuthDioService {
 
       appResponse.data = response.data;
 
-      await SharedPrefsService.saveAccessToken(
+      await TokenPrefsService.saveAccessToken(
         appResponse.data['data']['token'],
       );
     } catch (e) {
@@ -85,5 +85,5 @@ class AuthDioService {
     }
   }
 
-  String? checkTokenExpiry() => SharedPrefsService.getAccessToken();
+  String? checkTokenExpiry() => TokenPrefsService.getAccessToken();
 }

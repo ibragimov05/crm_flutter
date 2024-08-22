@@ -19,6 +19,7 @@ mixin _$EditProfileFormState {
   Email get email => throw _privateConstructorUsedError;
   Name get name => throw _privateConstructorUsedError;
   PhoneNumber get phoneNumber => throw _privateConstructorUsedError;
+  String get photoPath => throw _privateConstructorUsedError;
   dynamic get isValid => throw _privateConstructorUsedError;
 
   /// Create a copy of EditProfileFormState
@@ -34,7 +35,12 @@ abstract class $EditProfileFormStateCopyWith<$Res> {
           $Res Function(EditProfileFormState) then) =
       _$EditProfileFormStateCopyWithImpl<$Res, EditProfileFormState>;
   @useResult
-  $Res call({Email email, Name name, PhoneNumber phoneNumber, dynamic isValid});
+  $Res call(
+      {Email email,
+      Name name,
+      PhoneNumber phoneNumber,
+      String photoPath,
+      dynamic isValid});
 }
 
 /// @nodoc
@@ -56,6 +62,7 @@ class _$EditProfileFormStateCopyWithImpl<$Res,
     Object? email = null,
     Object? name = null,
     Object? phoneNumber = null,
+    Object? photoPath = null,
     Object? isValid = freezed,
   }) {
     return _then(_value.copyWith(
@@ -71,6 +78,10 @@ class _$EditProfileFormStateCopyWithImpl<$Res,
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as PhoneNumber,
+      photoPath: null == photoPath
+          ? _value.photoPath
+          : photoPath // ignore: cast_nullable_to_non_nullable
+              as String,
       isValid: freezed == isValid
           ? _value.isValid
           : isValid // ignore: cast_nullable_to_non_nullable
@@ -87,7 +98,12 @@ abstract class _$$EditProfileFormStateImplCopyWith<$Res>
       __$$EditProfileFormStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Email email, Name name, PhoneNumber phoneNumber, dynamic isValid});
+  $Res call(
+      {Email email,
+      Name name,
+      PhoneNumber phoneNumber,
+      String photoPath,
+      dynamic isValid});
 }
 
 /// @nodoc
@@ -106,6 +122,7 @@ class __$$EditProfileFormStateImplCopyWithImpl<$Res>
     Object? email = null,
     Object? name = null,
     Object? phoneNumber = null,
+    Object? photoPath = null,
     Object? isValid = freezed,
   }) {
     return _then(_$EditProfileFormStateImpl(
@@ -121,6 +138,10 @@ class __$$EditProfileFormStateImplCopyWithImpl<$Res>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as PhoneNumber,
+      photoPath: null == photoPath
+          ? _value.photoPath
+          : photoPath // ignore: cast_nullable_to_non_nullable
+              as String,
       isValid: freezed == isValid ? _value.isValid! : isValid,
     ));
   }
@@ -133,6 +154,7 @@ class _$EditProfileFormStateImpl implements _EditProfileFormState {
       {this.email = const Email.pure(),
       this.name = const Name.pure(),
       this.phoneNumber = const PhoneNumber.pure(),
+      this.photoPath = '',
       this.isValid = false});
 
   @override
@@ -146,11 +168,14 @@ class _$EditProfileFormStateImpl implements _EditProfileFormState {
   final PhoneNumber phoneNumber;
   @override
   @JsonKey()
+  final String photoPath;
+  @override
+  @JsonKey()
   final dynamic isValid;
 
   @override
   String toString() {
-    return 'EditProfileFormState(email: $email, name: $name, phoneNumber: $phoneNumber, isValid: $isValid)';
+    return 'EditProfileFormState(email: $email, name: $name, phoneNumber: $phoneNumber, photoPath: $photoPath, isValid: $isValid)';
   }
 
   @override
@@ -162,12 +187,14 @@ class _$EditProfileFormStateImpl implements _EditProfileFormState {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
+            (identical(other.photoPath, photoPath) ||
+                other.photoPath == photoPath) &&
             const DeepCollectionEquality().equals(other.isValid, isValid));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, email, name, phoneNumber,
-      const DeepCollectionEquality().hash(isValid));
+      photoPath, const DeepCollectionEquality().hash(isValid));
 
   /// Create a copy of EditProfileFormState
   /// with the given fields replaced by the non-null parameter values.
@@ -185,6 +212,7 @@ abstract class _EditProfileFormState implements EditProfileFormState {
       {final Email email,
       final Name name,
       final PhoneNumber phoneNumber,
+      final String photoPath,
       final dynamic isValid}) = _$EditProfileFormStateImpl;
 
   @override
@@ -193,6 +221,8 @@ abstract class _EditProfileFormState implements EditProfileFormState {
   Name get name;
   @override
   PhoneNumber get phoneNumber;
+  @override
+  String get photoPath;
   @override
   dynamic get isValid;
 

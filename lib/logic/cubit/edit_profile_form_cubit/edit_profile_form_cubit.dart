@@ -50,4 +50,13 @@ class EditProfileFormCubit extends Cubit<EditProfileFormState> {
 
     emit(state.copyWith(phoneNumber: phoneNumber, isValid: isValid));
   }
+
+  void profilePhotoChanged(String value) {
+    final isValid = state.name.isValid ||
+        state.email.isValid ||
+        state.phoneNumber.isValid ||
+        value.isNotEmpty;
+
+    emit(state.copyWith(photoPath: value, isValid: isValid));
+  }
 }

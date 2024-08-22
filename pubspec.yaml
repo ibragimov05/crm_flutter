@@ -29,12 +29,12 @@ dependencies:
   get_it: ^7.7.0
 
   formz: ^0.7.0
-  connectivity_plus: ^6.0.5
   freezed_annotation: ^2.4.4
   equatable: ^2.0.5
   mask_text_input_formatter: ^2.9.0
   toastification: ^2.1.0
   shared_preferences: ^2.3.2
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:

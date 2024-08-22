@@ -1,8 +1,11 @@
+import 'package:crm_flutter/ui/screens/profile/widgets/user_image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../../../../core/utils/utils.dart';
+import '../../../../logic/bloc/user/user_bloc.dart';
 import 'edit_profile_widget.dart';
 
 class ProfileInfoWidget extends StatefulWidget {
@@ -36,21 +39,18 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundColor: AppColors.softPastelBlue,
-                          child: Center(
-                            child: Text(
-                              AppFunction.getUserName(UserData.name),
-                              style: AppTextStyles.nunitoSansW700,
-                            ),
-                          ),
-                        ),
+                        const UserImageWidget(),
                         10.sizedBoxH,
-                        Text(
-                          UserData.name,
-                          style: AppTextStyles.nunitoSansW700
-                              .copyWith(fontSize: 22),
+                        BlocBuilder<UserBloc, UserState>(
+                          buildWhen: (previous, current) =>
+                              current.userStatus == UserStatus.loaded,
+                          builder: (context, state) {
+                            return Text(
+                              UserData.name,
+                              style: AppTextStyles.nunitoSansW700
+                                  .copyWith(fontSize: 22),
+                            );
+                          },
                         ),
                         Text(
                           UserData.roleName,

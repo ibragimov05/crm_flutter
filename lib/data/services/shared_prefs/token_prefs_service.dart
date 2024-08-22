@@ -1,6 +1,6 @@
 import '../../../app_config.dart';
 
-class SharedPrefsService {
+class TokenPrefsService {
   static String? getAccessToken() => sharedPrefs.getString('accessToken');
 
   static Future<void> saveAccessToken(String token) async {

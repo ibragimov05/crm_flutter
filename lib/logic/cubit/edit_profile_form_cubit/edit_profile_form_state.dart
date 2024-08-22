@@ -6,6 +6,7 @@ class EditProfileFormState with _$EditProfileFormState {
     @Default(Email.pure()) Email email,
     @Default(Name.pure()) Name name,
     @Default(PhoneNumber.pure()) PhoneNumber phoneNumber,
+    @Default('') String photoPath,
     @Default(false) isValid,
   }) = _EditProfileFormState;
 }

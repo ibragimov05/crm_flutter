@@ -16,4 +16,7 @@ class UserSharedPrefsService {
 
     return User.fromJson(jsonDecode(data));
   }
+
+  static Future<bool> clearUser() async =>
+      await sharedPrefs.remove(_userPrefsKey);
 }

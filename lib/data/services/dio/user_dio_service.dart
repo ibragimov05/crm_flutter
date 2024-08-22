@@ -30,7 +30,6 @@ class UserDioService {
     required String photoPath,
   }) async {
     final AppResponse appResponse = AppResponse();
-
     try {
       FormData formData = FormData.fromMap({
         "name": name,
@@ -43,7 +42,7 @@ class UserDioService {
           ),
       });
 
-      final response = await _dioClient.post(
+      await _dioClient.post(
         url: '/profile/update',
         formData: formData,
       );

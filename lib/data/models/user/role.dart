@@ -41,6 +41,20 @@ class Role {
     };
   }
 
+  Role copyWith({
+    int? id,
+    String? name,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return Role(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
   @override
   String toString() {
     return 'Role(id: $id, name: $name, createdAt: $createdAt, updatedAt: $updatedAt)';
