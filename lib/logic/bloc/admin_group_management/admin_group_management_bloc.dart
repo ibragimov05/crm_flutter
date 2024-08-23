@@ -21,6 +21,7 @@ class AdminGroupManagementBloc
     on<AddGroupAdminEvent>(_onAddGroup);
     on<EditGroupAdminEvent>(_onEditGroup);
     on<DeleteGroupAdminEvent>(_onDeleteGroup);
+    on<UpdateGroupStudentsEvent>(_onUpdateGroupStudents);
   }
 
   void _onGetAllGroups(
@@ -99,6 +100,28 @@ class AdminGroupManagementBloc
     try {
       final appResponse = await _adminGroupManagementRepository.deleteGroup(
         groupId: event.groupId,
+      );
+
+      if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
+        add(const GetAllGroupsAdminEvent());
+      } else {
+        throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
+      }
+    } catch (e) {
+      emit(ErrorAdminGroupState(errorMessage: e.toString()));
+    }
+  }
+
+  void _onUpdateGroupStudents(
+    UpdateGroupStudentsEvent event,
+    Emitter<AdminGroupState> emit,
+  ) async {
+    emit(const LoadingAdminGroupState());
+    try {
+      final appResponse =
+          await _adminGroupManagementRepository.updateGroupStudents(
+        groupId: event.groupId,
+        studentsId: event.updatedStudents,
       );
 
       if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {

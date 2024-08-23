@@ -34,3 +34,13 @@ final class DeleteGroupAdminEvent extends AdminGroupManagementEvent {
 
   const DeleteGroupAdminEvent({required this.groupId});
 }
+
+final class UpdateGroupStudentsEvent extends AdminGroupManagementEvent {
+  final int groupId;
+  final List<int> updatedStudents;
+
+  const UpdateGroupStudentsEvent({
+    required this.groupId,
+    required this.updatedStudents,
+  });
+}

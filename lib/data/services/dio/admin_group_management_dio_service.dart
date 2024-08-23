@@ -93,4 +93,29 @@ class AdminGroupManagementDioService {
 
     return appResponse;
   }
+
+  Future<AppResponse> updateGroupStudents({
+    required int groupId,
+    required List<int> studentsId,
+  }) async {
+    final AppResponse appResponse = AppResponse();
+
+    try {
+      final response = await _dioClient.post(
+        url: '/groups/$groupId/students',
+        data: {
+          "students": studentsId,
+        },
+      );
+      appResponse.data = response.data;
+    } catch (e) {
+      if (e is DioException) {
+        appResponse.statusCode = e.response?.statusCode;
+      }
+      appResponse.errorMessage = e.toString();
+      appResponse.isSuccess = false;
+    }
+
+    return appResponse;
+  }
 }

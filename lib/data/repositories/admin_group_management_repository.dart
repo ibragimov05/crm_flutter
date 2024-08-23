@@ -30,4 +30,14 @@ class AdminGroupManagementRepository {
 
   Future<AppResponse> deleteGroup({required int groupId}) async =>
       _adminGroupManagementDioService.deleteGroup(groupId: groupId);
+
+  Future<AppResponse> updateGroupStudents({
+    required int groupId,
+    required List<int> studentsId,
+  }) async =>
+      _adminGroupManagementDioService.updateGroupStudents(
+        groupId: groupId,
+        studentsId: studentsId,
+      );
+
 }
