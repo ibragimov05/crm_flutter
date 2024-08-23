@@ -1,6 +1,7 @@
 import 'package:crm_flutter/core/utils/app_text_styles.dart';
 import 'package:crm_flutter/data/models/groups/group.dart';
 import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/edit_group_students_dialog.dart';
+import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/edit_group_dialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_colors.dart';
@@ -47,6 +48,7 @@ class GroupItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              /// edit student button
               TextButton(
                 onPressed: () => showDialog(
                   context: context,
@@ -59,30 +61,24 @@ class GroupItem extends StatelessWidget {
                   ),
                 ),
               ),
+
+              /// edit group button
               TextButton(
-                onPressed: () {},
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => EditGroupDialog(
+                    group: group,
+                  ),
+                ),
                 child: Text(
-                  'Edit main teacher',
+                  'Edit group',
                   style: AppTextStyles.nunitoSansW600.copyWith(
                     color: AppColors.darkShadeGreen,
                   ),
                 ),
               ),
-            ],
-          ),
-          const SizedBox(height: 8),  // Add some space between rows for better readability
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Edit assistant teacher',
-                  style: AppTextStyles.nunitoSansW600.copyWith(
-                    color: AppColors.darkShadeGreen,
-                  ),
-                ),
-              ),
+
+              /// delete group
               TextButton(
                 onPressed: () {},
                 child: Text(

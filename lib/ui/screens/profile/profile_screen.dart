@@ -1,5 +1,5 @@
 import 'package:crm_flutter/app_config.dart';
-import 'package:crm_flutter/logic/bloc/admin_management/admin_management_bloc.dart';
+import 'package:crm_flutter/logic/bloc/admin_management/admin_user_management_bloc.dart';
 import 'package:crm_flutter/logic/cubit/edit_profile_form_cubit/edit_profile_form_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,8 +25,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         (UserData.roleId == 3 && UserData.roleName.toLowerCase() == 'admin');
     if (isAdmin) {
       context
-          .read<AdminManagementBloc>()
-          .add(const AdminManagementEvent.getAllUsers());
+          .read<AdminUserManagementBloc>()
+          .add(const AdminUserManagementEvent.getAllUsers());
     }
     return BlocProvider.value(
       value: getIt.get<EditProfileFormCubit>(),

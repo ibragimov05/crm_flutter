@@ -4,7 +4,7 @@ import 'package:crm_flutter/ui/screens/admin_panel/user/widgets/display_users_wi
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../logic/bloc/admin_management/admin_management_bloc.dart';
+import '../../../../logic/bloc/admin_management/admin_user_management_bloc.dart';
 
 class UsersScreen extends StatefulWidget {
   const UsersScreen({super.key});
@@ -33,15 +33,15 @@ class _UsersScreenState extends State<UsersScreen> {
             ],
           ),
         ),
-        body: BlocBuilder<AdminManagementBloc, AdminManagementState>(
+        body: BlocBuilder<AdminUserManagementBloc, AdminUserManagementState>(
           builder: (context, state) {
-            if (state.adminManagementStatus == AdminManagementStatus.loading) {
+            if (state.adminUserManagementStatus == AdminUserManagementStatus.loading) {
               return const Center(child: CircularProgressIndicator());
-            } else if (state.adminManagementStatus ==
-                AdminManagementStatus.error) {
+            } else if (state.adminUserManagementStatus ==
+                AdminUserManagementStatus.error) {
               return Center(child: Text(state.error ?? 'unknown error'));
-            } else if (state.adminManagementStatus ==
-                AdminManagementStatus.loaded) {
+            } else if (state.adminUserManagementStatus ==
+                AdminUserManagementStatus.loaded) {
               return TabBarView(
                 children: [
                   DisplayUsersWidget(users: state.users ?? []),

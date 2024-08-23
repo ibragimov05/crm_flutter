@@ -1,11 +1,12 @@
 import 'package:crm_flutter/core/utils/utils.dart';
 import 'package:crm_flutter/data/models/groups/add_group_request.dart';
 import 'package:crm_flutter/data/models/user/user.dart';
+import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/build_pop_up_menu_button.dart';
 import 'package:crm_flutter/ui/widgets/app_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../logic/bloc/admin_group_management/admin_group_management_bloc.dart';
-import '../../../../../logic/bloc/admin_management/admin_management_bloc.dart';
+import '../../../../../logic/bloc/admin_management/admin_user_management_bloc.dart';
 
 class AddNewGroupDialog extends StatefulWidget {
   const AddNewGroupDialog({super.key});
@@ -32,9 +33,9 @@ class _AddNewGroupDialogState extends State<AddNewGroupDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Add New Group'),
-      content: BlocBuilder<AdminManagementBloc, AdminManagementState>(
+      content: BlocBuilder<AdminUserManagementBloc, AdminUserManagementState>(
         builder: (context, state) {
-          if (state.adminManagementStatus == AdminManagementStatus.loaded &&
+          if (state.adminUserManagementStatus == AdminUserManagementStatus.loaded &&
               state.users != null &&
               state.users!.isNotEmpty) {
             final List<User> teachers = AppFunction.getUserFromRoleId(
@@ -59,7 +60,7 @@ class _AddNewGroupDialogState extends State<AddNewGroupDialog> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                _buildPopupMenuButton(
+                BuildPopUpMenuButton(
                   label: 'Choose a Teacher',
                   selectedTeacher: _selectedMainTeacher,
                   users: teachers,
@@ -67,7 +68,7 @@ class _AddNewGroupDialogState extends State<AddNewGroupDialog> {
                       setState(() => _selectedMainTeacher = value),
                 ),
                 const SizedBox(height: 16),
-                _buildPopupMenuButton(
+                BuildPopUpMenuButton(
                   label: 'Choose an Assistant Teacher',
                   selectedTeacher: _selectedAssistantTeacher,
                   users: teachers,
@@ -112,36 +113,4 @@ class _AddNewGroupDialogState extends State<AddNewGroupDialog> {
       ],
     );
   }
-
-  Widget _buildPopupMenuButton({
-    required String label,
-    required User? selectedTeacher,
-    required List<User> users,
-    required ValueChanged<User> onSelected,
-  }) =>
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          PopupMenuButton<User>(
-            onSelected: onSelected,
-            itemBuilder: (context) {
-              return users.map((User user) {
-                return PopupMenuItem<User>(
-                  value: user,
-                  child: Text("ID ${user.id}. ${user.name}"),
-                );
-              }).toList();
-            },
-            child: ListTile(
-              title: Text(
-                selectedTeacher != null
-                    ? "ID ${selectedTeacher.id}. ${selectedTeacher.name}"
-                    : label,
-              ),
-              trailing: const Icon(Icons.arrow_drop_down),
-            ),
-          ),
-          const SizedBox(height: 8),
-        ],
-      );
 }
