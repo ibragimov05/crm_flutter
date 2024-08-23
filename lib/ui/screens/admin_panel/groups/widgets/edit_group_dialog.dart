@@ -10,7 +10,7 @@ import '../../../../../core/utils/app_functions.dart';
 
 class EditGroupDialog extends StatefulWidget {
   final Group group;
-
+ 
   const EditGroupDialog({super.key, required this.group});
 
   @override
