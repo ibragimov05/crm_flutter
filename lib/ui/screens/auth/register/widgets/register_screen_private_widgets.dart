@@ -161,7 +161,7 @@ class _RegisterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentAuthStatus = context.select(
+    final authStatus = context.select(
       (AuthBloc bloc) => bloc.state.authStatus,
     );
 
@@ -170,20 +170,21 @@ class _RegisterButton extends StatelessWidget {
 
     final state = context.select((RegisterFormCubit cubit) => cubit.state);
 
-    return AppRegularButton(
-      buttonLabel: 'Register',
-      onTap: currentAuthStatus == AuthStatus.loading || isValid
-          ? () {
-              context.read<AuthBloc>().add(AuthEvent.registerUser(
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, authState) {
+        return AppRegularButton(
+          buttonLabel: 'Register',
+          onTap: authStatus != AuthStatus.loading && isValid
+              ? () => context.read<AuthBloc>().add(AuthEvent.registerUser(
                     name: state.name.value,
                     phoneNumber: state.phoneNumber.value,
                     password: state.password.value,
                     passwordConfirmation: state.confirmedPassword.value,
                     roleId: state.roleId,
-                  ));
-            }
-          : null,
+                  ))
+              : null,
+        );
+      },
     );
   }
 }
-

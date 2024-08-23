@@ -74,4 +74,23 @@ class AdminGroupManagementDioService {
 
     return appResponse;
   }
+
+  Future<AppResponse> deleteGroup({required int groupId}) async {
+    final AppResponse appResponse = AppResponse();
+
+    try {
+      final response = await _dioClient.delete(
+        url: '/groups/$groupId',
+      );
+      appResponse.data = response.data;
+    } catch (e) {
+      if (e is DioException) {
+        appResponse.statusCode = e.response?.statusCode;
+      }
+      appResponse.errorMessage = e.toString();
+      appResponse.isSuccess = false;
+    }
+
+    return appResponse;
+  }
 }

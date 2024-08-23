@@ -27,4 +27,7 @@ class AdminGroupManagementRepository {
         newMainTeacherId: newMainTeacherId,
         newAssistantTeacherId: newAssistantTeacherId,
       );
+
+  Future<AppResponse> deleteGroup({required int groupId}) async =>
+      _adminGroupManagementDioService.deleteGroup(groupId: groupId);
 }

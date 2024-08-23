@@ -51,7 +51,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           user: await _getSaveUser(),
         ));
       } else {
-        throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
+        throw appResponse.errorMessage;
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -80,7 +80,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           user: await _getSaveUser(),
         ));
       } else {
-        throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
+        throw appResponse.errorMessage;
       }
     } catch (e) {
       debugPrint(e.toString());

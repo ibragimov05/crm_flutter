@@ -10,23 +10,24 @@ part 'admin_group_management_event.dart';
 part 'admin_group_management_state.dart';
 
 class AdminGroupManagementBloc
-    extends Bloc<AdminGroupManagementEvent, AdminGroupManagementState> {
+    extends Bloc<AdminGroupManagementEvent, AdminGroupState> {
   final AdminGroupManagementRepository _adminGroupManagementRepository;
 
   AdminGroupManagementBloc({
     required AdminGroupManagementRepository adminGroupManagementRepository,
   })  : _adminGroupManagementRepository = adminGroupManagementRepository,
-        super(const InitialAdminGroupManagementState()) {
-    on<GetAllGroupsAdminManEvent>(_onGetAllGroups);
-    on<AddGroupAdminManEvent>(_onAddGroup);
-    on<EditGroupAdminManEvent>(_onEditGroup);
+        super(const InitialAdminGroupState()) {
+    on<GetAllGroupsAdminEvent>(_onGetAllGroups);
+    on<AddGroupAdminEvent>(_onAddGroup);
+    on<EditGroupAdminEvent>(_onEditGroup);
+    on<DeleteGroupAdminEvent>(_onDeleteGroup);
   }
 
   void _onGetAllGroups(
-    GetAllGroupsAdminManEvent event,
-    Emitter<AdminGroupManagementState> emit,
+    GetAllGroupsAdminEvent event,
+    Emitter<AdminGroupState> emit,
   ) async {
-    emit(const LoadingAdminGroupManagementState());
+    emit(const LoadingAdminGroupState());
 
     try {
       final appResponse = await _adminGroupManagementRepository.getAllGroups();
@@ -38,40 +39,40 @@ class AdminGroupManagementBloc
           allGroups.add(Group.fromJson(data));
         }
 
-        emit(LoadedAdminGroupManagementState(allGroups: allGroups));
+        emit(LoadedAdminGroupState(allGroups: allGroups));
       } else {
         throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
       }
     } catch (e) {
-      emit(ErrorAdminGroupManagementState(errorMessage: e.toString()));
+      emit(ErrorAdminGroupState(errorMessage: e.toString()));
     }
   }
 
   void _onAddGroup(
-    AddGroupAdminManEvent event,
-    Emitter<AdminGroupManagementState> emit,
+    AddGroupAdminEvent event,
+    Emitter<AdminGroupState> emit,
   ) async {
-    emit(const LoadingAdminGroupManagementState());
+    emit(const LoadingAdminGroupState());
 
     try {
       final appResponse =
           await _adminGroupManagementRepository.addGroup(event.newGroup);
 
       if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
-        add(const GetAllGroupsAdminManEvent());
+        add(const GetAllGroupsAdminEvent());
       } else {
         throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
       }
     } catch (e) {
-      emit(ErrorAdminGroupManagementState(errorMessage: e.toString()));
+      emit(ErrorAdminGroupState(errorMessage: e.toString()));
     }
   }
 
   void _onEditGroup(
-    EditGroupAdminManEvent event,
-    Emitter<AdminGroupManagementState> emit,
+    EditGroupAdminEvent event,
+    Emitter<AdminGroupState> emit,
   ) async {
-    emit(const LoadingAdminGroupManagementState());
+    emit(const LoadingAdminGroupState());
     try {
       final appResponse = await _adminGroupManagementRepository.editGroup(
         groupId: event.groupId,
@@ -81,12 +82,32 @@ class AdminGroupManagementBloc
       );
 
       if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
-        add(const GetAllGroupsAdminManEvent());
+        add(const GetAllGroupsAdminEvent());
       } else {
         throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
       }
     } catch (e) {
-      emit(ErrorAdminGroupManagementState(errorMessage: e.toString()));
+      emit(ErrorAdminGroupState(errorMessage: e.toString()));
+    }
+  }
+
+  void _onDeleteGroup(
+    DeleteGroupAdminEvent event,
+    Emitter<AdminGroupState> emit,
+  ) async {
+    emit(const LoadingAdminGroupState());
+    try {
+      final appResponse = await _adminGroupManagementRepository.deleteGroup(
+        groupId: event.groupId,
+      );
+
+      if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
+        add(const GetAllGroupsAdminEvent());
+      } else {
+        throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
+      }
+    } catch (e) {
+      emit(ErrorAdminGroupState(errorMessage: e.toString()));
     }
   }
 }

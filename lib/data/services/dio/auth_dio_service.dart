@@ -29,9 +29,15 @@ class AuthDioService {
     } catch (e) {
       if (e is DioException) {
         appResponse.statusCode = e.response?.statusCode;
+        appResponse.errorMessage =
+            e.response?.data['data']['error'].toString().toLowerCase() ==
+                    'unauthorised'
+                ? 'Login or password is incorrect'
+                : 'Error occurred while login';
+      } else {
+        appResponse.errorMessage = e.toString();
       }
       appResponse.isSuccess = false;
-      appResponse.errorMessage = e.toString();
     }
 
     return appResponse;
@@ -63,14 +69,18 @@ class AuthDioService {
       appResponse.data = response.data;
 
       await TokenPrefsService.saveAccessToken(
-        appResponse.data['data']['token'],
+        appResponse.data['data']['token'].toString(),
       );
     } catch (e) {
       if (e is DioException) {
         appResponse.statusCode = e.response?.statusCode;
+
+        appResponse.errorMessage = _getErrorMessage(e.response?.data);
+      } else {
+        appResponse.errorMessage = e.toString();
       }
+
       appResponse.isSuccess = false;
-      appResponse.errorMessage = e.toString();
     }
 
     return appResponse;
@@ -86,4 +96,18 @@ class AuthDioService {
   }
 
   String? checkTokenExpiry() => TokenPrefsService.getAccessToken();
+
+  String _getErrorMessage(dynamic errorData) {
+    if (errorData != null && errorData is Map<String, dynamic>) {
+      final errorMessages = errorData['data'] as Map<String, dynamic>?;
+
+      if (errorMessages != null) {
+        return errorMessages.values.expand((element) => element).join('\n');
+      } else {
+        return errorData['message'] ?? 'Unknown error';
+      }
+    } else {
+      return 'Error: No response data';
+    }
+  }
 }

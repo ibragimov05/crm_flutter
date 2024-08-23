@@ -103,7 +103,7 @@ class _AddNewGroupDialogState extends State<AddNewGroupDialog> {
               );
 
               context.read<AdminGroupManagementBloc>().add(
-                    AddGroupAdminManEvent(newGroup: addGroupRequest),
+                    AddGroupAdminEvent(newGroup: addGroupRequest),
                   );
               Navigator.of(context).pop();
             }

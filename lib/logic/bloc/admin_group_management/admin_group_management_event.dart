@@ -5,26 +5,32 @@ sealed class AdminGroupManagementEvent {
   const AdminGroupManagementEvent();
 }
 
-final class GetAllGroupsAdminManEvent extends AdminGroupManagementEvent {
-  const GetAllGroupsAdminManEvent();
+final class GetAllGroupsAdminEvent extends AdminGroupManagementEvent {
+  const GetAllGroupsAdminEvent();
 }
 
-final class AddGroupAdminManEvent extends AdminGroupManagementEvent {
+final class AddGroupAdminEvent extends AdminGroupManagementEvent {
   final AddGroupRequest newGroup;
 
-  const AddGroupAdminManEvent({required this.newGroup});
+  const AddGroupAdminEvent({required this.newGroup});
 }
 
-final class EditGroupAdminManEvent extends AdminGroupManagementEvent {
+final class EditGroupAdminEvent extends AdminGroupManagementEvent {
   final int groupId;
   final String newName;
   final int newMainTeacherId;
   final int newAssistantTeacherId;
 
-  const EditGroupAdminManEvent({
+  const EditGroupAdminEvent({
     required this.groupId,
     required this.newName,
     required this.newMainTeacherId,
     required this.newAssistantTeacherId,
   });
+}
+
+final class DeleteGroupAdminEvent extends AdminGroupManagementEvent {
+  final int groupId;
+
+  const DeleteGroupAdminEvent({required this.groupId});
 }

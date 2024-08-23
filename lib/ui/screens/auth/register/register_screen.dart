@@ -24,13 +24,6 @@ class RegisterScreen extends StatelessWidget {
           if(state.authStatus == AuthStatus.authenticated){
             Navigator.of(context).pop();
           }
-          else if (state.authStatus == AuthStatus.error) {
-            AppFunction.showToast(
-              message: state.error ?? 'Authentication failure',
-              isSuccess: false,
-              context: context,
-            );
-          }
         },
         child: Scaffold(
           body: ListView(

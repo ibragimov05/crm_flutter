@@ -144,7 +144,7 @@ class _LoginButton extends StatelessWidget {
 
     return AppRegularButton(
       buttonLabel: 'Sign in',
-      onTap: (currentAuthStatus == AuthStatus.loading || isValid)
+      onTap: currentAuthStatus != AuthStatus.loading && isValid
           ? () => context.read<AuthBloc>().add(AuthEvent.loginUser(
                 phoneNumber: state.phoneNumber.value,
                 password: state.password.value,

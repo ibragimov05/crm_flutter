@@ -18,20 +18,21 @@ class _GroupsScreenState extends State<GroupsScreen> {
     super.initState();
     context
         .read<AdminGroupManagementBloc>()
-        .add(const GetAllGroupsAdminManEvent());
+        .add(const GetAllGroupsAdminEvent());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Group management')),
-      body: BlocBuilder<AdminGroupManagementBloc, AdminGroupManagementState>(
+      body: BlocBuilder<AdminGroupManagementBloc, AdminGroupState>(
+        buildWhen: (previous, current) => current is LoadedAdminGroupState,
         builder: (context, state) {
-          if (state is LoadingAdminGroupManagementState) {
+          if (state is LoadingAdminGroupState) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is ErrorAdminGroupManagementState) {
+          } else if (state is ErrorAdminGroupState) {
             return Center(child: Text(state.errorMessage));
-          } else if (state is LoadedAdminGroupManagementState) {
+          } else if (state is LoadedAdminGroupState) {
             return ListView.builder(
               itemCount: state.allGroups.length,
               padding: const EdgeInsets.only(bottom: kToolbarHeight + 20),

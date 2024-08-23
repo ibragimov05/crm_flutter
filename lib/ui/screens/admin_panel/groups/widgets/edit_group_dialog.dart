@@ -36,7 +36,7 @@ class _EditGroupDialogState extends State<EditGroupDialog> {
     if (_formKey.currentState!.validate() &&
         _selectedMainTeacher != null &&
         _selectedAssistantTeacher != null) {
-      context.read<AdminGroupManagementBloc>().add(EditGroupAdminManEvent(
+      context.read<AdminGroupManagementBloc>().add(EditGroupAdminEvent(
             groupId: widget.group.id,
             newName: _newGroupNameController.text,
             newMainTeacherId: _selectedMainTeacher!.id,

@@ -1,8 +1,10 @@
 import 'package:crm_flutter/core/utils/app_text_styles.dart';
 import 'package:crm_flutter/data/models/groups/group.dart';
+import 'package:crm_flutter/logic/bloc/admin_group_management/admin_group_management_bloc.dart';
 import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/edit_group_students_dialog.dart';
 import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/edit_group_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 
@@ -80,7 +82,33 @@ class GroupItem extends StatelessWidget {
 
               /// delete group
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text(
+                        'Are you really want to delete group named: ${group.name}?',
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            context
+                                .read<AdminGroupManagementBloc>()
+                                .add(DeleteGroupAdminEvent(
+                                  groupId: group.id,
+                                ));
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Yes'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
                 child: Text(
                   'Delete group',
                   style: AppTextStyles.nunitoSansW600.copyWith(
