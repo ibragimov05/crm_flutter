@@ -14,4 +14,17 @@ class AdminGroupManagementRepository {
 
   Future<AppResponse> addGroup(AddGroupRequest newGroup) async =>
       _adminGroupManagementDioService.addNewGroup(newGroup);
+
+  Future<AppResponse> editGroup({
+    required int groupId,
+    required String newName,
+    required int newMainTeacherId,
+    required int newAssistantTeacherId,
+  }) async =>
+      _adminGroupManagementDioService.editGroup(
+        groupId: groupId,
+        newName: newName,
+        newMainTeacherId: newMainTeacherId,
+        newAssistantTeacherId: newAssistantTeacherId,
+      );
 }

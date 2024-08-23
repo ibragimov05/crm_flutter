@@ -19,7 +19,6 @@ class AdminUserManagementBloc
   })  : _adminManagementRepository = adminManagementRepository,
         super(const AdminUserManagementState()) {
     on<GetAllUsersEvent>(_onGetAllUsers);
-    on<EditGroupsMainTeacherEvent>(_onEditGroupsMainTeacher);
   }
 
   void _onGetAllUsers(
@@ -27,11 +26,11 @@ class AdminUserManagementBloc
     Emitter<AdminUserManagementState> emit,
   ) async {
     emit(state.copyWith(
-        adminUserManagementStatus: AdminUserManagementStatus.loading));
+      adminUserManagementStatus: AdminUserManagementStatus.loading,
+    ));
 
     try {
       final appResponse = await _adminManagementRepository.getAllUsers();
-
       if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
         List<User> allUsers = [];
 
@@ -43,34 +42,6 @@ class AdminUserManagementBloc
           adminUserManagementStatus: AdminUserManagementStatus.loaded,
           users: allUsers,
         ));
-      } else {
-        throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
-      }
-    } catch (e) {
-      emit(state.copyWith(
-        adminUserManagementStatus: AdminUserManagementStatus.error,
-        error: e.toString(),
-      ));
-    }
-  }
-
-  void _onEditGroupsMainTeacher(
-    EditGroupsMainTeacherEvent event,
-    Emitter<AdminUserManagementState> emit,
-  ) async {
-    emit(state.copyWith(
-      adminUserManagementStatus: AdminUserManagementStatus.loading,
-    ));
-    try {
-      final appResponse = await _adminManagementRepository.editGroups(
-        groupId: event.groupId,
-        newName: event.newName,
-        newMainTeacherId: event.newMainTeacherId,
-        newAssistantTeacherId: event.newAssistantTeacherId,
-      );
-
-      if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
-        add(const AdminUserManagementEvent.getAllUsers());
       } else {
         throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
       }

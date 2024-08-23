@@ -24,3 +24,4 @@ final class ErrorAdminGroupManagementState extends AdminGroupManagementState {
 
   const ErrorAdminGroupManagementState({required this.errorMessage});
 }
+

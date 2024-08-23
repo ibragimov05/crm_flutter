@@ -1,5 +1,6 @@
 import 'package:crm_flutter/data/models/groups/group.dart';
 import 'package:crm_flutter/data/models/user/user.dart';
+import 'package:crm_flutter/logic/bloc/admin_group_management/admin_group_management_bloc.dart';
 import 'package:crm_flutter/logic/bloc/admin_management/admin_user_management_bloc.dart';
 import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/build_pop_up_menu_button.dart';
 import 'package:crm_flutter/ui/widgets/app_text_form_field.dart';
@@ -10,7 +11,7 @@ import '../../../../../core/utils/app_functions.dart';
 
 class EditGroupDialog extends StatefulWidget {
   final Group group;
- 
+
   const EditGroupDialog({super.key, required this.group});
 
   @override
@@ -32,15 +33,16 @@ class _EditGroupDialogState extends State<EditGroupDialog> {
   }
 
   void _onSaveTap() {
-    if (_formKey.currentState!.validate() && _selectedMainTeacher != null) {
-      context
-          .read<AdminUserManagementBloc>()
-          .add(AdminUserManagementEvent.editGroupsMainTeacher(
+    if (_formKey.currentState!.validate() &&
+        _selectedMainTeacher != null &&
+        _selectedAssistantTeacher != null) {
+      context.read<AdminGroupManagementBloc>().add(EditGroupAdminManEvent(
             groupId: widget.group.id,
             newName: _newGroupNameController.text,
             newMainTeacherId: _selectedMainTeacher!.id,
             newAssistantTeacherId: _selectedAssistantTeacher!.id,
           ));
+      Navigator.of(context).pop();
     }
   }
 
@@ -99,6 +101,9 @@ class _EditGroupDialogState extends State<EditGroupDialog> {
                     ),
                   ],
                 );
+              } else if (state.adminUserManagementStatus ==
+                  AdminUserManagementStatus.error) {
+                return Center(child: Text("error: ${state.error}"));
               }
               return const Center(child: CircularProgressIndicator());
             },

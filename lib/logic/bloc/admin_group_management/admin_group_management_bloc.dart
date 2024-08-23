@@ -19,6 +19,7 @@ class AdminGroupManagementBloc
         super(const InitialAdminGroupManagementState()) {
     on<GetAllGroupsAdminManEvent>(_onGetAllGroups);
     on<AddGroupAdminManEvent>(_onAddGroup);
+    on<EditGroupAdminManEvent>(_onEditGroup);
   }
 
   void _onGetAllGroups(
@@ -55,6 +56,29 @@ class AdminGroupManagementBloc
     try {
       final appResponse =
           await _adminGroupManagementRepository.addGroup(event.newGroup);
+
+      if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
+        add(const GetAllGroupsAdminManEvent());
+      } else {
+        throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
+      }
+    } catch (e) {
+      emit(ErrorAdminGroupManagementState(errorMessage: e.toString()));
+    }
+  }
+
+  void _onEditGroup(
+    EditGroupAdminManEvent event,
+    Emitter<AdminGroupManagementState> emit,
+  ) async {
+    emit(const LoadingAdminGroupManagementState());
+    try {
+      final appResponse = await _adminGroupManagementRepository.editGroup(
+        groupId: event.groupId,
+        newName: event.newName,
+        newMainTeacherId: event.newMainTeacherId,
+        newAssistantTeacherId: event.newAssistantTeacherId,
+      );
 
       if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
         add(const GetAllGroupsAdminManEvent());

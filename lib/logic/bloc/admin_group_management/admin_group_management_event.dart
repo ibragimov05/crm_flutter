@@ -14,3 +14,17 @@ final class AddGroupAdminManEvent extends AdminGroupManagementEvent {
 
   const AddGroupAdminManEvent({required this.newGroup});
 }
+
+final class EditGroupAdminManEvent extends AdminGroupManagementEvent {
+  final int groupId;
+  final String newName;
+  final int newMainTeacherId;
+  final int newAssistantTeacherId;
+
+  const EditGroupAdminManEvent({
+    required this.groupId,
+    required this.newName,
+    required this.newMainTeacherId,
+    required this.newAssistantTeacherId,
+  });
+}

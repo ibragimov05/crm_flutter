@@ -10,16 +10,5 @@ class AdminManagementRepository {
 
   Future<AppResponse> getAllUsers() async => _adminDioService.getAllUsers();
 
-  Future<AppResponse> editGroups({
-    required int groupId,
-    required String newName,
-    required int newMainTeacherId,
-    required int newAssistantTeacherId,
-  }) async =>
-      _adminDioService.editGroup(
-        groupId: groupId,
-        newName: newName,
-        newMainTeacherId: newMainTeacherId,
-        newAssistantTeacherId: newAssistantTeacherId,
-      );
+
 }
