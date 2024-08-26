@@ -1,8 +1,10 @@
 import 'package:crm_flutter/core/utils/app_text_styles.dart';
 import 'package:crm_flutter/data/models/groups/group.dart';
 import 'package:crm_flutter/logic/bloc/admin_group_management/admin_group_management_bloc.dart';
+import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/create_time_table_for_group.dart';
 import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/edit_group_students_dialog.dart';
 import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/edit_group_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,6 +37,7 @@ class GroupItem extends StatelessWidget {
                   Text("Group name: ${group.name}"),
                   Text("Main teacher name: ${group.mainTeacher.name}"),
                   Text("Assistant teacher: ${group.assistantTeacher.name}"),
+                  Text("Subject: ${group.subject.name}"),
                 ],
               ),
               Expanded(
@@ -48,9 +51,8 @@ class GroupItem extends StatelessWidget {
           ),
           const SizedBox(height: 8),  // Add some space between rows for better readability
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              /// edit student button
               TextButton(
                 onPressed: () => showDialog(
                   context: context,
@@ -74,6 +76,28 @@ class GroupItem extends StatelessWidget {
                 ),
                 child: Text(
                   'Edit group',
+                  style: AppTextStyles.nunitoSansW600.copyWith(
+                    color: AppColors.darkShadeGreen,
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TextButton(
+                onPressed: () => Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => CreateTimeTableForGroup(
+                      group: group,
+                    ),
+                  ),
+                ),
+                child: Text(
+                  'Time table',
                   style: AppTextStyles.nunitoSansW600.copyWith(
                     color: AppColors.darkShadeGreen,
                   ),

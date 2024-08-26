@@ -1,6 +1,7 @@
 import 'package:crm_flutter/data/services/shared_prefs/token_prefs_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:talker_dio_logger/talker_dio_logger.dart';
 
 class DioClient {
   final _dio = Dio();
@@ -11,7 +12,21 @@ class DioClient {
       ..options.connectTimeout = const Duration(seconds: 10)
       ..options.receiveTimeout = const Duration(seconds: 10)
       ..options.responseType = ResponseType.json
-      ..interceptors.add(DioInterceptor());
+      ..interceptors.add(DioInterceptor())
+      ..interceptors.add(
+        TalkerDioLogger(
+          settings: const TalkerDioLoggerSettings(
+            printRequestHeaders: true,
+            printResponseHeaders: true,
+            printResponseMessage: true,
+            printErrorData: true,
+            printErrorHeaders: true,
+            printErrorMessage: true,
+            printRequestData: true,
+            printResponseData: true,
+          ),
+        ),
+      );
   }
 
   static final _singletonConstructor = DioClient._private();

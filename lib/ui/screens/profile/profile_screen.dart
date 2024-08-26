@@ -4,6 +4,7 @@ import 'package:crm_flutter/logic/cubit/edit_profile_form_cubit/edit_profile_for
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../logic/bloc/admin_subject_management/admin_subject_management_bloc.dart';
 import 'widgets/admin_panel_drawer.dart';
 import 'widgets/profile_info_widget.dart';
 import '../../../logic/bloc/auth/auth_bloc.dart';
@@ -23,11 +24,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final bool isAdmin =
         (UserData.roleId == 3 && UserData.roleName.toLowerCase() == 'admin');
-    if (isAdmin) {
-      context
-          .read<AdminUserManagementBloc>()
-          .add(const AdminUserManagementEvent.getAllUsers());
-    }
+
+    if (isAdmin) _adminGetDATA();
+
     return BlocProvider.value(
       value: getIt.get<EditProfileFormCubit>(),
       child: Scaffold(
@@ -76,5 +75,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             : null,
       ),
     );
+  }
+
+  void _adminGetDATA() {
+    context
+        .read<AdminUserManagementBloc>()
+        .add(const AdminUserManagementEvent.getAllUsers());
+    getIt
+        .get<AdminSubjectManagementBloc>()
+        .add(const AdminSubjectManagementEvent.getAll());
   }
 }

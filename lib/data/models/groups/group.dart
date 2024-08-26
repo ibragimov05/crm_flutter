@@ -1,3 +1,5 @@
+import 'package:crm_flutter/data/models/subject/subject.dart';
+
 import '../user/user.dart';
 
 class Group {
@@ -10,8 +12,9 @@ class Group {
   final User mainTeacher;
   final User assistantTeacher;
   final List<User> students;
+  final Subject subject;
 
-  Group({
+  const Group({
     required this.id,
     required this.name,
     required this.mainTeacherId,
@@ -21,6 +24,7 @@ class Group {
     required this.mainTeacher,
     required this.assistantTeacher,
     required this.students,
+    required this.subject,
   });
 
   factory Group.fromJson(Map<String, dynamic> json) => Group(
@@ -36,41 +40,15 @@ class Group {
                 ?.map((e) => User.fromJson(e as Map<String, dynamic>))
                 .toList() ??
             [],
-      );
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'main_teacher_id': mainTeacherId,
-        'assistant_teacher_id': assistantTeacherId,
-        'created_at': createdAt.toIso8601String(),
-        'updated_at': updatedAt.toIso8601String(),
-        'main_teacher': mainTeacher.toJson(),
-        'assistant_teacher': assistantTeacher.toJson(),
-        'students': students.map((e) => e.toJson()).toList(),
-      };
-
-  Group copyWith({
-    int? id,
-    String? name,
-    int? mainTeacherId,
-    int? assistantTeacherId,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    User? mainTeacher,
-    User? assistantTeacher,
-    List<User>? students,
-  }) =>
-      Group(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        mainTeacherId: mainTeacherId ?? this.mainTeacherId,
-        assistantTeacherId: assistantTeacherId ?? this.assistantTeacherId,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-        mainTeacher: mainTeacher ?? this.mainTeacher,
-        assistantTeacher: assistantTeacher ?? this.assistantTeacher,
-        students: students ?? this.students,
+        subject: Subject.fromJson(
+          json['subject'] ??
+              {
+                'id': -1,
+                "name":"null",
+                "created_at": DateTime.now().toIso8601String(),
+                "updated_at": DateTime.now().toIso8601String(),
+              },
+        ),
       );
 
   @override

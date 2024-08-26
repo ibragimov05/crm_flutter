@@ -1,7 +1,9 @@
 import 'package:crm_flutter/core/utils/utils.dart';
 import 'package:crm_flutter/data/models/groups/add_group_request.dart';
+import 'package:crm_flutter/data/models/subject/subject.dart';
 import 'package:crm_flutter/data/models/user/user.dart';
 import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/build_pop_up_menu_button.dart';
+import 'package:crm_flutter/ui/screens/admin_panel/groups/widgets/manage_add_groups_subject.dart';
 import 'package:crm_flutter/ui/widgets/app_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +24,7 @@ class _AddNewGroupDialogState extends State<AddNewGroupDialog> {
 
   User? _selectedMainTeacher;
   User? _selectedAssistantTeacher;
+  Subject? _selectedSubject;
 
   @override
   void dispose() {
@@ -75,6 +78,12 @@ class _AddNewGroupDialogState extends State<AddNewGroupDialog> {
                   onSelected: (value) =>
                       setState(() => _selectedAssistantTeacher = value),
                 ),
+                ManageAddGroupsSubject(
+                  selectedSubject: _selectedSubject,
+                  label: 'Choose a subject',
+                  onSelected: (value) =>
+                      setState(() => _selectedSubject = value),
+                )
               ],
             );
           }
@@ -95,8 +104,9 @@ class _AddNewGroupDialogState extends State<AddNewGroupDialog> {
         ),
         TextButton(
           onPressed: () {
-            if (_formKey.currentState!.validate()) {
+            if (_formKey.currentState!.validate() && _selectedSubject != null) {
               final AddGroupRequest addGroupRequest = AddGroupRequest(
+                subjectId: _selectedSubject!.id,
                 name: _groupNameController.text,
                 mainTeacherId: _selectedMainTeacher?.id ?? -1,
                 assistantTeacherId: _selectedAssistantTeacher?.id ?? -1,

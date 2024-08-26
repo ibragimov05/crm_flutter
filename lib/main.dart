@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/app.dart';
 import 'app_config.dart';
 import 'logic/bloc/admin_group_management/admin_group_management_bloc.dart';
+import 'logic/bloc/admin_subject_management/admin_subject_management_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +24,7 @@ void main() async {
         BlocProvider.value(value: getIt.get<AdminGroupManagementBloc>()),
         BlocProvider.value(value: getIt.get<AdminUserManagementBloc>()),
         BlocProvider.value(value: getIt.get<AdminRoomManagementBloc>()),
+        BlocProvider.value(value: getIt.get<AdminSubjectManagementBloc>()),
       ],
       child: const App(),
     ),

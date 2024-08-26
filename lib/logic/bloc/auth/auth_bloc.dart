@@ -116,8 +116,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     emit(state.copyWith(authStatus: AuthStatus.loading));
     try {
+      await _authRepository.logOut();
+
       await Future.wait([
-        _authRepository.logOut(),
         TokenPrefsService.clearAccessToken(),
         UserSharedPrefsService.clearUser(),
       ]);
