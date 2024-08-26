@@ -1,3 +1,4 @@
+import 'package:crm_flutter/data/models/groups/group.dart';
 import 'package:crm_flutter/data/models/user/user.dart';
 
 class UserData {
@@ -17,6 +18,17 @@ class UserData {
   static DateTime roleCreatedAt = DateTime.now();
   static DateTime roleUpdatedAt = DateTime.now();
 
+  /// user group
+  static int groupId = -1;
+  static String groupName = '';
+  static int groupMainTeacherId = -1;
+  static int groupAssistantTeacherId = -1;
+  static DateTime groupCreatedAt = DateTime.now();
+  static DateTime groupUpdatedAt = DateTime.now();
+  static User? groupMainTeacher;
+  static User? groupAssistantTeacher;
+  static List<User> groupStudents = [];
+
   static void setUserData(User user) {
     id = user.id;
     name = user.name;
@@ -31,5 +43,17 @@ class UserData {
     roleName = user.role.name;
     roleCreatedAt = user.role.createdAt ?? DateTime.now();
     roleUpdatedAt = user.role.updatedAt ?? DateTime.now();
+  }
+
+  static void setUserGroup(Group group) {
+    groupId = group.id;
+    groupName = group.name;
+    groupMainTeacherId = group.mainTeacherId;
+    groupAssistantTeacherId = group.assistantTeacherId;
+    groupCreatedAt = group.createdAt;
+    groupUpdatedAt = group.updatedAt;
+    groupMainTeacher = group.mainTeacher;
+    groupAssistantTeacher = group.assistantTeacher;
+    groupStudents = group.students;
   }
 }

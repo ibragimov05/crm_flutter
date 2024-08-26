@@ -1,4 +1,5 @@
 import 'package:crm_flutter/ui/screens/admin_panel/groups/groups_screen.dart';
+import 'package:crm_flutter/ui/screens/admin_panel/rooms/rooms_screen.dart';
 import 'package:crm_flutter/ui/screens/admin_panel/user/users_screen.dart';
 import 'package:crm_flutter/ui/screens/auth/login/login_screen.dart';
 import 'package:crm_flutter/ui/screens/auth/register/register_screen.dart';
@@ -15,6 +16,7 @@ class AppRouter {
   static const String profileScreen = '/profileScreen';
   static const String adminPanelUsersScreen = '/adminPanelUsersScreen';
   static const String adminPanelGroupsScreen = '/adminPanelGroupsScreen';
+  static const String adminPanelRoomsScreen = '/adminPanelRoomsScreen';
 
   static PageRoute _buildPageRoute(Widget widget) {
     return CupertinoPageRoute(builder: (BuildContext context) => widget);
@@ -34,6 +36,8 @@ class AppRouter {
         return _buildPageRoute(const UsersScreen());
       case AppRouter.adminPanelGroupsScreen:
         return _buildPageRoute(const GroupsScreen());
+      case AppRouter.adminPanelRoomsScreen:
+        return _buildPageRoute(const RoomsScreen());
       default:
         return _buildPageRoute(const SplashScreen());
     }

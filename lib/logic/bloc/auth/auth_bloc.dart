@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:crm_flutter/core/utils/user_constants.dart';
+import 'package:crm_flutter/core/utils/user_data.dart';
 import 'package:crm_flutter/data/models/user/user.dart';
 import 'package:crm_flutter/data/repositories/auth_repository.dart';
 import 'package:crm_flutter/data/repositories/user_repository.dart';

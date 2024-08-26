@@ -1,6 +1,7 @@
 import 'package:crm_flutter/core/utils/utils.dart';
 import 'package:crm_flutter/data/models/user/user.dart';
 import 'package:crm_flutter/data/services/shared_prefs/user_shared_prefs_service.dart';
+import 'package:crm_flutter/logic/bloc/user/user_bloc.dart';
 import 'package:crm_flutter/ui/screens/auth/login/login_screen.dart';
 import 'package:crm_flutter/ui/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,8 @@ class _SplashScreenState extends State<SplashScreen> {
               ..add(const AuthEvent.checkTokenExpiry()),
             builder: (context, state) {
               if (state.authStatus == AuthStatus.authenticated) {
+                context.read<UserBloc>().add(const UserEvent.getUserGroups());
+
                 return const HomeScreen();
               } else {
                 return const LoginScreen();

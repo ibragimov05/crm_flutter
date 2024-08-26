@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:crm_flutter/core/utils/user_constants.dart';
+import 'package:crm_flutter/core/utils/user_data.dart';
+import 'package:crm_flutter/data/models/groups/group.dart';
 import 'package:crm_flutter/data/models/user/user.dart';
 import 'package:crm_flutter/data/repositories/user_repository.dart';
 import 'package:crm_flutter/data/services/shared_prefs/user_shared_prefs_service.dart';
@@ -19,6 +20,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       : _userRepository = userRepository,
         super(const UserState()) {
     on<GetUserEvent>(_onGetUser);
+    on<GetUserGroupsEvent>(_onGetUserGroups);
     on<UpdateUserDataEvent>(_onUpdateUserData);
   }
 
@@ -26,9 +28,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     GetUserEvent event,
     Emitter<UserState> emit,
   ) async {
-    final appResponse = await _userRepository.getUser();
-
     try {
+      final appResponse = await _userRepository.getUser();
+
       if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
         final User user = (appResponse.data as User);
 
@@ -38,6 +40,33 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(state.copyWith(
           userStatus: UserStatus.loaded,
           user: user,
+        ));
+      } else {
+        throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
+      }
+    } catch (e) {
+      debugPrint("error _onGetUser UserBloc: $e");
+      emit(state.copyWith(error: e.toString(), userStatus: UserStatus.error));
+    }
+  }
+
+  void _onGetUserGroups(
+    GetUserGroupsEvent event,
+    Emitter<UserState> emit,
+  ) async {
+    emit(state.copyWith(userStatus: UserStatus.loading));
+    try {
+      final appResponse = await _userRepository.getUserGroups();
+
+      if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
+        List<Group> allUserGroups = [];
+
+        for (var data in (appResponse.data as List)) {
+          allUserGroups.add(Group.fromJson(data));
+        }
+        emit(state.copyWith(
+          userStatus: UserStatus.loaded,
+          userGroup: allUserGroups,
         ));
       } else {
         throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';

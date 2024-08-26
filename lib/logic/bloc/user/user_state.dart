@@ -6,6 +6,7 @@ enum UserStatus { initial, loading, loaded, error }
 class UserState with _$UserState {
   const factory UserState({
     User? user,
+    List<Group>? userGroup,
     @Default(UserStatus.initial) UserStatus userStatus,
     String? error,
   }) = _UserState;

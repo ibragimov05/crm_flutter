@@ -1,4 +1,5 @@
 import 'package:crm_flutter/logic/bloc/admin_management/admin_user_management_bloc.dart';
+import 'package:crm_flutter/logic/bloc/admin_room_management/admin_room_management_bloc.dart';
 import 'package:crm_flutter/logic/bloc/auth/auth_bloc.dart';
 import 'package:crm_flutter/logic/bloc/user/user_bloc.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,9 @@ void main() async {
       providers: [
         BlocProvider.value(value: getIt.get<AuthBloc>()),
         BlocProvider.value(value: getIt.get<UserBloc>()),
-        BlocProvider.value(value: getIt.get<  AdminGroupManagementBloc>()),
+        BlocProvider.value(value: getIt.get<AdminGroupManagementBloc>()),
         BlocProvider.value(value: getIt.get<AdminUserManagementBloc>()),
+        BlocProvider.value(value: getIt.get<AdminRoomManagementBloc>()),
       ],
       child: const App(),
     ),

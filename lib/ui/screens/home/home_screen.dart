@@ -1,4 +1,5 @@
 import 'package:crm_flutter/core/utils/utils.dart';
+import 'package:crm_flutter/ui/screens/home/widgets/user_group_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,16 +13,15 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            /// app bar
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.only(top: 10, right: 10, left: 10),
-              padding: const EdgeInsets.all(15),
+  Widget build(BuildContext context) => Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              /// app bar
+              Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(top: 10, right: 10, left: 10),
+                padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: AppColors.white,
                 borderRadius: BorderRadius.circular(24),
@@ -78,36 +78,70 @@ class HomeScreen extends StatelessWidget {
 
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
-                children: [
-                  Row(
-                    children: [
-                      BlocBuilder<UserBloc, UserState>(
-                        buildWhen: (previous, current) =>
-                            current.userStatus == UserStatus.loaded,
-                        builder: (context, state) => Text(
-                          'Welcome back, ${UserData.name}!',
-                          style: AppTextStyles.nunitoSansW600.copyWith(
-                            color: AppColors.grey,
-                            fontSize: 16,
+                  padding: const EdgeInsets.only(top: 30),
+                  children: [
+                    /// Welcome back  text
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Row(
+                        children: [
+                          BlocBuilder<UserBloc, UserState>(
+                            buildWhen: (previous, current) =>
+                                current.userStatus == UserStatus.loaded,
+                            builder: (context, state) => Text(
+                              'Welcome back, ${UserData.name}!',
+                              style: AppTextStyles.nunitoSansW600.copyWith(
+                                color: AppColors.grey,
+                                fontSize: 16,
+                              ),
                             ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    /// dashboard text
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Text(
+                        'Dashboard',
+                        style: AppTextStyles.nunitoSansW700.copyWith(
+                          color: AppColors.darkShadeGreen,
+                          fontSize: 36,
                         ),
                       ),
-                    ],
-                  ),
-                  Text(
-                    'Dashboard',
-                    style: AppTextStyles.nunitoSansW700.copyWith(
-                      color: AppColors.darkShadeGreen,
-                      fontSize: 36,
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
+                    15.sizedBoxH,
+
+                    /// my groups
+                    SizedBox(
+                      height: 200,
+                      child: BlocBuilder<UserBloc, UserState>(
+                        buildWhen: (previous, current) =>
+                            current.userGroup != null,
+                        builder: (context, state) => state.userGroup == null ||
+                                state.userGroup!.isEmpty
+                            ? const Center(
+                                child: Text('No lessons available right now'))
+                            : ListView.builder(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                itemCount: state.userGroup!.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return UserGroupWidget(
+                                    index: index,
+                                    group: state.userGroup![index],
+                                  );
+                                },
+                              ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
-      ),
     );
-  }
 }

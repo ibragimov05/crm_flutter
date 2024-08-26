@@ -19,6 +19,7 @@ mixin _$UserEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getUserEvent,
+    required TResult Function() getUserGroups,
     required TResult Function(
             String email, String name, String phone, String photoPath)
         updateUserData,
@@ -27,6 +28,7 @@ mixin _$UserEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getUserEvent,
+    TResult? Function()? getUserGroups,
     TResult? Function(
             String email, String name, String phone, String photoPath)?
         updateUserData,
@@ -35,6 +37,7 @@ mixin _$UserEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getUserEvent,
+    TResult Function()? getUserGroups,
     TResult Function(String email, String name, String phone, String photoPath)?
         updateUserData,
     required TResult orElse(),
@@ -43,18 +46,21 @@ mixin _$UserEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetUserEvent value) getUserEvent,
+    required TResult Function(GetUserGroupsEvent value) getUserGroups,
     required TResult Function(UpdateUserDataEvent value) updateUserData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetUserEvent value)? getUserEvent,
+    TResult? Function(GetUserGroupsEvent value)? getUserGroups,
     TResult? Function(UpdateUserDataEvent value)? updateUserData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetUserEvent value)? getUserEvent,
+    TResult Function(GetUserGroupsEvent value)? getUserGroups,
     TResult Function(UpdateUserDataEvent value)? updateUserData,
     required TResult orElse(),
   }) =>
@@ -129,6 +135,7 @@ class _$GetUserEventImpl with DiagnosticableTreeMixin implements GetUserEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getUserEvent,
+    required TResult Function() getUserGroups,
     required TResult Function(
             String email, String name, String phone, String photoPath)
         updateUserData,
@@ -140,6 +147,7 @@ class _$GetUserEventImpl with DiagnosticableTreeMixin implements GetUserEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getUserEvent,
+    TResult? Function()? getUserGroups,
     TResult? Function(
             String email, String name, String phone, String photoPath)?
         updateUserData,
@@ -151,6 +159,7 @@ class _$GetUserEventImpl with DiagnosticableTreeMixin implements GetUserEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getUserEvent,
+    TResult Function()? getUserGroups,
     TResult Function(String email, String name, String phone, String photoPath)?
         updateUserData,
     required TResult orElse(),
@@ -165,6 +174,7 @@ class _$GetUserEventImpl with DiagnosticableTreeMixin implements GetUserEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetUserEvent value) getUserEvent,
+    required TResult Function(GetUserGroupsEvent value) getUserGroups,
     required TResult Function(UpdateUserDataEvent value) updateUserData,
   }) {
     return getUserEvent(this);
@@ -174,6 +184,7 @@ class _$GetUserEventImpl with DiagnosticableTreeMixin implements GetUserEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetUserEvent value)? getUserEvent,
+    TResult? Function(GetUserGroupsEvent value)? getUserGroups,
     TResult? Function(UpdateUserDataEvent value)? updateUserData,
   }) {
     return getUserEvent?.call(this);
@@ -183,6 +194,7 @@ class _$GetUserEventImpl with DiagnosticableTreeMixin implements GetUserEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetUserEvent value)? getUserEvent,
+    TResult Function(GetUserGroupsEvent value)? getUserGroups,
     TResult Function(UpdateUserDataEvent value)? updateUserData,
     required TResult orElse(),
   }) {
@@ -195,6 +207,130 @@ class _$GetUserEventImpl with DiagnosticableTreeMixin implements GetUserEvent {
 
 abstract class GetUserEvent implements UserEvent {
   const factory GetUserEvent() = _$GetUserEventImpl;
+}
+
+/// @nodoc
+abstract class _$$GetUserGroupsEventImplCopyWith<$Res> {
+  factory _$$GetUserGroupsEventImplCopyWith(_$GetUserGroupsEventImpl value,
+          $Res Function(_$GetUserGroupsEventImpl) then) =
+      __$$GetUserGroupsEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetUserGroupsEventImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$GetUserGroupsEventImpl>
+    implements _$$GetUserGroupsEventImplCopyWith<$Res> {
+  __$$GetUserGroupsEventImplCopyWithImpl(_$GetUserGroupsEventImpl _value,
+      $Res Function(_$GetUserGroupsEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of UserEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$GetUserGroupsEventImpl
+    with DiagnosticableTreeMixin
+    implements GetUserGroupsEvent {
+  const _$GetUserGroupsEventImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UserEvent.getUserGroups()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'UserEvent.getUserGroups'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetUserGroupsEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getUserEvent,
+    required TResult Function() getUserGroups,
+    required TResult Function(
+            String email, String name, String phone, String photoPath)
+        updateUserData,
+  }) {
+    return getUserGroups();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getUserEvent,
+    TResult? Function()? getUserGroups,
+    TResult? Function(
+            String email, String name, String phone, String photoPath)?
+        updateUserData,
+  }) {
+    return getUserGroups?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getUserEvent,
+    TResult Function()? getUserGroups,
+    TResult Function(String email, String name, String phone, String photoPath)?
+        updateUserData,
+    required TResult orElse(),
+  }) {
+    if (getUserGroups != null) {
+      return getUserGroups();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetUserEvent value) getUserEvent,
+    required TResult Function(GetUserGroupsEvent value) getUserGroups,
+    required TResult Function(UpdateUserDataEvent value) updateUserData,
+  }) {
+    return getUserGroups(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetUserEvent value)? getUserEvent,
+    TResult? Function(GetUserGroupsEvent value)? getUserGroups,
+    TResult? Function(UpdateUserDataEvent value)? updateUserData,
+  }) {
+    return getUserGroups?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetUserEvent value)? getUserEvent,
+    TResult Function(GetUserGroupsEvent value)? getUserGroups,
+    TResult Function(UpdateUserDataEvent value)? updateUserData,
+    required TResult orElse(),
+  }) {
+    if (getUserGroups != null) {
+      return getUserGroups(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetUserGroupsEvent implements UserEvent {
+  const factory GetUserGroupsEvent() = _$GetUserGroupsEventImpl;
 }
 
 /// @nodoc
@@ -309,6 +445,7 @@ class _$UpdateUserDataEventImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getUserEvent,
+    required TResult Function() getUserGroups,
     required TResult Function(
             String email, String name, String phone, String photoPath)
         updateUserData,
@@ -320,6 +457,7 @@ class _$UpdateUserDataEventImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getUserEvent,
+    TResult? Function()? getUserGroups,
     TResult? Function(
             String email, String name, String phone, String photoPath)?
         updateUserData,
@@ -331,6 +469,7 @@ class _$UpdateUserDataEventImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getUserEvent,
+    TResult Function()? getUserGroups,
     TResult Function(String email, String name, String phone, String photoPath)?
         updateUserData,
     required TResult orElse(),
@@ -345,6 +484,7 @@ class _$UpdateUserDataEventImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetUserEvent value) getUserEvent,
+    required TResult Function(GetUserGroupsEvent value) getUserGroups,
     required TResult Function(UpdateUserDataEvent value) updateUserData,
   }) {
     return updateUserData(this);
@@ -354,6 +494,7 @@ class _$UpdateUserDataEventImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetUserEvent value)? getUserEvent,
+    TResult? Function(GetUserGroupsEvent value)? getUserGroups,
     TResult? Function(UpdateUserDataEvent value)? updateUserData,
   }) {
     return updateUserData?.call(this);
@@ -363,6 +504,7 @@ class _$UpdateUserDataEventImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetUserEvent value)? getUserEvent,
+    TResult Function(GetUserGroupsEvent value)? getUserGroups,
     TResult Function(UpdateUserDataEvent value)? updateUserData,
     required TResult orElse(),
   }) {
@@ -395,6 +537,7 @@ abstract class UpdateUserDataEvent implements UserEvent {
 /// @nodoc
 mixin _$UserState {
   User? get user => throw _privateConstructorUsedError;
+  List<Group>? get userGroup => throw _privateConstructorUsedError;
   UserStatus get userStatus => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
@@ -410,7 +553,11 @@ abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res, UserState>;
   @useResult
-  $Res call({User? user, UserStatus userStatus, String? error});
+  $Res call(
+      {User? user,
+      List<Group>? userGroup,
+      UserStatus userStatus,
+      String? error});
 }
 
 /// @nodoc
@@ -429,6 +576,7 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
   @override
   $Res call({
     Object? user = freezed,
+    Object? userGroup = freezed,
     Object? userStatus = null,
     Object? error = freezed,
   }) {
@@ -437,6 +585,10 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      userGroup: freezed == userGroup
+          ? _value.userGroup
+          : userGroup // ignore: cast_nullable_to_non_nullable
+              as List<Group>?,
       userStatus: null == userStatus
           ? _value.userStatus
           : userStatus // ignore: cast_nullable_to_non_nullable
@@ -457,7 +609,11 @@ abstract class _$$UserStateImplCopyWith<$Res>
       __$$UserStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({User? user, UserStatus userStatus, String? error});
+  $Res call(
+      {User? user,
+      List<Group>? userGroup,
+      UserStatus userStatus,
+      String? error});
 }
 
 /// @nodoc
@@ -474,6 +630,7 @@ class __$$UserStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = freezed,
+    Object? userGroup = freezed,
     Object? userStatus = null,
     Object? error = freezed,
   }) {
@@ -482,6 +639,10 @@ class __$$UserStateImplCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      userGroup: freezed == userGroup
+          ? _value._userGroup
+          : userGroup // ignore: cast_nullable_to_non_nullable
+              as List<Group>?,
       userStatus: null == userStatus
           ? _value.userStatus
           : userStatus // ignore: cast_nullable_to_non_nullable
@@ -498,10 +659,24 @@ class __$$UserStateImplCopyWithImpl<$Res>
 
 class _$UserStateImpl with DiagnosticableTreeMixin implements _UserState {
   const _$UserStateImpl(
-      {this.user, this.userStatus = UserStatus.initial, this.error});
+      {this.user,
+      final List<Group>? userGroup,
+      this.userStatus = UserStatus.initial,
+      this.error})
+      : _userGroup = userGroup;
 
   @override
   final User? user;
+  final List<Group>? _userGroup;
+  @override
+  List<Group>? get userGroup {
+    final value = _userGroup;
+    if (value == null) return null;
+    if (_userGroup is EqualUnmodifiableListView) return _userGroup;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @JsonKey()
   final UserStatus userStatus;
@@ -510,7 +685,7 @@ class _$UserStateImpl with DiagnosticableTreeMixin implements _UserState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserState(user: $user, userStatus: $userStatus, error: $error)';
+    return 'UserState(user: $user, userGroup: $userGroup, userStatus: $userStatus, error: $error)';
   }
 
   @override
@@ -519,6 +694,7 @@ class _$UserStateImpl with DiagnosticableTreeMixin implements _UserState {
     properties
       ..add(DiagnosticsProperty('type', 'UserState'))
       ..add(DiagnosticsProperty('user', user))
+      ..add(DiagnosticsProperty('userGroup', userGroup))
       ..add(DiagnosticsProperty('userStatus', userStatus))
       ..add(DiagnosticsProperty('error', error));
   }
@@ -529,13 +705,16 @@ class _$UserStateImpl with DiagnosticableTreeMixin implements _UserState {
         (other.runtimeType == runtimeType &&
             other is _$UserStateImpl &&
             (identical(other.user, user) || other.user == user) &&
+            const DeepCollectionEquality()
+                .equals(other._userGroup, _userGroup) &&
             (identical(other.userStatus, userStatus) ||
                 other.userStatus == userStatus) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, userStatus, error);
+  int get hashCode => Object.hash(runtimeType, user,
+      const DeepCollectionEquality().hash(_userGroup), userStatus, error);
 
   /// Create a copy of UserState
   /// with the given fields replaced by the non-null parameter values.
@@ -549,11 +728,14 @@ class _$UserStateImpl with DiagnosticableTreeMixin implements _UserState {
 abstract class _UserState implements UserState {
   const factory _UserState(
       {final User? user,
+      final List<Group>? userGroup,
       final UserStatus userStatus,
       final String? error}) = _$UserStateImpl;
 
   @override
   User? get user;
+  @override
+  List<Group>? get userGroup;
   @override
   UserStatus get userStatus;
   @override

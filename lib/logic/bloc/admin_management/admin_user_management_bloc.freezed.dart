@@ -19,45 +19,32 @@ mixin _$AdminUserManagementEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAllUsers,
-    required TResult Function(int groupId, String newName, int newMainTeacherId,
-            int newAssistantTeacherId)
-        editGroupsMainTeacher,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAllUsers,
-    TResult? Function(int groupId, String newName, int newMainTeacherId,
-            int newAssistantTeacherId)?
-        editGroupsMainTeacher,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAllUsers,
-    TResult Function(int groupId, String newName, int newMainTeacherId,
-            int newAssistantTeacherId)?
-        editGroupsMainTeacher,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetAllUsersEvent value) getAllUsers,
-    required TResult Function(EditGroupsMainTeacherEvent value)
-        editGroupsMainTeacher,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetAllUsersEvent value)? getAllUsers,
-    TResult? Function(EditGroupsMainTeacherEvent value)? editGroupsMainTeacher,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetAllUsersEvent value)? getAllUsers,
-    TResult Function(EditGroupsMainTeacherEvent value)? editGroupsMainTeacher,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,9 +114,6 @@ class _$GetAllUsersEventImpl implements GetAllUsersEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAllUsers,
-    required TResult Function(int groupId, String newName, int newMainTeacherId,
-            int newAssistantTeacherId)
-        editGroupsMainTeacher,
   }) {
     return getAllUsers();
   }
@@ -138,9 +122,6 @@ class _$GetAllUsersEventImpl implements GetAllUsersEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAllUsers,
-    TResult? Function(int groupId, String newName, int newMainTeacherId,
-            int newAssistantTeacherId)?
-        editGroupsMainTeacher,
   }) {
     return getAllUsers?.call();
   }
@@ -149,9 +130,6 @@ class _$GetAllUsersEventImpl implements GetAllUsersEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAllUsers,
-    TResult Function(int groupId, String newName, int newMainTeacherId,
-            int newAssistantTeacherId)?
-        editGroupsMainTeacher,
     required TResult orElse(),
   }) {
     if (getAllUsers != null) {
@@ -164,8 +142,6 @@ class _$GetAllUsersEventImpl implements GetAllUsersEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetAllUsersEvent value) getAllUsers,
-    required TResult Function(EditGroupsMainTeacherEvent value)
-        editGroupsMainTeacher,
   }) {
     return getAllUsers(this);
   }
@@ -174,7 +150,6 @@ class _$GetAllUsersEventImpl implements GetAllUsersEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetAllUsersEvent value)? getAllUsers,
-    TResult? Function(EditGroupsMainTeacherEvent value)? editGroupsMainTeacher,
   }) {
     return getAllUsers?.call(this);
   }
@@ -183,7 +158,6 @@ class _$GetAllUsersEventImpl implements GetAllUsersEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetAllUsersEvent value)? getAllUsers,
-    TResult Function(EditGroupsMainTeacherEvent value)? editGroupsMainTeacher,
     required TResult orElse(),
   }) {
     if (getAllUsers != null) {
@@ -195,203 +169,6 @@ class _$GetAllUsersEventImpl implements GetAllUsersEvent {
 
 abstract class GetAllUsersEvent implements AdminUserManagementEvent {
   const factory GetAllUsersEvent() = _$GetAllUsersEventImpl;
-}
-
-/// @nodoc
-abstract class _$$EditGroupsMainTeacherEventImplCopyWith<$Res> {
-  factory _$$EditGroupsMainTeacherEventImplCopyWith(
-          _$EditGroupsMainTeacherEventImpl value,
-          $Res Function(_$EditGroupsMainTeacherEventImpl) then) =
-      __$$EditGroupsMainTeacherEventImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {int groupId,
-      String newName,
-      int newMainTeacherId,
-      int newAssistantTeacherId});
-}
-
-/// @nodoc
-class __$$EditGroupsMainTeacherEventImplCopyWithImpl<$Res>
-    extends _$AdminUserManagementEventCopyWithImpl<$Res,
-        _$EditGroupsMainTeacherEventImpl>
-    implements _$$EditGroupsMainTeacherEventImplCopyWith<$Res> {
-  __$$EditGroupsMainTeacherEventImplCopyWithImpl(
-      _$EditGroupsMainTeacherEventImpl _value,
-      $Res Function(_$EditGroupsMainTeacherEventImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of AdminUserManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? groupId = null,
-    Object? newName = null,
-    Object? newMainTeacherId = null,
-    Object? newAssistantTeacherId = null,
-  }) {
-    return _then(_$EditGroupsMainTeacherEventImpl(
-      groupId: null == groupId
-          ? _value.groupId
-          : groupId // ignore: cast_nullable_to_non_nullable
-              as int,
-      newName: null == newName
-          ? _value.newName
-          : newName // ignore: cast_nullable_to_non_nullable
-              as String,
-      newMainTeacherId: null == newMainTeacherId
-          ? _value.newMainTeacherId
-          : newMainTeacherId // ignore: cast_nullable_to_non_nullable
-              as int,
-      newAssistantTeacherId: null == newAssistantTeacherId
-          ? _value.newAssistantTeacherId
-          : newAssistantTeacherId // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$EditGroupsMainTeacherEventImpl implements EditGroupsMainTeacherEvent {
-  const _$EditGroupsMainTeacherEventImpl(
-      {required this.groupId,
-      required this.newName,
-      required this.newMainTeacherId,
-      required this.newAssistantTeacherId});
-
-  @override
-  final int groupId;
-  @override
-  final String newName;
-  @override
-  final int newMainTeacherId;
-  @override
-  final int newAssistantTeacherId;
-
-  @override
-  String toString() {
-    return 'AdminUserManagementEvent.editGroupsMainTeacher(groupId: $groupId, newName: $newName, newMainTeacherId: $newMainTeacherId, newAssistantTeacherId: $newAssistantTeacherId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$EditGroupsMainTeacherEventImpl &&
-            (identical(other.groupId, groupId) || other.groupId == groupId) &&
-            (identical(other.newName, newName) || other.newName == newName) &&
-            (identical(other.newMainTeacherId, newMainTeacherId) ||
-                other.newMainTeacherId == newMainTeacherId) &&
-            (identical(other.newAssistantTeacherId, newAssistantTeacherId) ||
-                other.newAssistantTeacherId == newAssistantTeacherId));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, groupId, newName, newMainTeacherId, newAssistantTeacherId);
-
-  /// Create a copy of AdminUserManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$EditGroupsMainTeacherEventImplCopyWith<_$EditGroupsMainTeacherEventImpl>
-      get copyWith => __$$EditGroupsMainTeacherEventImplCopyWithImpl<
-          _$EditGroupsMainTeacherEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() getAllUsers,
-    required TResult Function(int groupId, String newName, int newMainTeacherId,
-            int newAssistantTeacherId)
-        editGroupsMainTeacher,
-  }) {
-    return editGroupsMainTeacher(
-        groupId, newName, newMainTeacherId, newAssistantTeacherId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAllUsers,
-    TResult? Function(int groupId, String newName, int newMainTeacherId,
-            int newAssistantTeacherId)?
-        editGroupsMainTeacher,
-  }) {
-    return editGroupsMainTeacher?.call(
-        groupId, newName, newMainTeacherId, newAssistantTeacherId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getAllUsers,
-    TResult Function(int groupId, String newName, int newMainTeacherId,
-            int newAssistantTeacherId)?
-        editGroupsMainTeacher,
-    required TResult orElse(),
-  }) {
-    if (editGroupsMainTeacher != null) {
-      return editGroupsMainTeacher(
-          groupId, newName, newMainTeacherId, newAssistantTeacherId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(GetAllUsersEvent value) getAllUsers,
-    required TResult Function(EditGroupsMainTeacherEvent value)
-        editGroupsMainTeacher,
-  }) {
-    return editGroupsMainTeacher(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GetAllUsersEvent value)? getAllUsers,
-    TResult? Function(EditGroupsMainTeacherEvent value)? editGroupsMainTeacher,
-  }) {
-    return editGroupsMainTeacher?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(GetAllUsersEvent value)? getAllUsers,
-    TResult Function(EditGroupsMainTeacherEvent value)? editGroupsMainTeacher,
-    required TResult orElse(),
-  }) {
-    if (editGroupsMainTeacher != null) {
-      return editGroupsMainTeacher(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class EditGroupsMainTeacherEvent implements AdminUserManagementEvent {
-  const factory EditGroupsMainTeacherEvent(
-          {required final int groupId,
-          required final String newName,
-          required final int newMainTeacherId,
-          required final int newAssistantTeacherId}) =
-      _$EditGroupsMainTeacherEventImpl;
-
-  int get groupId;
-  String get newName;
-  int get newMainTeacherId;
-  int get newAssistantTeacherId;
-
-  /// Create a copy of AdminUserManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$EditGroupsMainTeacherEventImplCopyWith<_$EditGroupsMainTeacherEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

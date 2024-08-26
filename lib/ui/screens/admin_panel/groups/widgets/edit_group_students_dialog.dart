@@ -18,7 +18,7 @@ class EditGroupStudentsDialog extends StatefulWidget {
 }
 
 class _EditGroupStudentsDialogState extends State<EditGroupStudentsDialog> {
-  List<User> selectedStudents = [];
+  final List<User> _selectedStudents = [];
 
   void _onDeleteStudentTap(int index) {
     widget.group.students.removeAt(index);
@@ -34,8 +34,8 @@ class _EditGroupStudentsDialogState extends State<EditGroupStudentsDialog> {
   }
 
   void _onAddStudentsTap() {
-    if (selectedStudents.isNotEmpty) {
-      widget.group.students.addAll(selectedStudents);
+    if (_selectedStudents.isNotEmpty) {
+      widget.group.students.addAll(_selectedStudents);
 
       List<int> updatedStudentsIds =
           widget.group.students.map((student) => student.id).toList();
@@ -45,7 +45,7 @@ class _EditGroupStudentsDialogState extends State<EditGroupStudentsDialog> {
             updatedStudents: updatedStudentsIds,
           ));
 
-      selectedStudents.clear();
+      _selectedStudents.clear();
       setState(() {});
     }
   }
@@ -91,16 +91,16 @@ class _EditGroupStudentsDialogState extends State<EditGroupStudentsDialog> {
                       Wrap(
                         children: availableStudents.map((User student) {
                           final bool isSelected =
-                              selectedStudents.contains(student);
+                              _selectedStudents.contains(student);
                           return _BuildChoiceChip(
                             student: student,
                             isSelected: isSelected,
                             onSelected: (selected) {
                               setState(() {
                                 if (selected) {
-                                  selectedStudents.add(student);
+                                  _selectedStudents.add(student);
                                 } else {
-                                  selectedStudents.remove(student);
+                                  _selectedStudents.remove(student);
                                 }
                               });
                             },
