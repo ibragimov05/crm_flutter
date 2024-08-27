@@ -1,25 +1,25 @@
 part of 'admin_group_management_bloc.dart';
 
 @immutable
-sealed class AdminGroupState {
-  const AdminGroupState();
+sealed class AdminGroupManagementState {
+  const AdminGroupManagementState();
 }
 
-final class InitialAdminGroupState extends AdminGroupState {
+final class InitialAdminGroupState extends AdminGroupManagementState {
   const InitialAdminGroupState();
 }
 
-final class LoadingAdminGroupState extends AdminGroupState {
+final class LoadingAdminGroupState extends AdminGroupManagementState {
   const LoadingAdminGroupState();
 }
 
-final class LoadedAdminGroupState extends AdminGroupState {
+final class LoadedAdminGroupState extends AdminGroupManagementState {
   final List<Group> allGroups;
 
   const LoadedAdminGroupState({required this.allGroups});
 }
 
-final class ErrorAdminGroupState extends AdminGroupState {
+final class ErrorAdminGroupState extends AdminGroupManagementState {
   final String errorMessage;
 
   const ErrorAdminGroupState({required this.errorMessage});

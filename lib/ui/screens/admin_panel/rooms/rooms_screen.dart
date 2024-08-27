@@ -47,7 +47,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
           backgroundColor: AppColors.darkShadeGreen.withOpacity(0.1),
           onPressed: () => showDialog(
             context: context,
-            builder: (context) => ManageRoomDialog(),
+            builder: (context) => const ManageRoomDialog(),
           ),
           child: const Icon(Icons.add, color: AppColors.white),
         ),

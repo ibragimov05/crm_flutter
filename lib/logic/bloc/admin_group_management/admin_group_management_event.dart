@@ -44,3 +44,9 @@ final class UpdateGroupStudentsEvent extends AdminGroupManagementEvent {
     required this.updatedStudents,
   });
 }
+
+final class CreateTimetableForGroupEvent extends AdminGroupManagementEvent {
+  final TimetableRequest timetableRequest;
+
+  const CreateTimetableForGroupEvent({required this.timetableRequest});
+}

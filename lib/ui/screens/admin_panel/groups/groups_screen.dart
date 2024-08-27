@@ -25,7 +25,7 @@ class _GroupsScreenState extends State<GroupsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Group management')),
-      body: BlocBuilder<AdminGroupManagementBloc, AdminGroupState>(
+      body: BlocBuilder<AdminGroupManagementBloc, AdminGroupManagementState>(
         buildWhen: (previous, current) => current is LoadedAdminGroupState,
         builder: (context, state) {
           if (state is LoadingAdminGroupState) {

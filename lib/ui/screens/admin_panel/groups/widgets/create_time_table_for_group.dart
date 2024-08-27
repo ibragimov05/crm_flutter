@@ -1,5 +1,6 @@
+import 'package:crm_flutter/core/utils/utils.dart';
 import 'package:crm_flutter/data/models/groups/group.dart';
-import 'package:crm_flutter/data/services/shared_prefs/token_prefs_service.dart';
+import 'package:crm_flutter/data/models/timetable/timetable_request.dart';
 import 'package:crm_flutter/logic/bloc/admin_group_management/admin_group_management_bloc.dart';
 import 'package:crm_flutter/logic/bloc/admin_room_management/admin_room_management_bloc.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +19,10 @@ class CreateTimeTableForGroup extends StatefulWidget {
 class _CreateTimeTableForGroupState extends State<CreateTimeTableForGroup> {
   final _formKey = GlobalKey<FormState>();
 
-  int? roomId;
-  int? dayId;
-  TimeOfDay? startTime;
-  TimeOfDay? endTime;
+  int? _roomId;
+  int? _dayId;
+  TimeOfDay? _startTime;
+  TimeOfDay? _endTime;
 
   @override
   Widget build(BuildContext context) {
@@ -41,16 +42,17 @@ class _CreateTimeTableForGroupState extends State<CreateTimeTableForGroup> {
                   loaded: (rooms) {
                     return rooms.isNotEmpty
                         ? DropdownButtonFormField<int>(
-                            value: roomId,
+                            value: _roomId,
                             decoration:
                                 const InputDecoration(labelText: 'Room'),
-                            items: List.generate(
-                              rooms.length,
-                              (index) => DropdownMenuItem(
-                                  value: null, child: Text(rooms[index].name)),
-                            ),
+                            items: rooms
+                                .map((room) => DropdownMenuItem(
+                                      value: room.id,
+                                      child: Text(room.name),
+                                    ))
+                                .toList(),
                             onChanged: (value) {
-                              roomId = value;
+                              _roomId = value;
                               setState(() {});
                             },
                             validator: (value) =>
@@ -62,10 +64,9 @@ class _CreateTimeTableForGroupState extends State<CreateTimeTableForGroup> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<int>(
-              value: dayId,
+              value: _dayId,
               decoration: const InputDecoration(labelText: 'Day'),
               items: const [
-                DropdownMenuItem(value: null, child: Text('Select Day')),
                 DropdownMenuItem(value: 1, child: Text('Monday')),
                 DropdownMenuItem(value: 2, child: Text('Tuesday')),
                 DropdownMenuItem(value: 3, child: Text('Wednesday')),
@@ -75,7 +76,7 @@ class _CreateTimeTableForGroupState extends State<CreateTimeTableForGroup> {
                 DropdownMenuItem(value: 7, child: Text('Sunday')),
               ],
               onChanged: (value) {
-                dayId = value;
+                _dayId = value;
                 setState(() {});
               },
               validator: (value) =>
@@ -84,49 +85,70 @@ class _CreateTimeTableForGroupState extends State<CreateTimeTableForGroup> {
             const SizedBox(height: 16),
             ListTile(
               title: const Text('Start Time'),
-              subtitle: Text(startTime?.format(context) ?? 'Not set'),
+              subtitle: Text(_startTime?.format(context) ?? 'Not set'),
               trailing: const Icon(Icons.access_time),
               onTap: () async {
                 final time = await showTimePicker(
                   context: context,
+
                   initialTime: TimeOfDay.now(),
                 );
-                if (time != null) {
-                  setState(() => startTime = time);
-                }
+                if (time != null) setState(() => _startTime = time);
               },
             ),
             const SizedBox(height: 16),
             ListTile(
               title: const Text('End Time'),
-              subtitle: Text(endTime?.format(context) ?? 'Not set'),
+              subtitle: Text(_endTime?.format(context) ?? 'Not set'),
               trailing: const Icon(Icons.access_time),
               onTap: () async {
                 final time = await showTimePicker(
                   context: context,
                   initialTime: TimeOfDay.now(),
                 );
-                if (time != null) {
-                  setState(() {
-                    endTime = time;
-                  });
-                }
+                if (time != null) setState(() => _endTime = time);
               },
             ),
             const SizedBox(height: 32),
-            ElevatedButton(
-              child: const Text('Create Timetable Entry'),
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  // TODO: Implement the logic to create the timetable entry
-                  // You can access the selected values: groupId, roomId, dayId, startTime, endTime
-                  // and send them to your database or state management solution
+            BlocListener<AdminGroupManagementBloc, AdminGroupManagementState>(
+              listener: (context, state) {
+                if (state is LoadedAdminGroupState) {
+                  Navigator.of(context).pop();
+                } else if (state is ErrorAdminGroupState) {
+                  AppFunction.showToast(
+                    message: state.errorMessage,
+                    isSuccess: false,
+                    context: context,
+                  );
                 }
               },
+              child: ElevatedButton(
+                child: const Text('Create Timetable Entry'),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    context.read<AdminGroupManagementBloc>().add(
+                          CreateTimetableForGroupEvent(
+                            timetableRequest: TimetableRequest(
+                              groupId: widget.group.id,
+                              roomId: _roomId ?? 0,
+                              dayId: _dayId ?? 0,
+                              startTime: formatTime(_startTime),
+                              endTime: formatTime(_endTime),
+                            ),
+                          ),
+                        );
+                  }
+                },
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  String formatTime(TimeOfDay? timeOfDay) {
+    timeOfDay ??= const TimeOfDay(hour: 0, minute: 0);
+    return timeOfDay.toString().split('(')[1].split(')')[0];
   }
 }

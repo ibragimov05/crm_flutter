@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:crm_flutter/data/models/groups/add_group_request.dart';
 import 'package:crm_flutter/data/models/groups/group.dart';
+import 'package:crm_flutter/data/models/timetable/timetable_request.dart';
 import 'package:crm_flutter/data/repositories/admin_group_management_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -10,7 +11,7 @@ part 'admin_group_management_event.dart';
 part 'admin_group_management_state.dart';
 
 class AdminGroupManagementBloc
-    extends Bloc<AdminGroupManagementEvent, AdminGroupState> {
+    extends Bloc<AdminGroupManagementEvent, AdminGroupManagementState> {
   final AdminGroupManagementRepository _adminGroupManagementRepository;
 
   AdminGroupManagementBloc({
@@ -22,11 +23,12 @@ class AdminGroupManagementBloc
     on<EditGroupAdminEvent>(_onEditGroup);
     on<DeleteGroupAdminEvent>(_onDeleteGroup);
     on<UpdateGroupStudentsEvent>(_onUpdateGroupStudents);
+    on<CreateTimetableForGroupEvent>(_onCreateTimetableForGroup);
   }
 
   void _onGetAllGroups(
     GetAllGroupsAdminEvent event,
-    Emitter<AdminGroupState> emit,
+    Emitter<AdminGroupManagementState> emit,
   ) async {
     emit(const LoadingAdminGroupState());
 
@@ -51,7 +53,7 @@ class AdminGroupManagementBloc
 
   void _onAddGroup(
     AddGroupAdminEvent event,
-    Emitter<AdminGroupState> emit,
+    Emitter<AdminGroupManagementState> emit,
   ) async {
     emit(const LoadingAdminGroupState());
 
@@ -71,7 +73,7 @@ class AdminGroupManagementBloc
 
   void _onEditGroup(
     EditGroupAdminEvent event,
-    Emitter<AdminGroupState> emit,
+    Emitter<AdminGroupManagementState> emit,
   ) async {
     emit(const LoadingAdminGroupState());
     try {
@@ -94,7 +96,7 @@ class AdminGroupManagementBloc
 
   void _onDeleteGroup(
     DeleteGroupAdminEvent event,
-    Emitter<AdminGroupState> emit,
+    Emitter<AdminGroupManagementState> emit,
   ) async {
     emit(const LoadingAdminGroupState());
     try {
@@ -114,7 +116,7 @@ class AdminGroupManagementBloc
 
   void _onUpdateGroupStudents(
     UpdateGroupStudentsEvent event,
-    Emitter<AdminGroupState> emit,
+    Emitter<AdminGroupManagementState> emit,
   ) async {
     emit(const LoadingAdminGroupState());
     try {
@@ -123,6 +125,25 @@ class AdminGroupManagementBloc
         groupId: event.groupId,
         studentsId: event.updatedStudents,
       );
+
+      if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
+        add(const GetAllGroupsAdminEvent());
+      } else {
+        throw 'error: {status_code: ${appResponse.statusCode}, "error_message": ${appResponse.errorMessage}}';
+      }
+    } catch (e) {
+      emit(ErrorAdminGroupState(errorMessage: e.toString()));
+    }
+  }
+
+  void _onCreateTimetableForGroup(
+    CreateTimetableForGroupEvent event,
+    Emitter<AdminGroupManagementState> emit,
+  ) async {
+    emit(const LoadingAdminGroupState());
+    try {
+      final appResponse = await _adminGroupManagementRepository
+          .createTimetableForGroup(timetableRequest: event.timetableRequest);
 
       if (appResponse.isSuccess && appResponse.errorMessage.isEmpty) {
         add(const GetAllGroupsAdminEvent());

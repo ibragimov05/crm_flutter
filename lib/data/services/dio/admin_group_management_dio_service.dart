@@ -1,5 +1,6 @@
 import 'package:crm_flutter/core/network/dio_client.dart';
 import 'package:crm_flutter/data/models/groups/add_group_request.dart';
+import 'package:crm_flutter/data/models/timetable/timetable_request.dart';
 import 'package:dio/dio.dart';
 
 import '../../models/app_response.dart';
@@ -106,6 +107,28 @@ class AdminGroupManagementDioService {
         data: {
           "students": studentsId,
         },
+      );
+      appResponse.data = response.data;
+    } catch (e) {
+      if (e is DioException) {
+        appResponse.statusCode = e.response?.statusCode;
+      }
+      appResponse.errorMessage = e.toString();
+      appResponse.isSuccess = false;
+    }
+
+    return appResponse;
+  }
+
+  Future<AppResponse> createTimetableForGroup({
+    required TimetableRequest timetableRequest,
+  }) async {
+    final AppResponse appResponse = AppResponse();
+
+    try {
+      final response = await _dioClient.post(
+        url: '/group-classes',
+        data: timetableRequest.toMap(),
       );
       appResponse.data = response.data;
     } catch (e) {

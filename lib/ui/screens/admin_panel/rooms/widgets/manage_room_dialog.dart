@@ -24,7 +24,7 @@ class _ManageRoomDialogState extends State<ManageRoomDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(widget.isEdit ? 'Edit room' : 'Add new room'),
-      actions: [],
+      actions: const [],
     );
   }
 }

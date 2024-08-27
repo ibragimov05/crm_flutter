@@ -2,6 +2,8 @@ import 'package:crm_flutter/data/models/app_response.dart';
 import 'package:crm_flutter/data/models/groups/add_group_request.dart';
 import 'package:crm_flutter/data/services/dio/admin_group_management_dio_service.dart';
 
+import '../models/timetable/timetable_request.dart';
+
 class AdminGroupManagementRepository {
   final AdminGroupManagementDioService _adminGroupManagementDioService;
 
@@ -40,4 +42,10 @@ class AdminGroupManagementRepository {
         studentsId: studentsId,
       );
 
+  Future<AppResponse> createTimetableForGroup({
+    required TimetableRequest timetableRequest,
+  }) async =>
+      _adminGroupManagementDioService.createTimetableForGroup(
+        timetableRequest: timetableRequest,
+      );
 }
