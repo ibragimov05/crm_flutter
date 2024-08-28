@@ -1,0 +1,34 @@
+name: crm_flutter
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        # - uses: actions/setup-java@v3
+        # with:
+        #   distribution: 'temurin'
+        #   java-version: "17.x"  # Ensure compatibility with your project
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+
+      # Debugging step
+      - name: Enable debug logging
+        run: |
+          java -version
+          flutter doctor
+          flutter analyze
+
+      - run: flutter pub get
+      - run: flutter analyze .
+      - run: flutter build apk
+      - uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: build/app/outputs/apk/release/app-release.apk
