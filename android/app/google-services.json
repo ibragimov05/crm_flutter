@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "872065121206",
+    "project_id": "crm-flutter-34719",
+    "storage_bucket": "crm-flutter-34719.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872065121206:android:b84587d5ad1cf7240ddf17",
+        "android_client_info": {
+          "package_name": "com.example.crm_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872065121206-bipb0lbtjtirid2bbr41csltns41tmm5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDw09s2z5bZDQr014W_9QJUcha8i1PTCxg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "872065121206-bipb0lbtjtirid2bbr41csltns41tmm5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

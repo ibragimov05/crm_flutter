@@ -1,6 +1,8 @@
 import 'package:crm_flutter/data/models/app_response.dart';
 import 'package:crm_flutter/data/services/dio/auth_dio_service.dart';
 
+import '../models/auth/social_login_request.dart';
+
 class AuthRepository {
   final AuthDioService _authDioService;
 
@@ -12,6 +14,9 @@ class AuthRepository {
     required String password,
   }) async =>
       _authDioService.login(phone: phone, password: password);
+
+  Future<AppResponse> socialLogin(SocialLoginRequest request) =>
+      _authDioService.socialLogin(request);
 
   Future<AppResponse> register({
     required String name,

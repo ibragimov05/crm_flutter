@@ -16,9 +16,9 @@ class ManageRoomDialog extends StatefulWidget {
 }
 
 class _ManageRoomDialogState extends State<ManageRoomDialog> {
-  final TextEditingController _roomName = TextEditingController();
-  final TextEditingController _roomDescription = TextEditingController();
-  final _roomCapacity = TextEditingController();
+  // final TextEditingController _roomName = TextEditingController();
+  // final TextEditingController _roomDescription = TextEditingController();
+  // final _roomCapacity = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

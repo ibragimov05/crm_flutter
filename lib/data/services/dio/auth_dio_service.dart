@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 
 import '../../models/app_response.dart';
 import '../../../core/network/dio_client.dart';
+import '../../models/auth/social_login_request.dart';
 
 class AuthDioService {
   final DioClient _dioClient = DioClient();
@@ -37,6 +38,33 @@ class AuthDioService {
       } else {
         appResponse.errorMessage = e.toString();
       }
+      appResponse.isSuccess = false;
+    }
+
+    return appResponse;
+  }
+
+  Future<AppResponse> socialLogin(SocialLoginRequest request) async {
+    final AppResponse appResponse = AppResponse();
+    try {
+      final response = await _dioClient.post(
+        url: '/social-login',
+        data: request.toMap(),
+      );
+      appResponse.data = response.data['data'];
+
+      await TokenPrefsService.saveAccessToken(
+        appResponse.data['token'],
+      );
+    } catch (e) {
+      if (e is DioException) {
+        appResponse.statusCode = e.response?.statusCode;
+
+        appResponse.errorMessage = _getErrorMessage(e.response?.data);
+      } else {
+        appResponse.errorMessage = e.toString();
+      }
+
       appResponse.isSuccess = false;
     }
 

@@ -93,7 +93,7 @@ class _PhoneNumberInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final displayError = context.select(
-      (LoginFormCubit cubit) => cubit.state.phoneNumber.displayError,
+          (LoginFormCubit cubit) => cubit.state.phoneNumber.displayError,
     );
 
     return AppTextFormField(
@@ -115,7 +115,7 @@ class _PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final displayError = context.select(
-      (LoginFormCubit cubit) => cubit.state.password.displayError,
+          (LoginFormCubit cubit) => cubit.state.password.displayError,
     );
     return AppTextFormField(
       textInputAction: TextInputAction.done,
@@ -135,7 +135,7 @@ class _LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentAuthStatus = context.select(
-      (AuthBloc bloc) => bloc.state.authStatus,
+          (AuthBloc bloc) => bloc.state.authStatus,
     );
 
     final state = context.select((LoginFormCubit cubit) => cubit.state);
@@ -146,9 +146,9 @@ class _LoginButton extends StatelessWidget {
       buttonLabel: 'Sign in',
       onTap: currentAuthStatus != AuthStatus.loading && isValid
           ? () => context.read<AuthBloc>().add(AuthEvent.loginUser(
-                phoneNumber: state.phoneNumber.value,
-                password: state.password.value,
-              ))
+        phoneNumber: state.phoneNumber.value,
+        password: state.password.value,
+      ))
           : null,
       shouldAddIcon: true,
     );

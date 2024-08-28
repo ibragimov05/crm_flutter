@@ -1,7 +1,9 @@
+import 'package:crm_flutter/firebase_options.dart';
 import 'package:crm_flutter/logic/bloc/admin_management/admin_user_management_bloc.dart';
 import 'package:crm_flutter/logic/bloc/admin_room_management/admin_room_management_bloc.dart';
 import 'package:crm_flutter/logic/bloc/auth/auth_bloc.dart';
 import 'package:crm_flutter/logic/bloc/user/user_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,6 +14,10 @@ import 'logic/bloc/admin_subject_management/admin_subject_management_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   await AppConfig.setUp();
   AppConfig.dependencySetup();
